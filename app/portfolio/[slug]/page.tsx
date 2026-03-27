@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { Quote } from "lucide-react";
+import Link from "next/link";
 
 import { CtaSection } from "@/components/cta-section";
 
@@ -65,11 +65,11 @@ export default async function ProjectPage({
   };
 
   return (
-    <main>
+    <main className="pt-20">
       {/* Breadcrumb */}
       <section className="px-6 pt-8 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <nav className="text-xs uppercase tracking-widest text-muted-foreground">
+          <nav className="font-medium text-muted-foreground text-xs uppercase tracking-widest">
             <Link className="hover:text-foreground" href="/portfolio">
               Portfolio
             </Link>
@@ -80,7 +80,7 @@ export default async function ProjectPage({
       </section>
 
       {/* Title */}
-      <section className="px-6 pb-8 pt-4 md:px-12 lg:px-24">
+      <section className="px-6 pt-4 pb-6 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <h1 className="font-bold text-3xl tracking-tight md:text-4xl lg:text-5xl">
             {project.name}
@@ -89,12 +89,12 @@ export default async function ProjectPage({
       </section>
 
       {/* Hero Image + Thumbnails */}
-      <section className="px-6 pb-12 md:px-12 lg:px-24">
+      <section className="px-6 pb-10 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <div className="aspect-[16/9] w-full rounded-lg bg-muted" />
-          <div className="mt-4 grid grid-cols-4 gap-4">
+          <div className="aspect-[16/9] w-full bg-muted" />
+          <div className="mt-3 grid grid-cols-4 gap-3">
             {[1, 2, 3, 4].map((i) => (
-              <div className="aspect-[4/3] rounded-lg bg-muted" key={i} />
+              <div className="aspect-[4/3] bg-muted" key={i} />
             ))}
           </div>
         </div>
@@ -102,18 +102,25 @@ export default async function ProjectPage({
 
       {/* Details + Description */}
       <section className="px-6 pb-16 md:px-12 lg:px-24">
-        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-3 lg:gap-16">
+          {/* Description */}
+          <div className="lg:col-span-2">
+            <p className="text-base text-muted-foreground leading-relaxed md:text-lg">
+              {project.description}
+            </p>
+          </div>
+
           {/* Sidebar */}
-          <aside className="order-2 lg:order-1 lg:col-span-1">
-            <div className="space-y-4 rounded-xl bg-bost-gray-lightest p-6">
+          <aside className="lg:col-span-1">
+            <div className="space-y-4 bg-bost-gray-lightest p-6">
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Location
                 </p>
                 <p className="font-semibold">{project.location}</p>
               </div>
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Square Footage
                 </p>
                 <p className="font-semibold">
@@ -121,7 +128,7 @@ export default async function ProjectPage({
                 </p>
               </div>
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Bedrooms / Bathrooms
                 </p>
                 <p className="font-semibold">
@@ -129,37 +136,30 @@ export default async function ProjectPage({
                 </p>
               </div>
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <p className="font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Year Built
                 </p>
                 <p className="font-semibold">{project.year}</p>
               </div>
             </div>
           </aside>
-
-          {/* Description */}
-          <div className="order-1 lg:order-2 lg:col-span-2">
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              {project.description}
-            </p>
-          </div>
         </div>
       </section>
 
       {/* Testimonial */}
-      <section className="bg-muted/50 px-6 py-16 md:px-12 md:py-24 lg:px-24">
+      <section className="bg-bost-gray-lightest px-6 py-16 md:px-12 md:py-24 lg:px-24">
         <div className="mx-auto max-w-3xl text-center">
-          <Quote className="mx-auto mb-6 size-10 text-bost-yellow" />
+          <Quote className="mx-auto mb-6 size-10 text-bost-olive" />
           <blockquote className="mb-6 text-lg italic leading-relaxed md:text-xl">
             &ldquo;It was so important to us to build a home we&apos;d love for
             decades. The Bost team made it easy to communicate our vision — the
             end result exceeds everything we dreamed.&rdquo;
           </blockquote>
-          <p className="font-medium text-sm text-muted-foreground">
+          <p className="font-medium text-muted-foreground text-sm">
             — Homeowner
           </p>
           <div className="mt-6 flex justify-center gap-2">
-            <span className="size-2.5 rounded-full bg-bost-yellow" />
+            <span className="size-2.5 rounded-full bg-bost-olive" />
             <span className="size-2.5 rounded-full bg-muted-foreground/30" />
             <span className="size-2.5 rounded-full bg-muted-foreground/30" />
           </div>
@@ -169,17 +169,17 @@ export default async function ProjectPage({
       {/* Featured Projects */}
       <section className="px-6 py-16 md:px-12 md:py-24 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <h2 className="mb-10 font-bold text-2xl tracking-tight md:text-3xl">
+          <h2 className="mb-8 font-bold text-2xl tracking-tight md:text-3xl">
             Featured Projects
           </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {relatedProjects.map((rp) => (
               <Link
-                className="group block overflow-hidden rounded-lg"
+                className="group block overflow-hidden"
                 href={`/portfolio/${rp.slug}`}
                 key={rp.slug}
               >
-                <div className="relative aspect-[4/3] bg-muted">
+                <div className="relative aspect-[4/3] bg-muted transition-transform duration-300 group-hover:scale-105">
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
                     <p className="font-semibold text-sm text-white">
                       {rp.name}

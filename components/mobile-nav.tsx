@@ -1,18 +1,18 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { BostLogo } from "@/components/bost-logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const mobileNavLinks = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/about", label: "About Us" },
-  { href: "/process", label: "Our Process" },
-  { href: "/neighborhoods", label: "Featured Neighborhoods" },
-  { href: "/resources", label: "Resources" },
+  { href: "/our-process", label: "Our Process" },
+  { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
+  { href: "/blog", label: "Resources" },
 ];
 
 function MobileNav() {
@@ -71,10 +71,7 @@ function MobileNav() {
         role="dialog"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4">
-          <Link href="/" onClick={close}>
-            <BostLogo />
-          </Link>
+        <div className="flex items-center justify-end px-6 py-5">
           <Button
             aria-label="Close navigation menu"
             onClick={close}
@@ -87,10 +84,10 @@ function MobileNav() {
         </div>
 
         {/* Nav links */}
-        <nav className="flex flex-1 flex-col gap-1 px-6 pt-8">
+        <nav className="flex flex-1 flex-col px-6">
           {mobileNavLinks.map((link) => (
             <Link
-              className="border-border border-b py-4 font-medium text-foreground text-lg transition-colors hover:text-bost-brick"
+              className="border-border/40 border-b py-5 font-medium text-2xl text-foreground transition-colors hover:text-bost-brick"
               href={link.href}
               key={link.href}
               onClick={close}
@@ -98,15 +95,41 @@ function MobileNav() {
               {link.label}
             </Link>
           ))}
-          <div className="pt-8">
-            <Button
-              className="w-full bg-bost-brick text-white hover:bg-bost-brick/90"
+          <Link
+            className="py-5 font-medium text-2xl text-bost-brick transition-colors hover:text-bost-brick/80"
+            href="/contact"
+            onClick={close}
+          >
+            Start a Project
+          </Link>
+
+          {/* Featured Projects Section */}
+          <div className="mt-auto pb-8">
+            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+              Featured Projects
+            </p>
+            <Link
+              className="group block overflow-hidden rounded-lg"
+              href="/portfolio"
               onClick={close}
-              render={<Link href="/contact" />}
-              size="lg"
             >
-              Start a Project
-            </Button>
+              <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+                <Image
+                  alt="Featured project by Bost Custom Homes"
+                  className="object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 0vw"
+                  src="/images/about/photo-strip-1.jpg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-3 left-3">
+                  <p className="font-medium text-sm text-white">Project Name</p>
+                  <p className="text-white/70 text-xs">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                </div>
+              </div>
+            </Link>
           </div>
         </nav>
       </div>

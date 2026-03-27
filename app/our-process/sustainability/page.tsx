@@ -1,36 +1,33 @@
+import Image from "next/image";
+import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
+import { Button } from "@/components/ui/button";
 
 export default function SustainabilityPage() {
   return (
-    <main>
+    <main className="pt-20">
       {/* Hero Section */}
-      <section className="relative flex min-h-[60vh] items-center justify-center">
-        <div className="absolute inset-0 bg-gray-300">
-          <div className="flex h-full w-full items-center justify-center text-gray-500 text-sm">
-            Sustainable home exterior image placeholder
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
-          <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex items-center justify-center gap-2 font-light text-sm text-white/60">
+      <section className="px-6 py-16 md:px-12 md:py-24 lg:px-24">
+        <div className="mx-auto max-w-4xl">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest">
               <li>
-                <a className="hover:text-white/90" href="/our-process">
+                <Link className="hover:text-foreground" href="/our-process">
                   Our Process
-                </a>
+                </Link>
               </li>
               <li>
                 <span className="mx-1">&gt;</span>
               </li>
-              <li className="text-white">Sustainability</li>
+              <li className="text-foreground">Sustainability</li>
             </ol>
           </nav>
-          <h1 className="mb-6 font-light text-3xl text-white leading-tight tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="mb-6 font-bold text-3xl leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             A True Partnership From First
             <br />
             Conversation to Final Walkthrough
           </h1>
-          <p className="mx-auto max-w-2xl font-light text-lg text-white/80 md:text-xl">
+          <p className="max-w-2xl text-base text-muted-foreground leading-relaxed md:text-lg">
             We believe in building homes that are kind to the environment and
             designed to perform efficiently for generations to come.
           </p>
@@ -39,25 +36,38 @@ export default function SustainabilityPage() {
 
       {/* Full-Width Image Section */}
       <section className="relative">
-        <div className="flex aspect-[21/9] w-full items-center justify-center bg-gray-300 text-gray-500 text-sm">
-          Large sustainability feature image placeholder
+        <div className="relative aspect-[21/9] w-full overflow-hidden">
+          <Image
+            alt="Sustainable building practices at Bost Custom Homes"
+            className="object-cover"
+            fill
+            priority
+            sizes="100vw"
+            src="/images/about/photo-strip-4.jpg"
+          />
         </div>
       </section>
 
       {/* Content Section 1 — Image Left, Text Right */}
-      <section className="bg-white px-6 py-24 md:py-32">
+      <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <div className="flex aspect-[4/3] items-center justify-center bg-gray-300 text-gray-500 text-sm">
-              Green building practices image placeholder
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <Image
+                alt="Green building practices"
+                className="object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                src="/images/process/masonry-section.jpg"
+              />
             </div>
             <div>
-              <h2 className="mb-6 font-light text-3xl text-gray-900 leading-snug md:text-4xl">
+              <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
                 Built with integrity,
                 <br />
                 from the ground up
               </h2>
-              <p className="font-light text-base text-gray-600 leading-relaxed md:text-lg">
+              <p className="mb-8 text-base text-muted-foreground leading-relaxed">
                 Sustainability starts at the foundation. We employ advanced
                 building science to maximize energy efficiency, using tightly
                 sealed building envelopes, high-performance insulation, and
@@ -65,22 +75,29 @@ export default function SustainabilityPage() {
                 your home&apos;s environmental footprint without sacrificing
                 comfort.
               </p>
+              <Button
+                className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
+                render={<Link href="/contact" />}
+                size="lg"
+              >
+                Learn More
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Content Section 2 — Text Left, Image Right */}
-      <section className="bg-gray-50 px-6 py-24 md:py-32">
+      <section className="bg-bost-gray-lightest px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
             <div className="order-2 md:order-1">
-              <h2 className="mb-6 font-light text-3xl text-gray-900 leading-snug md:text-4xl">
+              <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
                 Crafted for today,
                 <br />
                 but designed for tomorrow
               </h2>
-              <p className="font-light text-base text-gray-600 leading-relaxed md:text-lg">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 Every Bost home is designed with longevity in mind. We
                 incorporate renewable materials, low-VOC finishes, and
                 water-conserving fixtures as standard. Our forward-thinking
@@ -89,27 +106,42 @@ export default function SustainabilityPage() {
                 effortlessly.
               </p>
             </div>
-            <div className="order-1 flex aspect-[4/3] items-center justify-center bg-gray-300 text-gray-500 text-sm md:order-2">
-              Energy-efficient home features image placeholder
+            <div className="relative order-1 aspect-[4/3] overflow-hidden md:order-2">
+              <Image
+                alt="Energy-efficient home features"
+                className="object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                src="/images/about/photo-strip-1.jpg"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Materials Section */}
-      <section className="bg-white px-6 py-24 md:py-32">
+      <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <div className="flex aspect-[4/3] items-center justify-center bg-gray-300 text-gray-500 text-sm">
-              Sustainable materials image placeholder
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="relative aspect-square overflow-hidden">
+              <Image
+                alt="Sustainable materials showcase"
+                className="object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                src="/images/about/photo-strip-3.jpg"
+              />
             </div>
             <div>
-              <h2 className="mb-6 font-light text-3xl text-gray-900 leading-snug md:text-4xl">
+              <p className="mb-2 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                Process &amp; Expertise
+              </p>
+              <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
                 Materials That Matter,
                 <br />
                 Expertise That Elevates
               </h2>
-              <p className="font-light text-base text-gray-600 leading-relaxed md:text-lg">
+              <p className="text-base text-muted-foreground leading-relaxed">
                 We partner with suppliers who share our commitment to
                 responsibility. From FSC-certified lumber and recycled-content
                 countertops to locally sourced stone and reclaimed wood accents,

@@ -1,7 +1,6 @@
 import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react";
 
 import { ContactForm } from "@/components/contact-form";
-import { CtaSection } from "@/components/cta-section";
 import { getAwards, getTestimonials } from "@/lib/fetchers";
 
 export default async function ContactPage() {
@@ -13,14 +12,14 @@ export default async function ContactPage() {
   const testimonial = testimonials[0];
 
   return (
-    <main>
+    <main className="pt-20">
       {/* Header Section */}
-      <section className="px-6 pt-16 pb-10 text-center md:px-12 md:pt-24 md:pb-12 lg:px-24">
-        <div className="mx-auto max-w-3xl">
+      <section className="bg-white px-6 pt-16 pb-10 md:px-12 md:pt-24 md:pb-12 lg:px-24">
+        <div className="mx-auto max-w-3xl text-center">
           <h1 className="mb-4 font-bold text-4xl tracking-tight md:text-5xl lg:text-[3.5rem]">
             Ready to build your dream?
           </h1>
-          <p className="mx-auto max-w-xl text-base text-muted-foreground">
+          <p className="mx-auto max-w-xl text-base text-muted-foreground leading-relaxed">
             Let&apos;s begin crafting the home of your dreams! Whether you
             already have land and architectural plans or are starting with a
             blank canvas, we are here to be your dream home construction
@@ -30,19 +29,19 @@ export default async function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="px-6 pb-16 md:px-12 lg:px-24">
+      <section className="bg-white px-6 pb-12 md:px-12 lg:px-24">
         <div className="mx-auto max-w-2xl">
           <ContactForm />
         </div>
       </section>
 
       {/* Contact Info Cards */}
-      <section className="px-6 pb-16 md:px-12 lg:px-24">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
+      <section className="bg-white px-6 pb-16 md:px-12 lg:px-24">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
           {/* Address Card */}
-          <div className="flex items-start gap-4 rounded-xl bg-muted/50 p-6">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-foreground">
-              <MapPin className="size-5 text-background" />
+          <div className="flex items-start gap-4 rounded-xl bg-bost-mint p-6">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-bost-olive">
+              <MapPin className="size-5 text-white" />
             </div>
             <div>
               <p className="font-semibold text-sm">Bost Custom Homes</p>
@@ -54,9 +53,9 @@ export default async function ContactPage() {
           </div>
 
           {/* Phone Card */}
-          <div className="flex items-start gap-4 rounded-xl bg-muted/50 p-6">
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-foreground">
-              <Phone className="size-5 text-background" />
+          <div className="flex items-start gap-4 rounded-xl bg-bost-mint p-6">
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-bost-olive">
+              <Phone className="size-5 text-white" />
             </div>
             <div>
               <p className="text-sm">
@@ -80,13 +79,13 @@ export default async function ContactPage() {
 
       {/* Testimonial Section */}
       {testimonial && (
-        <section className="border-amber-500 border-t-4 px-6 py-16 md:px-12 md:py-20 lg:px-24">
-          <div className="relative mx-auto max-w-3xl">
-            {/* Quote icon */}
+        <section className="bg-bost-olive px-6 py-16 md:px-12 md:py-20 lg:px-24">
+          <div className="relative mx-auto max-w-3xl text-center">
+            {/* Decorative quotation mark */}
             <div className="mb-6 flex justify-center">
               <svg
                 aria-hidden="true"
-                className="size-12 text-bost-yellow"
+                className="size-14 text-white/20"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -94,83 +93,86 @@ export default async function ContactPage() {
               </svg>
             </div>
 
-            {/* Navigation arrows */}
-            <button
-              aria-label="Previous testimonial"
-              className="absolute top-1/2 left-0 -translate-x-2 -translate-y-1/2 rounded-full border border-border bg-white p-1.5 text-muted-foreground shadow-sm transition-colors hover:text-foreground md:-translate-x-12"
-              type="button"
-            >
-              <ChevronLeft className="size-4" />
-            </button>
-            <button
-              aria-label="Next testimonial"
-              className="absolute top-1/2 right-0 translate-x-2 -translate-y-1/2 rounded-full border border-border bg-white p-1.5 text-muted-foreground shadow-sm transition-colors hover:text-foreground md:translate-x-12"
-              type="button"
-            >
-              <ChevronRight className="size-4" />
-            </button>
-
             {/* Quote text */}
-            <blockquote className="px-8 text-center text-lg italic leading-relaxed md:px-12 md:text-xl">
-              {testimonial.quote}
+            <blockquote className="mb-6 text-lg text-white italic leading-relaxed md:text-xl">
+              &ldquo;{testimonial.quote}&rdquo;
             </blockquote>
 
             {/* Attribution */}
-            <p className="mt-6 text-center font-medium text-muted-foreground text-sm">
+            <p className="font-medium text-sm text-white/70 tracking-wide">
               {testimonial.author}
             </p>
 
-            {/* Dot indicators */}
-            {testimonials.length > 1 && (
-              <div className="mt-6 flex justify-center gap-2">
-                {testimonials.map((t, i) => (
-                  <span
-                    className={`size-2.5 rounded-full ${i === 0 ? "bg-bost-yellow" : "bg-muted-foreground/30"}`}
-                    key={t.id}
-                  />
-                ))}
-              </div>
-            )}
+            {/* Carousel arrows + dot pagination */}
+            <div className="mt-8 flex items-center justify-center gap-4">
+              <button
+                aria-label="Previous testimonial"
+                className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
+                type="button"
+              >
+                <ChevronLeft className="size-4" />
+              </button>
+
+              {testimonials.length > 1 && (
+                <div className="flex items-center gap-2">
+                  {testimonials.map((t, i) => (
+                    <span
+                      className={`rounded-full transition-all ${
+                        i === 0 ? "size-2.5 bg-white" : "size-2 bg-white/30"
+                      }`}
+                      key={t.id}
+                    />
+                  ))}
+                </div>
+              )}
+
+              <button
+                aria-label="Next testimonial"
+                className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
+                type="button"
+              >
+                <ChevronRight className="size-4" />
+              </button>
+            </div>
           </div>
         </section>
       )}
 
       {/* Awards Section */}
-      <section className="px-6 py-16 md:px-12 md:py-20 lg:px-24">
+      <section className="bg-bost-olive px-6 pt-0 pb-20 md:px-12 md:pb-28 lg:px-24">
         <div className="mx-auto max-w-5xl">
           {/* Awards header */}
-          <div className="mb-12 flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-8">
-            <p className="shrink-0 font-semibold text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <div className="mb-12">
+            <p className="mb-3 font-semibold text-bost-blue text-xs uppercase tracking-[0.2em]">
               Awards
             </p>
-            <h2 className="max-w-2xl font-bold text-2xl italic leading-snug tracking-tight md:text-3xl">
+            <h2 className="max-w-2xl font-bold text-2xl text-white italic leading-snug tracking-tight md:text-3xl">
               We strive for excellence in all that we do, with integrity,
               innovation, and calculated execution.
             </h2>
           </div>
 
           {/* Award columns */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
             {awards.map((award) => (
               <div key={award.id}>
-                <p className="mb-2 font-bold text-3xl text-bost-brick md:text-4xl">
+                <p className="mb-2 font-bold text-2xl text-bost-blue md:text-3xl">
                   {award.year}
                 </p>
-                <h3 className="mb-1 font-semibold text-sm">{award.title}</h3>
-                <p className="text-muted-foreground text-sm">
-                  {award.description}
-                </p>
+                <h3 className="mb-1 font-semibold text-sm text-white">
+                  {award.title}
+                </h3>
+                <p className="text-sm text-white/65">{award.description}</p>
               </div>
             ))}
           </div>
 
-          {/* Accent line */}
-          <div className="mt-10 h-1 w-32 bg-bost-yellow" />
+          {/* Accent divider */}
+          <div className="relative mt-12 h-px w-full bg-white/15">
+            <div className="absolute top-0 left-0 h-px w-16 bg-bost-yellow" />
+          </div>
         </div>
       </section>
-
-      {/* Footer CTA */}
-      <CtaSection />
     </main>
   );
 }
