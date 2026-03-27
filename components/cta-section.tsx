@@ -1,38 +1,40 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 function CtaSection() {
   return (
-    <section className="relative overflow-hidden bg-bost-olive">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-8 px-6 py-20 lg:flex-row lg:justify-between lg:py-24">
-        {/* Text + CTA */}
-        <div className="flex max-w-lg flex-col items-center gap-6 text-center lg:items-start lg:text-left">
-          <h2 className="font-bold text-3xl text-white tracking-tight sm:text-4xl">
-            Ready to Build Your Dream Home?
-          </h2>
-          <p className="text-lg text-white/60">
-            Let&apos;s bring your vision to life. Start the conversation with
-            our team today.
-          </p>
-          <Button
-            className="bg-bost-brick text-white hover:bg-bost-brick/90"
-            render={<Link href="/contact" />}
-            size="lg"
-          >
-            Start a Project
-          </Button>
-        </div>
+    <section className="relative flex min-h-[500px] flex-col overflow-hidden md:min-h-[580px] lg:min-h-[660px]">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          alt="Bost Custom Homes luxury exterior"
+          className="object-cover object-center"
+          fill
+          sizes="100vw"
+          src="/images/shared/cta-background.jpg"
+        />
+        {/* Gradient: transparent top, fading to black at bottom ~60% */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent from-40% via-black/60 via-75% to-black" />
+      </div>
 
-        {/* House illustration placeholder */}
-        <div aria-hidden="true" className="hidden lg:block">
-          <svg
-            className="h-56 w-72 text-white/10"
-            fill="currentColor"
-            viewBox="0 0 288 224"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M144 16L8 120h40v88h72v-56h48v56h72v-88h40L144 16z" />
-          </svg>
+      {/* Content pinned to bottom */}
+      <div className="relative mt-auto px-6 pb-12 md:px-12 md:pb-16 lg:px-24">
+        <div className="mx-auto flex max-w-7xl flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="font-semibold text-5xl text-white leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
+            Ready to Build Your
+            <br />
+            Dream Home?
+          </h2>
+          <div className="shrink-0">
+            <Button
+              className="bg-bost-brick px-8 text-white hover:bg-bost-brick/90"
+              render={<Link href="/contact" />}
+              size="lg"
+            >
+              Start a Project
+            </Button>
+          </div>
         </div>
       </div>
     </section>

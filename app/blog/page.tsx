@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BlogFilter } from "@/components/blog-filter";
 import { CtaSection } from "@/components/cta-section";
@@ -32,18 +33,14 @@ export default async function BlogPage({
           <p className="mb-2 font-semibold text-bost-brick text-xs uppercase tracking-widest">
             Media Hub
           </p>
-          <h1 className="mb-4 font-bold text-4xl tracking-tight md:text-5xl">
+          <h1 className="mb-4 font-bold text-3xl tracking-tight md:text-4xl lg:text-5xl">
             Welcome to the Bost Custom Homes Media Hub
           </h1>
-          <p className="max-w-2xl text-lg text-muted-foreground">
-            Insights, inspiration, and news from the world of custom home
-            building in the Triangle.
-          </p>
         </div>
       </section>
 
       {/* Search / Filter */}
-      <section className="border-border border-b px-6 pb-8 md:px-12 lg:px-24">
+      <section className="border-border/50 border-b px-6 pb-8 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <BlogFilter />
         </div>
@@ -51,22 +48,32 @@ export default async function BlogPage({
 
       {/* Featured Post */}
       {featuredPost && (
-        <section className="px-6 py-12 md:px-12 lg:px-24">
+        <section className="px-6 py-10 md:px-12 md:py-12 lg:px-24">
           <div className="mx-auto max-w-7xl">
             <Link
-              className="group block overflow-hidden rounded-lg border border-border"
+              className="group block overflow-hidden rounded-lg border border-border/50"
               href={`/blog/${featuredPost.slug}`}
             >
               <div className="grid md:grid-cols-2">
-                <div className="aspect-[16/10] bg-muted md:aspect-auto md:min-h-[320px]" />
-                <div className="flex flex-col justify-center p-8">
+                <div className="relative aspect-[16/10] bg-muted md:aspect-auto md:min-h-[320px]">
+                  {featuredPost.featuredImage && (
+                    <Image
+                      alt={featuredPost.title}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      src={featuredPost.featuredImage.url}
+                    />
+                  )}
+                </div>
+                <div className="flex flex-col justify-center p-6 md:p-8">
                   <span className="mb-3 inline-block w-fit rounded-full bg-bost-brick px-3 py-1 font-semibold text-white text-xs">
                     {featuredPost.category}
                   </span>
-                  <h2 className="mb-3 font-bold text-2xl tracking-tight transition-colors group-hover:text-bost-brick md:text-3xl">
+                  <h2 className="mb-3 font-bold text-xl tracking-tight transition-colors group-hover:text-bost-brick md:text-2xl lg:text-3xl">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-sm md:text-base">
                     {featuredPost.excerpt}
                   </p>
                 </div>
@@ -79,19 +86,29 @@ export default async function BlogPage({
       {/* Post Grid */}
       <section className="px-6 pb-16 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {gridPosts.map((post) => (
               <Link
-                className="group overflow-hidden rounded-lg border border-border"
+                className="group overflow-hidden rounded-lg border border-border/50"
                 href={`/blog/${post.slug}`}
                 key={post.id}
               >
-                <div className="aspect-[16/10] bg-muted" />
-                <div className="p-6">
+                <div className="relative aspect-[16/10] bg-muted">
+                  {post.featuredImage && (
+                    <Image
+                      alt={post.title}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      src={post.featuredImage.url}
+                    />
+                  )}
+                </div>
+                <div className="p-5 md:p-6">
                   <span className="mb-3 inline-block rounded-full bg-bost-brick px-3 py-1 font-semibold text-white text-xs">
                     {post.category}
                   </span>
-                  <h3 className="mb-3 font-semibold text-xl transition-colors group-hover:text-bost-brick">
+                  <h3 className="mb-3 font-semibold text-lg transition-colors group-hover:text-bost-brick">
                     {post.title}
                   </h3>
                   <span className="font-medium text-bost-brick text-sm">

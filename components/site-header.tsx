@@ -1,23 +1,49 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { BostLogo } from "@/components/bost-logo";
 import { MobileNav } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/process", label: "Our Process" },
-  { href: "/about", label: "About" },
-  { href: "/resources", label: "Resources", hasDropdown: true },
+  { href: "/our-process", label: "Approach" },
+  { href: "/about", label: "Story" },
+  { href: "/blog", label: "Resources", hasDropdown: true },
 ];
 
 function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    function onScroll() {
+      setScrolled(window.scrollY > 50);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 right-0 left-0 z-40 border-border/50 border-b bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+    <header
+      className={cn(
+        "fixed top-0 right-0 left-0 z-40",
+        mounted && "transition-all duration-300",
+        scrolled
+          ? "border-border/50 border-b bg-white/95 backdrop-blur-sm"
+          : "bg-transparent"
+      )}
+      suppressHydrationWarning
+    >
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 xl:px-0">
         {/* Logo */}
         <Link className="shrink-0" href="/">
-          <BostLogo />
+          <BostLogo variant={scrolled ? "default" : "light"} />
         </Link>
 
         {/* Desktop navigation */}
@@ -27,7 +53,12 @@ function SiteHeader() {
         >
           {navLinks.map((link) => (
             <Link
-              className="inline-flex items-center gap-1 font-medium text-foreground/80 text-sm transition-colors hover:text-foreground"
+              className={cn(
+                "inline-flex items-center gap-1 font-bold text-sm transition-colors",
+                scrolled
+                  ? "text-bost-olive hover:text-bost-olive/70"
+                  : "text-white hover:text-white/70"
+              )}
               href={link.href}
               key={link.href}
             >
