@@ -62,7 +62,11 @@ export default async function FeaturedNeighborhoodsPage() {
                           Available Lots
                         </p>
                         <p className="text-sm text-white/80">
-                          {neighborhood.availableLots ?? "Contact us"}
+                          {neighborhood.lots
+                            ? neighborhood.lots.filter(
+                                (l) => l.lotStatus === "AVAILABLE"
+                              ).length
+                            : neighborhood.availableLots ?? "Contact us"}
                         </p>
                       </div>
                     </div>

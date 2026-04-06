@@ -12,10 +12,11 @@ const mobileNavLinks = [
   { href: "/about", label: "About Us" },
   { href: "/our-process", label: "Our Process" },
   { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
-  { href: "/blog", label: "Resources" },
+  { href: "/media", label: "Media Hub" },
+  { href: "/careers", label: "Careers" },
 ];
 
-function MobileNav() {
+function MobileNav({ lightIcon = false }: { lightIcon?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
@@ -51,7 +52,7 @@ function MobileNav() {
     <>
       <Button
         aria-label="Open navigation menu"
-        className="lg:hidden"
+        className={cn("lg:hidden", lightIcon && "text-white hover:text-white/70")}
         onClick={() => setIsOpen(true)}
         ref={openButtonRef}
         size="icon"

@@ -39,11 +39,24 @@ export interface BlogPost {
   title: string;
 }
 
+export interface Lot {
+  acreage: number;
+  address?: string;
+  description?: string;
+  dimensions?: string;
+  features: string[];
+  id: string;
+  lotNumber: string;
+  lotStatus: "AVAILABLE" | "UNDER_CONTRACT" | "SOLD" | "COMING_SOON";
+  price?: number;
+}
+
 export interface Neighborhood {
   availableLots: number;
   description: string;
   id: string;
   image?: Asset;
+  lots: Lot[];
   name: string;
   slug: string;
 }
@@ -73,6 +86,26 @@ export interface ProcessStep {
   description: string;
   id: string;
   number: string;
+  title: string;
+}
+
+export interface JobOpening {
+  department: "CONSTRUCTION" | "DESIGN" | "PROJECT_MANAGEMENT" | "OPERATIONS" | "SALES";
+  description?: RichText;
+  id: string;
+  jobType: "FULL_TIME" | "PART_TIME" | "CONTRACT";
+  location: string;
+  slug: string;
+  summary: string;
+  title: string;
+}
+
+export interface GreenFeature {
+  category: "FEATURED" | "ADDITIONAL";
+  description: string;
+  id: string;
+  pioneeredLocally: boolean;
+  sortOrder: number;
   title: string;
 }
 

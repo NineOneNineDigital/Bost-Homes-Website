@@ -1,21 +1,26 @@
 "use client";
 
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BostLogo } from "@/components/bost-logo";
 import { MobileNav } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+const darkHeroRoutes = new Set(["/"]);
+
 const navLinks = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/our-process", label: "Approach" },
   { href: "/about", label: "Story" },
-  { href: "/blog", label: "Resources", hasDropdown: true },
+  { href: "/media", label: "Media Hub" },
+  { href: "/careers", label: "Careers" },
 ];
 
 function SiteHeader() {
+  const pathname = usePathname();
+  const hasDarkHero = darkHeroRoutes.has(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -28,6 +33,8 @@ function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const useLightText = hasDarkHero && !scrolled;
 
   return (
     <header
@@ -43,7 +50,7 @@ function SiteHeader() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 xl:px-0">
         {/* Logo */}
         <Link className="shrink-0" href="/">
-          <BostLogo variant={scrolled ? "default" : "light"} />
+          <BostLogo variant={useLightText ? "light" : "default"} />
         </Link>
 
         {/* Desktop navigation */}
@@ -55,17 +62,14 @@ function SiteHeader() {
             <Link
               className={cn(
                 "inline-flex items-center gap-1 font-bold text-sm transition-colors",
-                scrolled
-                  ? "text-bost-olive hover:text-bost-olive/70"
-                  : "text-white hover:text-white/70"
+                useLightText
+                  ? "text-white hover:text-white/70"
+                  : "text-bost-olive hover:text-bost-olive/70"
               )}
               href={link.href}
               key={link.href}
             >
               {link.label}
-              {link.hasDropdown && (
-                <ChevronDown aria-hidden="true" className="size-4" />
-              )}
             </Link>
           ))}
         </nav>
@@ -79,7 +83,7 @@ function SiteHeader() {
           >
             Start a Project
           </Button>
-          <MobileNav />
+          <MobileNav lightIcon={useLightText} />
         </div>
       </div>
     </header>

@@ -4,71 +4,42 @@ import { BostLogo } from "@/components/bost-logo";
 
 const footerNavLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "About" },
   { href: "/our-process", label: "Our Process" },
-  { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
-  { href: "/blog", label: "Resources" },
-  { href: "/contact", label: "Start a Project" },
+  { href: "/featured-neighborhoods", label: "Neighborhoods" },
+  { href: "/media", label: "Media Hub" },
+  { href: "/careers", label: "Careers" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const socialLinks = [
-  {
-    href: "https://linkedin.com",
-    label: "LinkedIn",
-    icon: Linkedin,
-  },
-  {
-    href: "https://instagram.com",
-    label: "Instagram",
-    icon: Instagram,
-  },
-  {
-    href: "https://youtube.com",
-    label: "YouTube",
-    icon: Youtube,
-  },
-  {
-    href: "https://x.com",
-    label: "X (Twitter)",
-    icon: Twitter,
-  },
+  { href: "https://linkedin.com", label: "LinkedIn", icon: Linkedin },
+  { href: "https://instagram.com", label: "Instagram", icon: Instagram },
+  { href: "https://youtube.com", label: "YouTube", icon: Youtube },
+  { href: "https://x.com", label: "X (Twitter)", icon: Twitter },
 ];
 
 function SiteFooter() {
   return (
-    <footer className="bg-bost-gray-lightest text-bost-black">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20 xl:px-0">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1fr_auto_1fr]">
-          {/* Brand column — logo top, social bottom */}
-          <div className="flex flex-col justify-between gap-12">
-            <BostLogo className="self-start" />
-
-            <div>
-              <p className="mb-3 font-bold text-sm">Follow us on:</p>
-              <div className="flex items-center gap-2.5">
-                {socialLinks.map((social) => (
-                  <a
-                    aria-label={social.label}
-                    className="flex size-9 items-center justify-center rounded-md bg-bost-black text-white transition-opacity hover:opacity-80"
-                    href={social.href}
-                    key={social.label}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <social.icon className="size-[18px]" />
-                  </a>
-                ))}
-              </div>
-            </div>
+    <footer className="bg-bost-olive text-white">
+      {/* Main row */}
+      <div className="mx-auto max-w-7xl px-6 py-10 xl:px-0">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+          {/* Logo + tagline */}
+          <div className="shrink-0">
+            <BostLogo className="mb-2" variant="light" />
+            <p className="text-sm text-white/50">
+              Custom homes in the Triangle since 1986.
+            </p>
           </div>
 
-          {/* Navigation column — large links */}
+          {/* Nav links */}
           <nav aria-label="Footer navigation">
-            <ul className="flex flex-col gap-5">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2">
               {footerNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    className="text-2xl text-bost-black transition-colors hover:text-bost-brick lg:text-[32px] lg:leading-tight"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
                     href={link.href}
                   >
                     {link.label}
@@ -78,45 +49,49 @@ function SiteFooter() {
             </ul>
           </nav>
 
-          {/* Contact + Legal column */}
-          <div className="flex flex-col justify-between gap-12">
-            {/* Contact info */}
-            <div>
-              <h3 className="mb-2 font-bold text-base">Bost Homes Office</h3>
-              <address className="flex flex-col gap-0.5 not-italic text-sm text-bost-black/50">
-                <p>8255 Chapel Hill Rd. Cary, NC 27513</p>
-                <p>
-                  T:{" "}
-                  <a
-                    className="underline transition-colors hover:text-bost-black"
-                    href="tel:+19194601983"
-                  >
-                    (919) 460-1983
-                  </a>
-                </p>
-                <p>
-                  F:{" "}
-                  <a
-                    className="underline transition-colors hover:text-bost-black"
-                    href="tel:+19194601986"
-                  >
-                    (919) 460-1986
-                  </a>
-                </p>
-              </address>
-            </div>
+          {/* Contact */}
+          <address className="not-italic text-sm text-white/50">
+            <p>8255 Chapel Hill Rd. Cary, NC 27513</p>
+            <p>
+              <a
+                className="transition-colors hover:text-white"
+                href="tel:+19194601983"
+              >
+                (919) 460-1983
+              </a>
+            </p>
+          </address>
+        </div>
+      </div>
 
-            {/* Legal */}
-            <div className="text-bost-black/50 text-xs">
-              <p className="mb-1">
-                <span>Terms</span>
-                <span className="mx-1.5">&bull;</span>
-                <span>Privacy policy</span>
-                <span className="mx-1.5">&bull;</span>
-                <span>Security</span>
-              </p>
-              <p>&copy; {new Date().getFullYear()} Bost Custom Homes. All rights Reserved.</p>
-            </div>
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row xl:px-0">
+          <p className="text-xs text-white/40">
+            &copy; {new Date().getFullYear()} Bost Custom Homes. All rights
+            reserved.
+            <span className="mx-1.5">&middot;</span>
+            <span className="cursor-pointer transition-colors hover:text-white/60">
+              Terms
+            </span>
+            <span className="mx-1.5">&middot;</span>
+            <span className="cursor-pointer transition-colors hover:text-white/60">
+              Privacy
+            </span>
+          </p>
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social) => (
+              <a
+                aria-label={social.label}
+                className="text-white/40 transition-colors hover:text-white"
+                href={social.href}
+                key={social.label}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <social.icon className="size-4" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
