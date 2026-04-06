@@ -51,8 +51,39 @@ export const AWARDS_QUERY = gql`
     awards(orderBy: year_DESC) {
       id
       year
-      title
+      title: awardTitle
       description
+    }
+  }
+`;
+
+export const JOB_OPENINGS_QUERY = gql`
+  query JobOpenings {
+    jobOpenings(orderBy: createdAt_DESC) {
+      id
+      title: jobTitle
+      slug
+      summary
+      description {
+        html
+        text
+      }
+      location
+      jobType
+      department
+    }
+  }
+`;
+
+export const GREEN_FEATURES_QUERY = gql`
+  query GreenFeatures {
+    greenFeatures(orderBy: sortOrder_ASC) {
+      id
+      title: featureTitle
+      description
+      category
+      pioneeredLocally
+      sortOrder
     }
   }
 `;
@@ -62,7 +93,7 @@ export const PROCESS_STEPS_QUERY = gql`
     processSteps(orderBy: number_ASC) {
       id
       number
-      title
+      title: stepTitle
       description
     }
   }

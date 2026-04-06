@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CtaSection } from "@/components/cta-section";
-import { getTeamMembers } from "@/lib/fetchers";
+import { getAwards, getTeamMembers } from "@/lib/fetchers";
 import type { TeamMember } from "@/lib/types/hygraph";
 
 const leadership = [
@@ -37,27 +37,45 @@ const leadership = [
 const values = [
   {
     number: "01",
-    name: "Transparency",
+    name: "Quality",
     description:
-      "We believe an informed client is a confident client. From pricing to scheduling, we keep every detail open and accessible throughout the entire build.",
+      "We build beautiful, durable homes with the highest standards of craftsmanship to exceed our client\u2019s expectations.",
   },
   {
     number: "02",
-    name: "Execution",
+    name: "Teamwork",
     description:
-      "Great design only matters if it is built right. We hold ourselves and our trade partners to exacting standards so that the finished home matches the vision—down to the last detail.",
+      "We strengthen, encourage, and assist each other to better serve our clients and accomplish our goals.",
   },
   {
     number: "03",
-    name: "Artistry",
+    name: "Integrity",
     description:
-      "Building is both a science and an art. We bring a discerning eye to every finish, proportion, and material selection, elevating each home beyond the ordinary.",
+      "We do the right thing always, whether it\u2019s easy or challenging; whether it\u2019s recognized or unnoticed.",
   },
   {
     number: "04",
-    name: "Continuous Learning",
+    name: "Relationships",
     description:
-      "The best builders never stop improving. We invest in new techniques, materials, and technologies to deliver homes that are better, more efficient, and more enduring with every project.",
+      "We make effort to form positive relationships with all we encounter.",
+  },
+  {
+    number: "05",
+    name: "Stewardship",
+    description:
+      "We take pride in reducing the waste of resources, and we take great responsibility in managing our clients\u2019 investment.",
+  },
+  {
+    number: "06",
+    name: "Innovation",
+    description:
+      "We lead our industry with new innovations and pursue the future of home technology and building science.",
+  },
+  {
+    number: "07",
+    name: "Artistry",
+    description:
+      "We inspire our clients and the community with creative and functional design.",
   },
 ];
 
@@ -107,7 +125,10 @@ const staticTeam: TeamMember[] = [
 ];
 
 export default async function AboutPage() {
-  const teamMembers = await getTeamMembers();
+  const [teamMembers, awards] = await Promise.all([
+    getTeamMembers(),
+    getAwards(),
+  ]);
   const team = teamMembers.length > 0 ? teamMembers : staticTeam;
 
   return (
@@ -225,32 +246,57 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Our Values */}
+      {/* Mission & Vision */}
       <section className="bg-bost-olive px-6 py-20 text-white md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-4 font-medium text-white/60 text-xs uppercase tracking-[0.2em]">
-            Our Values
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.2em]">
+            Our Mission
           </p>
-          <h2 className="mb-16 max-w-xl font-bold text-3xl leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
-            We&apos;re Guided by our Principles...
-          </h2>
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <p className="font-light text-xl text-white leading-relaxed md:text-2xl lg:text-3xl">
+            To build the highest quality custom homes possible and offer our
+            clients an unparalleled positive experience.
+          </p>
+
+          <div className="mx-auto my-12 h-px w-16 bg-bost-yellow md:my-16" />
+
+          <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.2em]">
+            Our Vision
+          </p>
+          <p className="font-light text-xl text-white leading-relaxed md:text-2xl lg:text-3xl">
+            To continually strive for excellence in all areas of our
+            organization with integrity, innovation, and calculated execution.
+          </p>
+        </div>
+      </section>
+
+      {/* Guiding Principles */}
+      <section className="bg-bost-cream px-6 py-20 md:px-12 md:py-28 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14 text-center">
+            <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+              Our Guiding Principles
+            </p>
+            <h2 className="font-bold text-3xl text-bost-olive tracking-tight md:text-4xl">
+              The Values That Drive Us
+            </h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-6">
             {values.map((value) => (
-              <div key={value.number}>
-                <span className="mb-4 block font-bold text-2xl text-bost-blue">
+              <div
+                className="w-full border-t-2 border-bost-brick bg-white p-6 sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
+                key={value.number}
+              >
+                <span className="mb-3 block font-bold text-2xl text-bost-olive/30">
                   {value.number}
                 </span>
-                <h3 className="mb-3 font-semibold text-lg text-white">
+                <h3 className="mb-2 font-semibold text-bost-olive text-lg">
                   {value.name}
                 </h3>
-                <p className="text-sm text-white/70 leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {value.description}
                 </p>
               </div>
             ))}
-          </div>
-          <div className="mt-16 h-px w-full bg-white/20">
-            <div className="h-px w-24 bg-bost-yellow" />
           </div>
         </div>
       </section>
@@ -272,25 +318,25 @@ export default async function AboutPage() {
               const imageLeft = index % 2 === 0;
               return (
                 <div
-                  className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16"
+                  className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10"
                   key={leader.id}
                 >
                   <div
-                    className={`relative aspect-[4/5] w-full overflow-hidden ${imageLeft ? "md:order-1" : "md:order-2"}`}
+                    className={`relative h-[380px] w-[280px] shrink-0 overflow-hidden ${imageLeft ? "md:order-1" : "md:order-2"}`}
                   >
                     <Image
                       alt={leader.name}
                       className="object-cover object-top"
                       fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 768px) 35vw, 100vw"
                       src={leader.image}
                     />
                   </div>
-                  <div className={imageLeft ? "md:order-2" : "md:order-1"}>
+                  <div className={`max-w-2xl ${imageLeft ? "md:order-2" : "md:order-1"}`}>
                     <h3 className="mb-1 font-bold text-2xl tracking-tight md:text-3xl">
                       {leader.name}
                     </h3>
-                    <p className="mb-6 font-medium text-bost-brick text-sm uppercase tracking-[0.15em]">
+                    <p className="mb-4 font-medium text-bost-brick text-sm uppercase tracking-[0.15em]">
                       {leader.title}
                     </p>
                     <p className="text-base text-muted-foreground leading-relaxed">
@@ -315,9 +361,9 @@ export default async function AboutPage() {
               The People Who Make It Happen
             </h2>
           </div>
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-10">
             {team.map((member) => (
-              <div className="text-center" key={member.id}>
+              <div className="w-[calc(50%-12px)] text-center lg:w-[calc(25%-18px)]" key={member.id}>
                 <div className="relative mx-auto mb-4 aspect-square w-full overflow-hidden bg-muted">
                   {member.image && (
                     <Image
@@ -333,6 +379,37 @@ export default async function AboutPage() {
                 <p className="text-muted-foreground text-sm">{member.title}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Awards */}
+      <section className="bg-bost-olive px-6 py-20 md:px-12 md:py-28 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14">
+            <p className="mb-3 font-semibold text-bost-blue text-xs uppercase tracking-[0.2em]">
+              Awards &amp; Recognition
+            </p>
+            <h2 className="max-w-2xl font-bold text-2xl text-white italic leading-snug tracking-tight md:text-3xl">
+              We strive for excellence in all that we do, with integrity,
+              innovation, and calculated execution.
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+            {awards.map((award) => (
+              <div key={award.id}>
+                <p className="mb-2 font-bold text-2xl text-bost-blue md:text-3xl">
+                  {award.year}
+                </p>
+                <h3 className="mb-1 font-semibold text-sm text-white">
+                  {award.title}
+                </h3>
+                <p className="text-sm text-white/65">{award.description}</p>
+              </div>
+            ))}
+          </div>
+          <div className="relative mt-12 h-px w-full bg-white/15">
+            <div className="absolute top-0 left-0 h-px w-16 bg-bost-yellow" />
           </div>
         </div>
       </section>

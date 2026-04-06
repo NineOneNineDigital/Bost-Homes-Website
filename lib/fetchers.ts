@@ -1,8 +1,13 @@
 import { hygraph } from "@/lib/hygraph";
 import { BLOG_POST_BY_SLUG_QUERY, BLOG_POSTS_QUERY } from "@/lib/queries/blog";
-import { NEIGHBORHOODS_QUERY } from "@/lib/queries/neighborhoods";
+import {
+  NEIGHBORHOOD_BY_SLUG_QUERY,
+  NEIGHBORHOODS_QUERY,
+} from "@/lib/queries/neighborhoods";
 import {
   AWARDS_QUERY,
+  GREEN_FEATURES_QUERY,
+  JOB_OPENINGS_QUERY,
   PAGE_CONTENT_QUERY,
   PROCESS_STEPS_QUERY,
   TESTIMONIALS_QUERY,
@@ -18,6 +23,8 @@ import { TEAM_MEMBERS_QUERY } from "@/lib/queries/team";
 import type {
   Award,
   BlogPost,
+  GreenFeature,
+  JobOpening,
   Neighborhood,
   PageContent,
   ProcessStep,
@@ -135,6 +142,15 @@ export async function getNeighborhoods(): Promise<Neighborhood[]> {
   return neighborhoods;
 }
 
+export async function getNeighborhoodBySlug(
+  slug: string
+): Promise<Neighborhood | null> {
+  const { neighborhood } = await safeRequest<{
+    neighborhood: Neighborhood | null;
+  }>(NEIGHBORHOOD_BY_SLUG_QUERY, { slug }, { neighborhood: null });
+  return neighborhood;
+}
+
 // --- Team ---
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
@@ -173,6 +189,20 @@ export async function getAwards(): Promise<Award[]> {
     { awards: [] }
   );
   return awards;
+}
+
+export async function getJobOpenings(): Promise<JobOpening[]> {
+  const { jobOpenings } = await safeRequest<{
+    jobOpenings: JobOpening[];
+  }>(JOB_OPENINGS_QUERY, undefined, { jobOpenings: [] });
+  return jobOpenings;
+}
+
+export async function getGreenFeatures(): Promise<GreenFeature[]> {
+  const { greenFeatures } = await safeRequest<{
+    greenFeatures: GreenFeature[];
+  }>(GREEN_FEATURES_QUERY, undefined, { greenFeatures: [] });
+  return greenFeatures;
 }
 
 export async function getProcessSteps(): Promise<ProcessStep[]> {

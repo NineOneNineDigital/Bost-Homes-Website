@@ -1,13 +1,10 @@
 import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react";
 
 import { ContactForm } from "@/components/contact-form";
-import { getAwards, getTestimonials } from "@/lib/fetchers";
+import { getTestimonials } from "@/lib/fetchers";
 
 export default async function ContactPage() {
-  const [testimonials, awards] = await Promise.all([
-    getTestimonials(),
-    getAwards(),
-  ]);
+  const testimonials = await getTestimonials();
 
   const testimonial = testimonials[0];
 
@@ -138,41 +135,6 @@ export default async function ContactPage() {
         </section>
       )}
 
-      {/* Awards Section */}
-      <section className="bg-bost-olive px-6 pt-0 pb-20 md:px-12 md:pb-28 lg:px-24">
-        <div className="mx-auto max-w-5xl">
-          {/* Awards header */}
-          <div className="mb-12">
-            <p className="mb-3 font-semibold text-bost-blue text-xs uppercase tracking-[0.2em]">
-              Awards
-            </p>
-            <h2 className="max-w-2xl font-bold text-2xl text-white italic leading-snug tracking-tight md:text-3xl">
-              We strive for excellence in all that we do, with integrity,
-              innovation, and calculated execution.
-            </h2>
-          </div>
-
-          {/* Award columns */}
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-            {awards.map((award) => (
-              <div key={award.id}>
-                <p className="mb-2 font-bold text-2xl text-bost-blue md:text-3xl">
-                  {award.year}
-                </p>
-                <h3 className="mb-1 font-semibold text-sm text-white">
-                  {award.title}
-                </h3>
-                <p className="text-sm text-white/65">{award.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Accent divider */}
-          <div className="relative mt-12 h-px w-full bg-white/15">
-            <div className="absolute top-0 left-0 h-px w-16 bg-bost-yellow" />
-          </div>
-        </div>
-      </section>
     </main>
   );
 }

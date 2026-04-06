@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
 import { ProcessAccordion } from "@/components/process-accordion";
+import { ProcessCarousel } from "@/components/process-carousel";
 import { Button } from "@/components/ui/button";
 import { getProcessSteps } from "@/lib/fetchers";
 
@@ -38,77 +39,10 @@ export default async function OurProcessPage() {
         </div>
       </section>
 
-      {/* What to Expect Section — dark olive, CMS cards */}
-      <section className="bg-bost-olive px-6 py-20 md:py-28">
+      {/* What to Expect Section — dark olive, CMS carousel */}
+      <section className="overflow-hidden bg-bost-olive px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex items-center justify-between">
-            <h2 className="font-bold text-3xl text-white tracking-tight md:text-4xl">
-              What to expect
-            </h2>
-            <div className="flex items-center gap-2">
-              <button
-                aria-label="Previous step"
-                className="flex size-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  className="size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M15 18l-6-6 6-6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-              <button
-                aria-label="Next step"
-                className="flex size-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors hover:bg-white/10"
-                type="button"
-              >
-                <svg
-                  aria-hidden="true"
-                  className="size-4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M9 18l6-6-6-6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {steps.map((step) => (
-              <div
-                className="overflow-hidden rounded-lg bg-white shadow-lg"
-                key={step.id}
-              >
-                <div className="h-1.5 w-full bg-bost-blue" />
-                <div className="p-8">
-                  <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                    {step.title}
-                  </p>
-                  <h3 className="mb-3 font-semibold text-foreground text-lg leading-snug">
-                    {step.number}. {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ProcessCarousel steps={steps} />
         </div>
       </section>
 

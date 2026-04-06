@@ -1,12 +1,8 @@
-import {
-  ArrowRight,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { Button } from "@/components/ui/button";
 import {
   getFeaturedProjects,
@@ -51,19 +47,21 @@ export default async function Page() {
         </div>
         {/* Content — lower-left in translucent olive shape */}
         <div className="relative z-10 mt-auto px-6 pb-24 md:px-12 lg:px-24">
-          <div className="max-w-3xl bg-bost-olive/75 px-10 py-10 backdrop-blur-sm md:px-12 md:py-12 lg:max-w-4xl">
-            <p className="mb-4 font-medium text-sm text-white/80 uppercase tracking-[0.3em]">
+          <div
+            className="max-w-xl bg-bost-olive/75 px-8 py-8 backdrop-blur-sm md:px-10 md:py-10"
+            style={{ clipPath: "polygon(0 0, calc(100% - 165px) 0, 100% 60px, 100% 100%, 0 100%)" }}
+          >
+            <p className="mb-3 font-medium text-xs text-white/80 uppercase tracking-[0.3em]">
               Welcome
             </p>
-            <h1 className="mb-6 font-bold text-4xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="mb-4 font-bold text-2xl text-white leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
               Designed for Distinction.
               <br />
               Built for the Art of Living.
             </h1>
-            <p className="max-w-xl text-sm text-white/75 leading-relaxed md:text-base">
-              Your vision defines our process. We&apos;ll guide you through a
-              collaborative partnership, translating your passion into a truly
-              custom home or estate, built with calculated execution and timeless
+            <p className="max-w-md text-sm text-white/75 leading-relaxed">
+              Your vision defines our process—translating your passion into a
+              truly custom home, built with calculated execution and timeless
               craftsmanship.
             </p>
           </div>
@@ -84,7 +82,7 @@ export default async function Page() {
             <p className="font-medium text-bost-black/50 text-xs uppercase tracking-[0.2em]">
               Who We Are
             </p>
-            <p className="font-bold text-2xl text-bost-black leading-snug md:text-3xl lg:text-[42px] lg:leading-[1.5]">
+            <p className="font-bold text-xl text-bost-black leading-snug md:text-2xl lg:text-3xl lg:leading-normal">
               We are a team of Planners and Executors. Dreamers and
               Pragmatists. We believe the enjoyment and transparency of the
               process is equally important as the end result.
@@ -269,68 +267,8 @@ export default async function Page() {
       </section>
 
       {/* ── 4. TESTIMONIAL ────────────────────────────────────────────── */}
-      {testimonial && (
-        <section className="relative bg-bost-gray-lightest px-8 py-20 md:px-16 md:py-28">
-          {/* Top divider */}
-          <div className="absolute inset-x-0 top-0 flex justify-center">
-            <div className="h-px w-full max-w-3xl bg-bost-gray-light" />
-          </div>
-
-          <div className="relative mx-auto max-w-3xl text-center">
-            {/* Quote icon */}
-            <svg
-              aria-hidden="true"
-              className="mx-auto mb-8 size-12 text-bost-blue"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C9.591 11.69 11 13.162 11 15c0 1.933-1.567 3.5-3.5 3.5-1.298 0-2.44-.671-2.917-1.179zM14.583 17.321C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C19.591 11.69 21 13.162 21 15c0 1.933-1.567 3.5-3.5 3.5-1.298 0-2.44-.671-2.917-1.179z" />
-            </svg>
-
-            {/* Left arrow */}
-            <button
-              aria-label="Previous testimonial"
-              className="absolute top-1/2 left-0 flex size-10 -translate-x-full -translate-y-1/2 items-center justify-center rounded-full border border-bost-gray-light text-bost-black/40 transition-colors hover:border-bost-olive hover:text-bost-olive md:-translate-x-16"
-              type="button"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-
-            {/* Right arrow */}
-            <button
-              aria-label="Next testimonial"
-              className="absolute top-1/2 right-0 flex size-10 -translate-y-1/2 translate-x-full items-center justify-center rounded-full border border-bost-gray-light text-bost-black/40 transition-colors hover:border-bost-olive hover:text-bost-olive md:translate-x-16"
-              type="button"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-
-            <blockquote className="mb-8">
-              <p className="text-bost-black/65 text-lg italic leading-relaxed md:text-xl">
-                {testimonial.quote}
-              </p>
-            </blockquote>
-            <cite className="block font-semibold text-bost-black text-sm not-italic">
-              {testimonial.author}
-            </cite>
-
-            {/* Dots */}
-            {allTestimonials.length > 1 && (
-              <div className="mt-8 flex items-center justify-center gap-2">
-                {allTestimonials.map((t, i) => (
-                  <span
-                    className={`rounded-full transition-all ${
-                      i === 0
-                        ? "size-2.5 bg-bost-olive"
-                        : "size-2 bg-bost-gray-light"
-                    }`}
-                    key={t.id}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
+      {allTestimonials.length > 0 && (
+        <TestimonialCarousel testimonials={allTestimonials} />
       )}
 
       {/* ── 5. FEATURED NEIGHBORHOODS ─────────────────────────────────── */}
