@@ -4,7 +4,6 @@ import { Archivo, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-sans" });
@@ -130,18 +129,15 @@ export default function RootLayout({
         archivo.variable
       )}
       lang="en"
-      suppressHydrationWarning
     >
       <body>
         <script
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           type="application/ld+json"
         />
-        <ThemeProvider>
-          <SiteHeader />
-          <div>{children}</div>
-          <SiteFooter />
-        </ThemeProvider>
+        <SiteHeader />
+        <div>{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );

@@ -72,7 +72,7 @@ export function LeadershipCard({
         <Dialog.Root onOpenChange={setOpen} open={open}>
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0 dark:bg-neutral-900">
+            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
               <div className="flex flex-col md:flex-row">
                 <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
                   <Image
@@ -95,7 +95,7 @@ export function LeadershipCard({
                   </p>
                 </div>
               </div>
-              <Dialog.Close className="absolute top-3 right-3 rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20 dark:bg-white/10 dark:hover:bg-white/20">
+              <Dialog.Close className="absolute top-3 right-3 rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20">
                 <X className="size-4" />
                 <span className="sr-only">Close</span>
               </Dialog.Close>

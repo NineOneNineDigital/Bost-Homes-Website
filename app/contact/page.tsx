@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { ContactForm } from "@/components/contact-form";
 import { getTestimonials } from "@/lib/fetchers";
@@ -41,7 +42,7 @@ export default async function ContactPage() {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="bg-white px-6 pb-16 md:px-12 lg:px-24">
+      <section className="bg-bost-olive px-6 pt-16 pb-10 md:px-12 md:pt-20 md:pb-12 lg:px-24">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
           {/* Address Card */}
           <div className="flex items-start gap-4 rounded-xl bg-bost-mint p-6">
@@ -84,7 +85,7 @@ export default async function ContactPage() {
 
       {/* Testimonial Section */}
       {testimonial && (
-        <section className="bg-bost-olive px-6 py-16 md:px-12 md:py-20 lg:px-24">
+        <section className="bg-bost-olive px-6 pt-10 pb-16 md:px-12 md:pt-12 md:pb-20 lg:px-24">
           <div className="relative mx-auto max-w-3xl text-center">
             {/* Decorative quotation mark */}
             <div className="mb-6 flex justify-center">
@@ -142,6 +143,36 @@ export default async function ContactPage() {
           </div>
         </section>
       )}
+
+      {/* Design Invitation — Floor Plan */}
+      <section className="bg-bost-olive px-6 pb-24 md:px-12 md:pb-32 lg:px-24">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+          <div className="order-2 md:order-1">
+            <p className="mb-3 font-semibold text-bost-yellow text-xs uppercase tracking-[0.25em]">
+              Your Blueprint
+            </p>
+            <h2 className="font-bold text-3xl text-white leading-tight tracking-tight md:text-4xl lg:text-[2.75rem]">
+              Every home begins with a vision.
+            </h2>
+            <p className="mt-5 max-w-md text-base text-white/70 leading-relaxed">
+              From the first sketch to the final walkthrough, we guide every
+              line, every material, every decision. Reach out and let&apos;s
+              start drawing yours.
+            </p>
+            <div className="mt-8 h-px w-16 bg-bost-yellow" />
+          </div>
+          <div className="relative order-1 overflow-hidden rounded-lg border border-white/10 bg-bost-cream p-3 shadow-2xl md:order-2 md:p-5">
+            <Image
+              alt="Architectural floor plan sketch for a custom Bost home"
+              className="h-auto w-full"
+              height={724}
+              sizes="(min-width: 768px) 50vw, 100vw"
+              src="/images/process/hero-architectural.png"
+              width={1086}
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

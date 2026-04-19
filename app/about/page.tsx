@@ -83,42 +83,70 @@ const staticTeam: TeamMember[] = [
     name: "Team Member",
     title: "Project Manager",
     image: { url: "/images/about/team-1.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Coordinates daily build activity from ground-breaking through punch list, keeping schedules, trades, and clients aligned. A Bost project manager is the single point of accountability on a job — the person who makes sure every decision is captured, every trade shows up prepared, and every homeowner knows exactly where their project stands.",
+    },
   },
   {
     id: "t2",
     name: "Team Member",
     title: "Design Coordinator",
     image: { url: "/images/about/team-2.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Guides homeowners through selections — from cabinetry and countertops to lighting and hardware — translating design intent into documented, build-ready specifications. The design coordinator is where aesthetic vision meets constructability, ensuring every choice is beautiful, cohesive, and ready for the field.",
+    },
   },
   {
     id: "t3",
     name: "Team Member",
     title: "Site Superintendent",
     image: { url: "/images/about/team-3.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Runs the job site day in and day out, holding every trade to Bost's standard of craftsmanship. Superintendents are the quality backbone of the company — walking the home constantly, catching the details that never make a punch list, and making sure the house is built right the first time.",
+    },
   },
   {
     id: "t4",
     name: "Team Member",
     title: "Estimator",
     image: { url: "/images/about/team-4.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Builds the detailed, line-by-line budget that turns a set of plans into a buildable project. Our estimators partner closely with architects and clients early in the process to surface cost implications before they become surprises, protecting both the design vision and the investment.",
+    },
   },
   {
     id: "t5",
     name: "Team Member",
     title: "Project Manager",
     image: { url: "/images/about/team-5.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Leads complex custom projects with a focus on clear communication and proactive problem-solving. Brings years of field and office experience together to anticipate issues before they reach the homeowner, and to make every week on site feel predictable and well-run.",
+    },
   },
   {
     id: "t6",
     name: "Team Member",
     title: "Client Relations",
     image: { url: "/images/about/team-6.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "The trusted point of contact for homeowners throughout the build, translating construction details into language that makes sense and advocating for the client at every step. Keeps the experience warm, organized, and transparent — from contract signing to the day the keys change hands.",
+    },
   },
   {
     id: "t7",
     name: "Team Member",
     title: "Lead Carpenter",
     image: { url: "/images/about/team-7.jpg", width: 400, height: 400 },
+    bio: {
+      html: "",
+      text: "Sets the bar for craftsmanship on every Bost home, handling the finish work and complex framing details that define a truly custom build. A steady presence on site whose pride in the work shows up in every miter, reveal, and hand-fit transition.",
+    },
   },
 ];
 
@@ -312,10 +340,10 @@ export default async function AboutPage() {
               quality of our craftsmanship to the relationships we build.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-wrap justify-center gap-4">
             {principles.map((principle, i) => (
               <div
-                className="group relative overflow-hidden rounded-lg border border-bost-brick/10 bg-white p-6 transition-colors hover:bg-bost-brick lg:p-8"
+                className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-bost-brick/10 bg-white p-6 transition-colors hover:bg-bost-brick sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)] lg:p-8"
                 key={principle.name}
               >
                 <span className="mb-4 block font-bold text-3xl text-bost-brick/20 transition-colors group-hover:text-white/20">
@@ -356,41 +384,39 @@ export default async function AboutPage() {
             />
 
             {/* Tier 2 — Leadership */}
-            <div className="mt-14 flex flex-wrap justify-center gap-8 md:mt-16 md:gap-12">
+            <div className="mt-14 flex w-full flex-wrap justify-center gap-x-6 gap-y-10 md:mt-16 lg:gap-x-8 lg:gap-y-12">
               {leadership.slice(1).map((leader) => (
-                <LeadershipCard
-                  bio={leader.bio}
-                  image={leader.image}
+                <div
+                  className="flex w-full justify-center sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]"
                   key={leader.id}
-                  name={leader.name}
-                  title={leader.title}
-                />
+                >
+                  <LeadershipCard
+                    bio={leader.bio}
+                    image={leader.image}
+                    name={leader.name}
+                    title={leader.title}
+                  />
+                </div>
               ))}
             </div>
 
-            {/* Tier 3 — Team Members (two rows) */}
-            {[
-              team.slice(0, Math.ceil(team.length / 2)),
-              team.slice(Math.ceil(team.length / 2)),
-            ].map((row, rowIndex) => (
-              <div
-                className={rowIndex === 0 ? "mt-14 md:mt-16" : "mt-8"}
-                key={rowIndex}
-              >
-                <div className="flex flex-wrap justify-center gap-6 md:gap-8">
-                  {row.map((member) => (
-                    <LeadershipCard
-                      bio={member.bio?.text}
-                      image={member.image?.url ?? ""}
-                      key={member.id}
-                      name={member.name}
-                      size="sm"
-                      title={member.title}
-                    />
-                  ))}
+            {/* Tier 3 — Team Members */}
+            <div className="mt-14 flex w-full flex-wrap justify-center gap-x-4 gap-y-8 md:mt-16 md:gap-x-6 md:gap-y-10 lg:gap-x-8">
+              {team.map((member) => (
+                <div
+                  className="flex w-[calc(50%-0.5rem)] justify-center md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.5rem)]"
+                  key={member.id}
+                >
+                  <LeadershipCard
+                    bio={member.bio?.text}
+                    image={member.image?.url ?? ""}
+                    name={member.name}
+                    size="sm"
+                    title={member.title}
+                  />
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
