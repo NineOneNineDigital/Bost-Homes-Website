@@ -1,9 +1,16 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
-import { PortfolioFilter } from "@/components/portfolio-filter";
 import { Button } from "@/components/ui/button";
 import { getAllProjects } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Portfolio",
+  description:
+    "Browse our portfolio of luxury custom homes across the Raleigh, Cary, and Triangle area. Each home uniquely crafted to match our clients' vision and lifestyle.",
+  alternates: { canonical: "/portfolio" },
+};
 
 export default async function PortfolioPage() {
   const projects = await getAllProjects();
@@ -27,9 +34,7 @@ export default async function PortfolioPage() {
       {/* Filter + Grid */}
       <section className="px-6 pb-16 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <PortfolioFilter />
-
-          <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
               <Link
                 className="group relative overflow-hidden"
@@ -42,13 +47,13 @@ export default async function PortfolioPage() {
                       alt={project.name}
                       className="object-cover transition-transform duration-300 group-hover:scale-105"
                       fill
-                      sizes="(min-width: 1024px) 33vw, 50vw"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       src={project.images[0].url}
                     />
                   )}
                 </div>
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 md:p-6">
-                  <p className="font-medium text-[10px] text-white/70 uppercase tracking-wider md:text-xs">
+                  <p className="font-medium text-white/70 text-xs uppercase tracking-wider">
                     {project.location}
                   </p>
                   <h3 className="font-semibold text-sm text-white md:text-lg">

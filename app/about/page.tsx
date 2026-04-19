@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { CtaSection } from "@/components/cta-section";
+import { LeadershipCard } from "@/components/leadership-card";
 import { getAwards, getTeamMembers } from "@/lib/fetchers";
 import type { TeamMember } from "@/lib/types/hygraph";
+
+export const metadata: Metadata = {
+  title: "Our Story",
+  description:
+    "Learn about Bost Custom Homes — a family-owned luxury home builder in the Triangle area since 1986. Meet our team, our values, and our commitment to craftsmanship.",
+  alternates: { canonical: "/about" },
+};
 
 const leadership = [
   {
@@ -34,48 +43,37 @@ const leadership = [
   },
 ];
 
-const values = [
+const principles = [
   {
-    number: "01",
-    name: "Quality",
-    description:
-      "We build beautiful, durable homes with the highest standards of craftsmanship to exceed our client\u2019s expectations.",
+    name: "Transparency",
+    description: "We share openly and build trust through clarity.",
   },
   {
-    number: "02",
-    name: "Teamwork",
+    name: "Execution",
     description:
-      "We strengthen, encourage, and assist each other to better serve our clients and accomplish our goals.",
+      "We turn ideas into action, follow through on commitments, and focus on solutions.",
   },
   {
-    number: "03",
-    name: "Integrity",
-    description:
-      "We do the right thing always, whether it\u2019s easy or challenging; whether it\u2019s recognized or unnoticed.",
-  },
-  {
-    number: "04",
-    name: "Relationships",
-    description:
-      "We make effort to form positive relationships with all we encounter.",
-  },
-  {
-    number: "05",
-    name: "Stewardship",
-    description:
-      "We take pride in reducing the waste of resources, and we take great responsibility in managing our clients\u2019 investment.",
-  },
-  {
-    number: "06",
-    name: "Innovation",
-    description:
-      "We lead our industry with new innovations and pursue the future of home technology and building science.",
-  },
-  {
-    number: "07",
     name: "Artistry",
     description:
-      "We inspire our clients and the community with creative and functional design.",
+      "We value creativity and inspired design, even over ease and norms.",
+  },
+  {
+    name: "Continuous Learning",
+    description: "We embrace curiosity, adapt to change, and seek answers.",
+  },
+  {
+    name: "Humility",
+    description: "We remain humble and open to new perspectives. We listen.",
+  },
+  {
+    name: "Empowerment",
+    description: "We lift others up and create space for people to thrive.",
+  },
+  {
+    name: "Shared Vision",
+    description:
+      "We place our clients\u2019 vision at the center of our projects and operation.",
   },
 ];
 
@@ -180,7 +178,7 @@ export default async function AboutPage() {
 
       {/* Our Story */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-[240px_1fr] md:gap-20 lg:grid-cols-[300px_1fr]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-[180px_1fr] md:gap-16 lg:grid-cols-[300px_1fr] lg:gap-20">
           <div>
             <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
               Our Story
@@ -225,21 +223,32 @@ export default async function AboutPage() {
       <section className="w-full overflow-hidden">
         <div className="flex">
           {[
-            "photo-strip-1",
-            "photo-strip-2",
-            "photo-strip-3",
-            "photo-strip-4",
+            {
+              src: "historic_image_1991",
+              alt: "Bost Custom Homes 1991",
+              position: "object-center",
+            },
+            {
+              src: "historic_image_1992",
+              alt: "Bost Custom Homes 1992",
+              position: "object-top",
+            },
+            {
+              src: "historic_image_2002",
+              alt: "Bost Custom Homes 2002",
+              position: "object-center",
+            },
           ].map((photo) => (
             <div
               className="relative h-[280px] flex-1 md:h-[360px] lg:h-[420px]"
-              key={photo}
+              key={photo.src}
             >
               <Image
-                alt="Bost Custom Homes project"
-                className="object-cover"
+                alt={photo.alt}
+                className={`object-cover ${photo.position}`}
                 fill
-                sizes="25vw"
-                src={`/images/about/${photo}.jpg`}
+                sizes="33vw"
+                src={`/images/${photo.src}.jpg`}
               />
             </div>
           ))}
@@ -247,53 +256,76 @@ export default async function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-bost-olive px-6 py-20 text-white md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.2em]">
-            Our Mission
-          </p>
-          <p className="font-light text-xl text-white leading-relaxed md:text-2xl lg:text-3xl">
-            To build the highest quality custom homes possible and offer our
-            clients an unparalleled positive experience.
-          </p>
-
-          <div className="mx-auto my-12 h-px w-16 bg-bost-yellow md:my-16" />
-
-          <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.2em]">
-            Our Vision
-          </p>
-          <p className="font-light text-xl text-white leading-relaxed md:text-2xl lg:text-3xl">
-            To continually strive for excellence in all areas of our
-            organization with integrity, innovation, and calculated execution.
-          </p>
+      <section className="bg-bost-olive px-6 py-24 md:px-12 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 max-w-xl">
+            <p className="mb-3 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
+              Who We Are
+            </p>
+            <p className="text-base text-white/60 leading-relaxed">
+              Our mission and vision serve as the foundation for all brand
+              decisions. By aligning with them, we ensure every expression of
+              the brand remains purposeful, consistent, and true to who we are.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div className="relative overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10 lg:p-12">
+              <div className="absolute top-0 left-0 h-1 w-full bg-bost-yellow" />
+              <p className="mb-6 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
+                Our Mission
+              </p>
+              <p className="font-bold text-white text-xl leading-snug md:text-2xl lg:text-3xl">
+                We create a delightful home building journey for our
+                clients—turning their vision into beautifully designed,
+                precisely executed custom homes.
+              </p>
+            </div>
+            <div className="relative overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10 lg:p-12">
+              <div className="absolute top-0 left-0 h-1 w-full bg-bost-blue" />
+              <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.25em]">
+                Our Vision
+              </p>
+              <p className="font-bold text-white text-xl leading-snug md:text-2xl lg:text-3xl">
+                To cultivate an environment defined by our principles where our
+                team thrives and continuously refines our client experience and
+                custom home execution.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Guiding Principles */}
-      <section className="bg-bost-cream px-6 py-20 md:px-12 md:py-28 lg:px-24">
+      <section className="bg-bost-cream px-6 py-24 md:px-12 md:py-32 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-14 text-center">
-            <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
-              Our Guiding Principles
+          <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-xl">
+              <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.25em]">
+                Guiding Principles
+              </p>
+              <h2 className="font-bold text-3xl text-bost-olive tracking-tight md:text-4xl">
+                What TEACHES Us
+              </h2>
+            </div>
+            <p className="max-w-sm text-bost-olive/60 text-sm leading-relaxed">
+              Our guiding principles shape every aspect of how we work—from the
+              quality of our craftsmanship to the relationships we build.
             </p>
-            <h2 className="font-bold text-3xl text-bost-olive tracking-tight md:text-4xl">
-              The Values That Drive Us
-            </h2>
           </div>
-          <div className="flex flex-wrap justify-center gap-6">
-            {values.map((value) => (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map((principle, i) => (
               <div
-                className="w-full border-t-2 border-bost-brick bg-white p-6 sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]"
-                key={value.number}
+                className="group relative overflow-hidden rounded-lg border border-bost-brick/10 bg-white p-6 transition-colors hover:bg-bost-brick lg:p-8"
+                key={principle.name}
               >
-                <span className="mb-3 block font-bold text-2xl text-bost-olive/30">
-                  {value.number}
+                <span className="mb-4 block font-bold text-3xl text-bost-brick/20 transition-colors group-hover:text-white/20">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mb-2 font-semibold text-bost-olive text-lg">
-                  {value.name}
+                <h3 className="mb-2 font-bold text-bost-olive text-lg tracking-tight transition-colors group-hover:text-white">
+                  {principle.name}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {value.description}
+                <p className="text-bost-olive/60 text-sm leading-relaxed transition-colors group-hover:text-white/80">
+                  {principle.description}
                 </p>
               </div>
             ))}
@@ -301,82 +333,62 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
+      {/* Our Team — Org Chart */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
             <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-              Leadership
+              Our Team
             </p>
             <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
               Meet the Minds Behind the Craft
             </h2>
           </div>
 
-          <div className="space-y-20 md:space-y-28">
-            {leadership.map((leader, index) => {
-              const imageLeft = index % 2 === 0;
-              return (
-                <div
-                  className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-10"
-                  key={leader.id}
-                >
-                  <div
-                    className={`relative h-[380px] w-[280px] shrink-0 overflow-hidden ${imageLeft ? "md:order-1" : "md:order-2"}`}
-                  >
-                    <Image
-                      alt={leader.name}
-                      className="object-cover object-top"
-                      fill
-                      sizes="(min-width: 768px) 35vw, 100vw"
-                      src={leader.image}
-                    />
-                  </div>
-                  <div className={`max-w-2xl ${imageLeft ? "md:order-2" : "md:order-1"}`}>
-                    <h3 className="mb-1 font-bold text-2xl tracking-tight md:text-3xl">
-                      {leader.name}
-                    </h3>
-                    <p className="mb-4 font-medium text-bost-brick text-sm uppercase tracking-[0.15em]">
-                      {leader.title}
-                    </p>
-                    <p className="text-base text-muted-foreground leading-relaxed">
-                      {leader.bio}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+          {/* Tier 1 — President */}
+          <div className="flex flex-col items-center">
+            <LeadershipCard
+              bio={leadership[0].bio}
+              image={leadership[0].image}
+              name={leadership[0].name}
+              size="lg"
+              title={leadership[0].title}
+            />
 
-      {/* Team Grid */}
-      <section className="bg-bost-gray-lightest px-6 py-20 md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-              Our Team
-            </p>
-            <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
-              The People Who Make It Happen
-            </h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-10">
-            {team.map((member) => (
-              <div className="w-[calc(50%-12px)] text-center lg:w-[calc(25%-18px)]" key={member.id}>
-                <div className="relative mx-auto mb-4 aspect-square w-full overflow-hidden bg-muted">
-                  {member.image && (
-                    <Image
-                      alt={member.name}
-                      className="object-cover object-top"
-                      fill
-                      sizes="(min-width: 1024px) 25vw, 50vw"
-                      src={member.image.url}
+            {/* Tier 2 — Leadership */}
+            <div className="mt-14 flex flex-wrap justify-center gap-8 md:mt-16 md:gap-12">
+              {leadership.slice(1).map((leader) => (
+                <LeadershipCard
+                  bio={leader.bio}
+                  image={leader.image}
+                  key={leader.id}
+                  name={leader.name}
+                  title={leader.title}
+                />
+              ))}
+            </div>
+
+            {/* Tier 3 — Team Members (two rows) */}
+            {[
+              team.slice(0, Math.ceil(team.length / 2)),
+              team.slice(Math.ceil(team.length / 2)),
+            ].map((row, rowIndex) => (
+              <div
+                className={rowIndex === 0 ? "mt-14 md:mt-16" : "mt-8"}
+                key={rowIndex}
+              >
+                <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+                  {row.map((member) => (
+                    <LeadershipCard
+                      bio={member.bio?.text}
+                      image={member.image?.url ?? ""}
+                      key={member.id}
+                      name={member.name}
+                      size="sm"
+                      title={member.title}
                     />
-                  )}
+                  ))}
                 </div>
-                <h3 className="font-semibold text-base">{member.name}</h3>
-                <p className="text-muted-foreground text-sm">{member.title}</p>
               </div>
             ))}
           </div>

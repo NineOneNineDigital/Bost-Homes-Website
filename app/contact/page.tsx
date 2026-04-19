@@ -1,7 +1,15 @@
 import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react";
+import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contact-form";
 import { getTestimonials } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Start your custom home project with Bost Custom Homes. Contact us at (919) 460-1983 or visit us at 8255 Chapel Hill Road, Cary, NC 27513.",
+  alternates: { canonical: "/contact" },
+};
 
 export default async function ContactPage() {
   const testimonials = await getTestimonials();
@@ -104,10 +112,10 @@ export default async function ContactPage() {
             <div className="mt-8 flex items-center justify-center gap-4">
               <button
                 aria-label="Previous testimonial"
-                className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
                 type="button"
               >
-                <ChevronLeft className="size-4" />
+                <ChevronLeft className="size-5" />
               </button>
 
               {testimonials.length > 1 && (
@@ -125,16 +133,15 @@ export default async function ContactPage() {
 
               <button
                 aria-label="Next testimonial"
-                className="flex size-9 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
+                className="flex size-11 items-center justify-center rounded-full border border-white/20 text-white/60 transition-colors hover:border-white/50 hover:text-white"
                 type="button"
               >
-                <ChevronRight className="size-4" />
+                <ChevronRight className="size-5" />
               </button>
             </div>
           </div>
         </section>
       )}
-
     </main>
   );
 }

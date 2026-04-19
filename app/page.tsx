@@ -1,4 +1,5 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
@@ -9,6 +10,13 @@ import {
   getNeighborhoods,
   getTestimonials,
 } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Bost Custom Homes | Luxury Custom Home Builder in Cary, NC",
+  description:
+    "Bost Custom Homes has been building luxury custom homes in Raleigh, Cary, and the Triangle area since 1986. Designed for distinction, built for the art of living.",
+  alternates: { canonical: "/" },
+};
 
 export default async function Page() {
   const [projects, neighborhoods, testimonials] = await Promise.all([
@@ -49,9 +57,12 @@ export default async function Page() {
         <div className="relative z-10 mt-auto px-6 pb-24 md:px-12 lg:px-24">
           <div
             className="max-w-xl bg-bost-olive/75 px-8 py-8 backdrop-blur-sm md:px-10 md:py-10"
-            style={{ clipPath: "polygon(0 0, calc(100% - 165px) 0, 100% 60px, 100% 100%, 0 100%)" }}
+            style={{
+              clipPath:
+                "polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%)",
+            }}
           >
-            <p className="mb-3 font-medium text-xs text-white/80 uppercase tracking-[0.3em]">
+            <p className="mb-3 font-medium text-white/80 text-xs uppercase tracking-[0.3em]">
               Welcome
             </p>
             <h1 className="mb-4 font-bold text-2xl text-white leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
@@ -82,10 +93,10 @@ export default async function Page() {
             <p className="font-medium text-bost-black/50 text-xs uppercase tracking-[0.2em]">
               Who We Are
             </p>
-            <p className="font-bold text-xl text-bost-black leading-snug md:text-2xl lg:text-3xl lg:leading-normal">
-              We are a team of Planners and Executors. Dreamers and
-              Pragmatists. We believe the enjoyment and transparency of the
-              process is equally important as the end result.
+            <p className="font-bold text-bost-black text-xl leading-snug md:text-2xl lg:text-3xl lg:leading-normal">
+              We are a team of Planners and Executors. Dreamers and Pragmatists.
+              We believe the enjoyment and transparency of the process is
+              equally important as the end result.
             </p>
           </div>
 
@@ -94,7 +105,7 @@ export default async function Page() {
             {/* Left column — body text + button */}
             <div>
               <div className="mb-6 h-px w-48 bg-bost-gray-light" />
-              <p className="mb-8 text-sm text-bost-black/65 leading-relaxed">
+              <p className="mb-8 text-bost-black/65 text-sm leading-relaxed">
                 We&apos;ve been crafting custom homes rooted in artistry,
                 transparency, and calculated execution for nearly four decades.
                 Our work begins with listening—because a custom home should
@@ -303,7 +314,7 @@ export default async function Page() {
             </div>
 
             {/* Right: mosaic image grid — 3 cols, 2 rows */}
-            <div className="grid grid-cols-3 grid-rows-2 gap-0.5">
+            <div className="grid grid-cols-2 grid-rows-3 gap-0.5 md:grid-cols-3 md:grid-rows-2">
               {[
                 "/images/about/photo-strip-1.jpg",
                 "/images/about/photo-strip-3.jpg",
@@ -322,7 +333,7 @@ export default async function Page() {
                       alt={`Neighborhood ${i + 1}`}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       fill
-                      sizes="(min-width: 1024px) 20vw, 33vw"
+                      sizes="(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 50vw"
                       src={src}
                     />
                   </div>

@@ -127,7 +127,7 @@ export default async function BlogPage({
             >
               <button
                 aria-label="Previous page"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                 type="button"
               >
                 <ChevronLeft className="size-5" />
@@ -149,7 +149,7 @@ export default async function BlogPage({
               )}
               <button
                 aria-label="Next page"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                 type="button"
               >
                 <ChevronRight className="size-5" />

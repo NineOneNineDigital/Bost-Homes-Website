@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
@@ -6,6 +7,13 @@ import { ProcessCarousel } from "@/components/process-carousel";
 import { Button } from "@/components/ui/button";
 import { getProcessSteps } from "@/lib/fetchers";
 
+export const metadata: Metadata = {
+  title: "Our Process",
+  description:
+    "Discover how Bost Custom Homes builds your dream home — from first conversation to final walkthrough. A true partnership built on transparency and craftsmanship.",
+  alternates: { canonical: "/our-process" },
+};
+
 export default async function OurProcessPage() {
   const steps = await getProcessSteps();
 
@@ -13,26 +21,28 @@ export default async function OurProcessPage() {
     <main className="pt-20">
       {/* Hero Section — Blueprint background */}
       <section className="relative flex min-h-[70vh] items-center">
-        <div className="absolute inset-0 bg-white">
+        <div className="absolute inset-0 bg-bost-olive">
           <Image
             alt="Architectural drawings and blueprints"
-            className="object-cover opacity-30"
+            className="object-cover opacity-50"
             fill
             priority
             sizes="100vw"
-            src="/images/process/hero-architectural.png"
+            src="/images/plan_sketch.png"
           />
         </div>
         <div className="relative z-10 mx-auto max-w-4xl px-6 py-24">
-          <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-medium text-bost-yellow text-xs uppercase tracking-[0.2em]">
             Our Process
           </p>
-          <h1 className="mb-6 font-bold text-3xl leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+          <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
             A True Partnership From First
-            <br />
+            <span className="hidden md:inline">
+              <br />
+            </span>{" "}
             Conversation to Final Walkthrough
           </h1>
-          <p className="max-w-2xl text-base text-muted-foreground leading-relaxed md:text-lg">
+          <p className="max-w-2xl text-base text-white/70 leading-relaxed md:text-lg">
             Building a custom home is one of life&apos;s most significant
             endeavors. We ensure the journey is as rewarding as the destination.
           </p>
