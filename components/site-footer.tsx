@@ -50,7 +50,7 @@ function SiteFooter() {
           </nav>
 
           {/* Contact */}
-          <address className="not-italic text-sm text-white/50">
+          <address className="text-sm text-white/50 not-italic">
             <p>8255 Chapel Hill Rd. Cary, NC 27513</p>
             <p>
               <a
@@ -65,9 +65,9 @@ function SiteFooter() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div className="border-white/10 border-t">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-4 sm:flex-row xl:px-0">
-          <p className="text-xs text-white/40">
+          <p className="text-white/40 text-xs">
             &copy; {new Date().getFullYear()} Bost Custom Homes. All rights
             reserved.
             <span className="mx-1.5">&middot;</span>
@@ -83,7 +83,7 @@ function SiteFooter() {
             {socialLinks.map((social) => (
               <a
                 aria-label={social.label}
-                className="text-white/40 transition-colors hover:text-white"
+                className="flex size-10 items-center justify-center text-white/40 transition-colors hover:text-white"
                 href={social.href}
                 key={social.label}
                 rel="noopener noreferrer"

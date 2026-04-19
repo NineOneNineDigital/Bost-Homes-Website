@@ -1,5 +1,9 @@
 import { hygraph } from "@/lib/hygraph";
-import { BLOG_POST_BY_SLUG_QUERY, BLOG_POSTS_QUERY } from "@/lib/queries/blog";
+import {
+  BLOG_POST_BY_SLUG_QUERY,
+  BLOG_POST_SLUGS_QUERY,
+  BLOG_POSTS_QUERY,
+} from "@/lib/queries/blog";
 import {
   NEIGHBORHOOD_BY_SLUG_QUERY,
   NEIGHBORHOODS_QUERY,
@@ -120,6 +124,15 @@ export async function getBlogPosts(options?: {
     }
   );
   return { posts: blogPosts, total: blogPostsConnection.aggregate.count };
+}
+
+export async function getBlogPostSlugs(): Promise<string[]> {
+  const { blogPosts } = await safeRequest<{ blogPosts: { slug: string }[] }>(
+    BLOG_POST_SLUGS_QUERY,
+    undefined,
+    { blogPosts: [] }
+  );
+  return blogPosts.map((p) => p.slug);
 }
 
 export async function getBlogPostBySlug(

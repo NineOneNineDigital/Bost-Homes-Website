@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { CtaSection } from "@/components/cta-section";
 import { getArchivedProjects } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "The Vault",
+  description:
+    "Explore the Bost Custom Homes archive — decades of luxury custom home projects across the Triangle, each a testament to enduring craftsmanship and design.",
+  alternates: { canonical: "/vault" },
+};
 
 const heightMap = {
   0: "aspect-[3/4]",

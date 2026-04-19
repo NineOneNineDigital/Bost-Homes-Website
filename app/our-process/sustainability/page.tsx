@@ -1,9 +1,16 @@
+import { Check, Leaf } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Check, Leaf } from "lucide-react";
 import { CtaSection } from "@/components/cta-section";
-import { Button } from "@/components/ui/button";
 import { getGreenFeatures } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Green Building & Sustainability",
+  description:
+    "Bost Custom Homes has pioneered green building in NC for over 20 years. Learn about our HERS-rated energy efficient homes and sustainable construction practices.",
+  alternates: { canonical: "/our-process/sustainability" },
+};
 
 export default async function SustainabilityPage() {
   const features = await getGreenFeatures();

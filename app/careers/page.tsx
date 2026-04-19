@@ -1,9 +1,17 @@
 import { Briefcase, Clock, Heart, MapPin, TrendingUp } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getJobOpenings } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Careers",
+  description:
+    "Join the Bost Custom Homes team. We're looking for talented, passionate people who share our commitment to craftsmanship, integrity, and exceptional client experiences.",
+  alternates: { canonical: "/careers" },
+};
 
 const benefits = [
   {
@@ -31,7 +39,6 @@ const benefits = [
       "Industry-leading pay, performance bonuses, and a 401(k) retirement plan with company match.",
   },
 ];
-
 
 const values = [
   {
@@ -157,17 +164,14 @@ export default async function CareersPage() {
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {benefits.map((benefit) => (
-              <div
-                className="rounded-xl bg-bost-mint p-6"
-                key={benefit.title}
-              >
+              <div className="rounded-xl bg-bost-mint p-6" key={benefit.title}>
                 <div className="mb-4 flex size-10 items-center justify-center rounded-full bg-bost-olive">
                   <benefit.icon className="size-5 text-white" />
                 </div>
                 <h3 className="mb-2 font-semibold text-base">
                   {benefit.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {benefit.description}
                 </p>
               </div>
@@ -198,7 +202,7 @@ export default async function CareersPage() {
                     <h3 className="mb-2 font-semibold text-lg tracking-tight md:text-xl">
                       {job.title}
                     </h3>
-                    <p className="mb-3 text-sm text-muted-foreground leading-relaxed">
+                    <p className="mb-3 text-muted-foreground text-sm leading-relaxed">
                       {job.summary}
                     </p>
                     <div className="flex flex-wrap items-center gap-3">
@@ -239,8 +243,8 @@ export default async function CareersPage() {
           </h2>
           <p className="mb-8 text-base text-muted-foreground leading-relaxed md:text-lg">
             We&apos;re always interested in meeting talented people who are
-            passionate about custom home building. Send us your resume and
-            tell us what drives you.
+            passionate about custom home building. Send us your resume and tell
+            us what drives you.
           </p>
           <Button
             className="bg-bost-olive text-white hover:bg-bost-olive/90"

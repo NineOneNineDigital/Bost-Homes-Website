@@ -1,9 +1,17 @@
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoods } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Featured Neighborhoods",
+  description:
+    "Discover shovel-ready lots in Raleigh's most sought-after communities. Bost Custom Homes offers hand-selected homesites throughout the Triangle area.",
+  alternates: { canonical: "/featured-neighborhoods" },
+};
 
 export default async function FeaturedNeighborhoodsPage() {
   const neighborhoods = await getNeighborhoods();
@@ -66,7 +74,7 @@ export default async function FeaturedNeighborhoodsPage() {
                             ? neighborhood.lots.filter(
                                 (l) => l.lotStatus === "AVAILABLE"
                               ).length
-                            : neighborhood.availableLots ?? "Contact us"}
+                            : (neighborhood.availableLots ?? "Contact us")}
                         </p>
                       </div>
                     </div>

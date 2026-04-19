@@ -1,4 +1,5 @@
 import { Quote } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CtaSection } from "@/components/cta-section";
@@ -47,6 +48,25 @@ export function generateStaticParams() {
   return Object.keys(projects).map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projects[slug];
+  const name = project?.name ?? "Custom Home Project";
+  const location = project?.location ?? "Cary, NC";
+
+  return {
+    title: name,
+    description: project?.description
+      ? project.description.slice(0, 155)
+      : `${name} — a luxury custom home built by Bost Custom Homes in ${location}.`,
+    alternates: { canonical: `/portfolio/${slug}` },
+  };
+}
+
 export default async function ProjectPage({
   params,
 }: {
@@ -92,7 +112,7 @@ export default async function ProjectPage({
       <section className="px-6 pb-10 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="aspect-[16/9] w-full bg-muted" />
-          <div className="mt-3 grid grid-cols-4 gap-3">
+          <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[1, 2, 3, 4].map((i) => (
               <div className="aspect-[4/3] bg-muted" key={i} />
             ))}

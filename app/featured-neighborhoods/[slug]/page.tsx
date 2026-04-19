@@ -1,4 +1,5 @@
 import { ArrowRight, Check, MapPin, Ruler, TreePine } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -34,6 +35,27 @@ export async function generateStaticParams() {
   return neighborhoods.map((n) => ({ slug: n.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const neighborhood = await getNeighborhoodBySlug(slug);
+
+  if (!neighborhood) {
+    return { title: "Neighborhood Not Found" };
+  }
+
+  return {
+    title: neighborhood.name,
+    description:
+      neighborhood.description.slice(0, 155) ||
+      `Explore available homesites in ${neighborhood.name} — a featured neighborhood by Bost Custom Homes.`,
+    alternates: { canonical: `/featured-neighborhoods/${slug}` },
+  };
+}
+
 export default async function NeighborhoodPage({
   params,
 }: {
@@ -42,7 +64,9 @@ export default async function NeighborhoodPage({
   const { slug } = await params;
   const neighborhood = await getNeighborhoodBySlug(slug);
 
-  if (!neighborhood) return notFound();
+  if (!neighborhood) {
+    return notFound();
+  }
 
   const availableLots = neighborhood.lots.filter(
     (l) => l.lotStatus === "AVAILABLE"
@@ -166,12 +190,12 @@ function LotCard({ lot, slug }: { lot: Lot; slug: string }) {
 
       {/* Stats */}
       <div className="mb-4 flex gap-4">
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
           <TreePine className="size-4" />
           {lot.acreage} acres
         </div>
         {lot.dimensions && (
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
             <Ruler className="size-4" />
             {lot.dimensions}
           </div>
@@ -201,13 +225,13 @@ function LotCard({ lot, slug }: { lot: Lot; slug: string }) {
       )}
 
       {/* Price & CTA */}
-      <div className="mt-auto flex items-center justify-between border-t border-border pt-4">
+      <div className="mt-auto flex items-center justify-between border-border border-t pt-4">
         {lot.price ? (
-          <p className="font-bold text-lg text-bost-olive">
+          <p className="font-bold text-bost-olive text-lg">
             {formatPrice(lot.price)}
           </p>
         ) : (
-          <p className="text-sm text-muted-foreground">Contact for pricing</p>
+          <p className="text-muted-foreground text-sm">Contact for pricing</p>
         )}
         {!isSold && (
           <Button

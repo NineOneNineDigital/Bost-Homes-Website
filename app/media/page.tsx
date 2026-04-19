@@ -1,9 +1,17 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BlogFilter } from "@/components/blog-filter";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPosts } from "@/lib/fetchers";
+
+export const metadata: Metadata = {
+  title: "Media Hub",
+  description:
+    "Explore the Bost Custom Homes Media Hub for design inspiration, construction insights, community news, and the latest from our custom home projects in the Triangle.",
+  alternates: { canonical: "/media" },
+};
 
 export default async function BlogPage({
   searchParams,
@@ -127,7 +135,7 @@ export default async function BlogPage({
             >
               <button
                 aria-label="Previous page"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                 type="button"
               >
                 <ChevronLeft className="size-5" />
@@ -149,7 +157,7 @@ export default async function BlogPage({
               )}
               <button
                 aria-label="Next page"
-                className="rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground"
                 type="button"
               >
                 <ChevronRight className="size-5" />

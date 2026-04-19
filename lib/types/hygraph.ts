@@ -90,7 +90,12 @@ export interface ProcessStep {
 }
 
 export interface JobOpening {
-  department: "CONSTRUCTION" | "DESIGN" | "PROJECT_MANAGEMENT" | "OPERATIONS" | "SALES";
+  department:
+    | "CONSTRUCTION"
+    | "DESIGN"
+    | "PROJECT_MANAGEMENT"
+    | "OPERATIONS"
+    | "SALES";
   description?: RichText;
   id: string;
   jobType: "FULL_TIME" | "PART_TIME" | "CONTRACT";

@@ -2,8 +2,8 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 import type { ProcessStep } from "@/lib/types/hygraph";
+import { cn } from "@/lib/utils";
 
 function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -12,15 +12,20 @@ function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
 
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     setCanScrollLeft(el.scrollLeft > 0);
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
   }, []);
 
   const scroll = useCallback((direction: "left" | "right") => {
     const el = scrollRef.current;
-    if (!el) return;
-    const cardWidth = el.querySelector<HTMLElement>(":scope > div")?.offsetWidth ?? 360;
+    if (!el) {
+      return;
+    }
+    const cardWidth =
+      el.querySelector<HTMLElement>(":scope > div")?.offsetWidth ?? 360;
     const gap = 24;
     const distance = cardWidth + gap;
     el.scrollBy({
@@ -40,9 +45,7 @@ function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
             aria-label="Previous step"
             className={cn(
               "flex size-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors",
-              canScrollLeft
-                ? "hover:bg-white/10"
-                : "cursor-default opacity-30",
+              canScrollLeft ? "hover:bg-white/10" : "cursor-default opacity-30"
             )}
             disabled={!canScrollLeft}
             onClick={() => scroll("left")}
@@ -54,9 +57,7 @@ function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
             aria-label="Next step"
             className={cn(
               "flex size-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors",
-              canScrollRight
-                ? "hover:bg-white/10"
-                : "cursor-default opacity-30",
+              canScrollRight ? "hover:bg-white/10" : "cursor-default opacity-30"
             )}
             disabled={!canScrollRight}
             onClick={() => scroll("right")}
@@ -68,7 +69,7 @@ function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
       </div>
 
       <div
-        className="-mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 scrollbar-none"
+        className="scrollbar-none -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6"
         onScroll={updateScrollState}
         ref={scrollRef}
       >
