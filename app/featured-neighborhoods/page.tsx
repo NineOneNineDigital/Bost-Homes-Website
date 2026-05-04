@@ -20,17 +20,18 @@ export default async function FeaturedNeighborhoodsPage() {
     <main className="bg-bost-olive pt-20">
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-7xl">
           <p className="mb-4 font-semibold text-white/75 text-xs uppercase tracking-widest">
             Featured Neighborhoods
           </p>
-          <h1 className="mb-6 font-bold text-4xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            House-Ready Lots in Raleigh&apos;s Most Sought-After Communities
+          <h1 className="mb-6 max-w-3xl font-bold text-4xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
+            Available Lots in Prestigious Neighborhoods
           </h1>
           <p className="max-w-2xl text-base text-white/65 leading-relaxed md:text-lg">
-            Each neighborhood has been hand-selected for its quality, location,
-            and lifestyle — giving you the ideal foundation for the custom home
-            you&apos;ve always envisioned.
+            Each neighborhood has been considered carefully and selected for its
+            proximity, physical features, value, and lifestyle. Bost Homes is
+            proud to be on the builder team in these future-classic
+            neighborhoods.
           </p>
         </div>
       </section>

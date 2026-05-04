@@ -57,48 +57,38 @@ async function safeRequest<T>(
 // --- Projects ---
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-  const { projects } = await safeRequest<{ projects: Project[] }>(
-    FEATURED_PROJECTS_QUERY,
-    undefined,
-    { projects: [] }
-  );
-  return projects;
+  const { completed_Project } = await safeRequest<{
+    completed_Project: Project[];
+  }>(FEATURED_PROJECTS_QUERY, undefined, { completed_Project: [] });
+  return completed_Project;
 }
 
 export async function getAllProjects(): Promise<Project[]> {
-  const { projects } = await safeRequest<{ projects: Project[] }>(
-    ALL_PROJECTS_QUERY,
-    undefined,
-    { projects: [] }
-  );
-  return projects;
+  const { completed_Project } = await safeRequest<{
+    completed_Project: Project[];
+  }>(ALL_PROJECTS_QUERY, undefined, { completed_Project: [] });
+  return completed_Project;
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  const { project } = await safeRequest<{ project: Project | null }>(
-    PROJECT_BY_SLUG_QUERY,
-    { slug },
-    { project: null }
-  );
-  return project;
+  const { completedProject } = await safeRequest<{
+    completedProject: Project | null;
+  }>(PROJECT_BY_SLUG_QUERY, { slug }, { completedProject: null });
+  return completedProject;
 }
 
 export async function getProjectSlugs(): Promise<string[]> {
-  const { projects } = await safeRequest<{ projects: { slug: string }[] }>(
-    PROJECT_SLUGS_QUERY,
-    undefined,
-    { projects: [] }
-  );
-  return projects.map((p) => p.slug);
+  const { completed_Project } = await safeRequest<{
+    completed_Project: { slug: string }[];
+  }>(PROJECT_SLUGS_QUERY, undefined, { completed_Project: [] });
+  return completed_Project.map((p) => p.slug);
 }
 
 export async function getArchivedProjects(): Promise<Project[]> {
-  const { projects } = await safeRequest<{ projects: Project[] }>(
-    ARCHIVED_PROJECTS_QUERY,
-    undefined,
-    { projects: [] }
-  );
-  return projects;
+  const { completed_Project } = await safeRequest<{
+    completed_Project: Project[];
+  }>(ARCHIVED_PROJECTS_QUERY, undefined, { completed_Project: [] });
+  return completed_Project;
 }
 
 // --- Blog ---
@@ -106,8 +96,18 @@ export async function getArchivedProjects(): Promise<Project[]> {
 export async function getBlogPosts(options?: {
   first?: number;
   skip?: number;
-  category?: string;
+  category?: BlogPost["category"];
+  search?: string;
 }): Promise<{ posts: BlogPost[]; total: number }> {
+  const where: Record<string, unknown> = {};
+  if (options?.category) {
+    where.category = options.category;
+  }
+  const trimmedSearch = options?.search?.trim();
+  if (trimmedSearch) {
+    where._search = trimmedSearch;
+  }
+
   const { blogPosts, blogPostsConnection } = await safeRequest<{
     blogPosts: BlogPost[];
     blogPostsConnection: { aggregate: { count: number } };
@@ -116,7 +116,7 @@ export async function getBlogPosts(options?: {
     {
       first: options?.first ?? 10,
       skip: options?.skip ?? 0,
-      category: options?.category ?? undefined,
+      where: Object.keys(where).length > 0 ? where : undefined,
     },
     {
       blogPosts: [],

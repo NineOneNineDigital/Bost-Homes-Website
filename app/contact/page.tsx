@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, MapPin, Phone } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Phone, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
@@ -11,6 +11,24 @@ export const metadata: Metadata = {
     "Start your custom home project with Bost Custom Homes. Contact us at (919) 460-1983 or visit us at 8255 Chapel Hill Road, Cary, NC 27513.",
   alternates: { canonical: "/contact" },
 };
+
+const faqs = [
+  {
+    question: "Do you have a minimum budget amount to take on a project?",
+    answer:
+      "Not in budgetary terms, but we do have a minimum quality of craftsmanship and process that often provides the most value for a luxury-oriented project. We can hit smaller budgets if the goal is quality over quantity.",
+  },
+  {
+    question: "What is your geographic service area?",
+    answer:
+      "Our team can easily handle projects across Wake, Eastern Chatham, and Southern Durham counties. Projects in Chapel Hill, North Durham, Southern Wake, Pittsboro, and farther communities are considered on a case-by-case basis.",
+  },
+  {
+    question: "We're ready to engage your services — what is the next step?",
+    answer:
+      "After an introductory call or meeting to determine mutual fit, we will engage in a Professional Services Agreement and Deposit Request. This preconstruction agreement funds us to act as your custom home building consultant. With that we'll begin diving into the project planning objectives with you.",
+  },
+];
 
 export default async function ContactPage() {
   const testimonials = await getTestimonials();
@@ -38,6 +56,38 @@ export default async function ContactPage() {
       <section className="bg-white px-6 pb-12 md:px-12 lg:px-24">
         <div className="mx-auto max-w-2xl">
           <ContactForm />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="bg-bost-cream px-6 py-16 md:px-12 md:py-20 lg:px-24">
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-10 text-center md:mb-12">
+            <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-[0.25em]">
+              Frequently Asked
+            </p>
+            <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
+              Answers before you reach out
+            </h2>
+          </div>
+          <ul className="space-y-3">
+            {faqs.map((faq) => (
+              <li key={faq.question}>
+                <details className="group rounded-xl border border-bost-olive/10 bg-white px-5 py-4 transition-colors open:border-bost-olive/20 md:px-6 md:py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-semibold text-base text-bost-olive md:text-lg [&::-webkit-details-marker]:hidden">
+                    <span>{faq.question}</span>
+                    <Plus
+                      aria-hidden="true"
+                      className="size-5 shrink-0 text-bost-brick transition-transform duration-200 group-open:rotate-45"
+                    />
+                  </summary>
+                  <p className="mt-3 text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </details>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

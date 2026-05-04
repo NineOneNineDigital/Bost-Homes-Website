@@ -71,6 +71,7 @@ export const JOB_OPENINGS_QUERY = gql`
       location
       jobType
       department
+      urlLink
     }
   }
 `;
@@ -81,8 +82,7 @@ export const GREEN_FEATURES_QUERY = gql`
       id
       title: featureTitle
       description
-      category
-      pioneeredLocally
+      standard
       sortOrder
     }
   }

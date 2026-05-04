@@ -8,13 +8,13 @@ import { MobileNav } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const darkHeroRoutes = new Set(["/"]);
+const darkHeroRoutes = new Set(["/", "/featured-neighborhoods"]);
 
 const navLinks = [
   { href: "/portfolio", label: "Portfolio" },
   { href: "/our-process", label: "Approach" },
   { href: "/about", label: "Story" },
-  { href: "/media", label: "Media Hub" },
+  { href: "/blog", label: "Media Hub" },
   { href: "/careers", label: "Careers" },
 ];
 

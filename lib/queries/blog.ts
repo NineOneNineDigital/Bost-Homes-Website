@@ -13,22 +13,27 @@ const BLOG_POST_FIELDS = gql`
       height
     }
     author
+    originalDate
     publishedAt
   }
 `;
 
 export const BLOG_POSTS_QUERY = gql`
   ${BLOG_POST_FIELDS}
-  query BlogPosts($first: Int, $skip: Int, $category: String) {
+  query BlogPosts(
+    $first: Int
+    $skip: Int
+    $where: BlogPostWhereInput
+  ) {
     blogPosts(
-      orderBy: publishedAt_DESC
+      orderBy: originalDate_DESC
       first: $first
       skip: $skip
-      where: { category: $category }
+      where: $where
     ) {
       ...BlogPostFields
     }
-    blogPostsConnection(where: { category: $category }) {
+    blogPostsConnection(where: $where) {
       aggregate {
         count
       }
@@ -54,6 +59,7 @@ export const BLOG_POST_BY_SLUG_QUERY = gql`
         height
       }
       author
+      originalDate
       publishedAt
     }
   }

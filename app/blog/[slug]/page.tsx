@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/fetchers";
+import { formatBlogCategory, formatPostDate } from "@/lib/utils";
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -31,7 +32,7 @@ export async function generateMetadata({
       type: "article",
       title: post.title,
       description: post.excerpt,
-      publishedTime: post.publishedAt,
+      publishedTime: post.originalDate ?? post.publishedAt,
       authors: post.author ? [post.author] : undefined,
       images: post.featuredImage
         ? [
@@ -45,14 +46,6 @@ export async function generateMetadata({
         : undefined,
     },
   };
-}
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 }
 
 export default async function BlogPostPage({
@@ -72,7 +65,7 @@ export default async function BlogPostPage({
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    datePublished: post.publishedAt,
+    datePublished: post.originalDate ?? post.publishedAt,
     author: post.author
       ? { "@type": "Person", name: post.author }
       : { "@type": "Organization", name: "Bost Custom Homes" },
@@ -93,7 +86,7 @@ export default async function BlogPostPage({
 
       {/* Breadcrumb */}
       <section className="px-6 pt-8 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-4xl">
           <Link
             className="inline-flex items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-foreground"
             href="/blog"
@@ -106,9 +99,9 @@ export default async function BlogPostPage({
 
       {/* Header */}
       <section className="px-6 pt-6 pb-8 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-3xl">
-          <span className="mb-4 inline-block rounded-full bg-bost-brick px-3 py-1 font-semibold text-white text-xs">
-            {post.category}
+        <div className="mx-auto max-w-4xl">
+          <span className="mb-4 inline-block rounded-full bg-bost-brick px-3 py-1 font-semibold text-white text-xs uppercase tracking-wide">
+            {formatBlogCategory(post.category)}
           </span>
           <h1 className="mb-6 font-bold text-3xl leading-[1.15] tracking-tight md:text-4xl lg:text-5xl">
             {post.title}
@@ -122,7 +115,7 @@ export default async function BlogPostPage({
             )}
             <span className="flex items-center gap-1.5">
               <Calendar className="size-4" />
-              {formatDate(post.publishedAt)}
+              {formatPostDate(post.originalDate ?? post.publishedAt)}
             </span>
           </div>
         </div>
@@ -148,10 +141,10 @@ export default async function BlogPostPage({
 
       {/* Body Content */}
       <section className="px-6 pb-20 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-4xl">
           {post.body?.html ? (
             <div
-              className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-bost-brick prose-headings:tracking-tight prose-a:no-underline hover:prose-a:underline"
+              className="blog-body"
               dangerouslySetInnerHTML={{ __html: post.body.html }}
             />
           ) : (

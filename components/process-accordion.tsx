@@ -6,33 +6,35 @@ import { useState } from "react";
 const FAQ_ITEMS = [
   {
     id: "1",
-    title: "What materials do you use for custom homes?",
+    title: "Will you build on my vacant land, or tear-down property?",
     description:
-      "We source premium, locally-available materials and partner with specialized craftsmen. From hand-selected hardwoods and custom millwork to high-performance windows and roofing systems, every material is chosen with intention and installed with expertise.",
+      "Absolutely — some of our most intriguing projects are on private land. Everything from dilapidated tear-down homes inside the beltline to 50+ acre tracts on the periphery. We've even assisted clients achieve agricultural exemption, and tax write-offs for deconstruction and donation.",
   },
   {
     id: "2",
-    title: "How do you select your trade partners and subcontractors?",
+    title: "What does the project budgeting process look like?",
     description:
-      "Our trade partners are carefully vetted over years of working relationships. We prioritize local craftsmen who share our commitment to quality, communication, and accountability. Every subcontractor we bring on is someone we would invite into our own homes.",
+      "Using a running database of current construction cost information, we can provide general price guidance based on size, architecture, and features. Once the design is developed to a pricing set, we'll produce an accurate itemized contract budget, adjusting as needed.",
   },
   {
     id: "3",
-    title: "Do you offer energy-efficient or sustainable building options?",
+    title:
+      "Will you work with my architect, or from an existing set of drawings?",
     description:
-      "Absolutely. We incorporate high-performance insulation, efficient HVAC systems, Energy Star-rated appliances, and can accommodate solar-ready designs, EV charging infrastructure, and other forward-thinking features upon request.",
+      "Yes. You likely won't find a more accommodating custom home builder. If you have a relationship with a home designer or architect, add us into the workflow. In our experience, home design without the input of the builder can lead to frustrating budgeting outcomes, so we advise involving a builder prior to plan finalization.",
   },
   {
     id: "4",
-    title: "Can I bring my own architect or designer?",
+    title:
+      "How will you manage the quality, schedule, and costs of my project?",
     description:
-      "Yes. We work seamlessly with outside architects and interior designers. Our in-house team is also available if you need design guidance from the start. Collaboration is at the core of how we build.",
+      "Your project will be assigned to a Project Manager, Construction Manager, and Project Coordinator. Together this team will manage the on-site execution, schedule impacts, selection related meetings and decision needs, permits, and ongoing communication with the entire team. This process includes daily logs, weekly updates, and monthly budget forecasts throughout the project.",
   },
   {
     id: "5",
-    title: "What warranties do you provide?",
+    title: "What does your move-in and warranty program look like?",
     description:
-      "We stand behind our work with a comprehensive warranty program. All Bost Custom Homes include a 1-year workmanship warranty, 2-year systems warranty, and 10-year structural warranty in line with industry standards.",
+      "Ahead of project completion, your construction team will schedule home orientation walkthroughs and a final list of correction items to be completed prior to moving in. Beginning at occupancy, we offer a 1-year warranty on all cosmetic and structural defects, followed by warranty service on structural/system defects subject to our warranty program agreement. Our goal is to be your builder for life.",
   },
 ];
 

@@ -12,13 +12,14 @@ export interface RichText {
 
 export interface Project {
   archived: boolean;
-  bathrooms?: number;
-  bedrooms?: number;
   description?: RichText;
   featured: boolean;
+  featuredImages?: Asset[];
+  highlights?: RichText;
   id: string;
   images: Asset[];
   location: string;
+  mainImage?: Asset;
   name: string;
   slug: string;
   sqft?: number;
@@ -27,13 +28,21 @@ export interface Project {
   year?: number;
 }
 
+export type BlogCategory =
+  | "DESIGN"
+  | "CONSTRUCTION"
+  | "INSPIRATION"
+  | "COMMUNITY"
+  | "NEWS";
+
 export interface BlogPost {
   author?: string;
   body?: RichText;
-  category: "Design" | "Construction" | "Inspiration" | "Community" | "News";
+  category: BlogCategory;
   excerpt: string;
   featuredImage?: Asset;
   id: string;
+  originalDate?: string;
   publishedAt: string;
   slug: string;
   title: string;
@@ -103,14 +112,14 @@ export interface JobOpening {
   slug: string;
   summary: string;
   title: string;
+  urlLink?: string;
 }
 
 export interface GreenFeature {
-  category: "FEATURED" | "ADDITIONAL";
   description: string;
   id: string;
-  pioneeredLocally: boolean;
   sortOrder: number;
+  standard?: boolean;
   title: string;
 }
 
