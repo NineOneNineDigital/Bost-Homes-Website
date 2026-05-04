@@ -216,15 +216,23 @@ export default async function CareersPage() {
                       </span>
                     </div>
                   </div>
-                  <div className="shrink-0">
-                    <Button
-                      className="bg-bost-brick text-white hover:bg-bost-brick/90"
-                      render={<Link href={`/careers/${job.slug}`} />}
-                      size="lg"
-                    >
-                      Apply Now
-                    </Button>
-                  </div>
+                  {job.urlLink && (
+                    <div className="shrink-0">
+                      <Button
+                        className="bg-bost-brick text-white hover:bg-bost-brick/90"
+                        render={
+                          <a
+                            href={job.urlLink}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          />
+                        }
+                        size="lg"
+                      >
+                        Apply Now
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

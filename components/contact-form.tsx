@@ -1,7 +1,11 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { useActionState } from "react";
 
+import {
+  type ContactFormState,
+  submitContactForm,
+} from "@/app/contact/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +19,8 @@ const budgetOptions = [
   "$1.5M - $2M",
   "$2M+",
 ];
+
+const initialState: ContactFormState = { status: "idle" };
 
 const inputStyles = cn(
   "h-11 w-full rounded-md border border-border bg-white px-3 text-foreground text-sm",
@@ -105,14 +111,12 @@ function SelectField({
 }
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [state, formAction, isPending] = useActionState(
+    submitContactForm,
+    initialState
+  );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
-  if (submitted) {
+  if (state.status === "success") {
     return (
       <div className="rounded-xl bg-muted/60 p-12 text-center">
         <h3 className="mb-2 font-semibold text-2xl">Thank You!</h3>
@@ -125,9 +129,23 @@ export function ContactForm() {
 
   return (
     <form
+      action={formAction}
       className="space-y-5 rounded-xl border border-border/60 bg-muted/30 p-6 sm:p-8"
-      onSubmit={handleSubmit}
     >
+      {/* Honeypot — bots fill this; humans never see it */}
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor="company_website">
+          Leave this field blank
+          <input
+            autoComplete="off"
+            id="company_website"
+            name="company_website"
+            tabIndex={-1}
+            type="text"
+          />
+        </label>
+      </div>
+
       {/* Name Row */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <InputField
@@ -208,13 +226,23 @@ export function ContactForm() {
         />
       </div>
 
+      {state.status === "error" && (
+        <p
+          className="rounded-md border border-bost-brick/30 bg-bost-brick/5 px-4 py-3 text-bost-brick text-sm"
+          role="alert"
+        >
+          {state.message}
+        </p>
+      )}
+
       {/* Submit */}
       <Button
-        className="h-12 w-full rounded-lg bg-bost-brick text-base text-white hover:bg-bost-brick/90"
+        className="h-12 w-full rounded-lg bg-bost-brick text-base text-white hover:bg-bost-brick/90 disabled:opacity-60"
+        disabled={isPending}
         size="lg"
         type="submit"
       >
-        Submit
+        {isPending ? "Sending..." : "Submit"}
       </Button>
     </form>
   );

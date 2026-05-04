@@ -13,7 +13,7 @@ const mobileNavLinks = [
   { href: "/about", label: "About Us" },
   { href: "/our-process", label: "Our Process" },
   { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
-  { href: "/media", label: "Media Hub" },
+  { href: "/blog", label: "Media Hub" },
   { href: "/careers", label: "Careers" },
 ];
 

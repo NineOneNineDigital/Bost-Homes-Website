@@ -1,9 +1,9 @@
+import { HardHat } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { AwardsCarousel } from "@/components/awards-carousel";
 import { CtaSection } from "@/components/cta-section";
-import { LeadershipCard } from "@/components/leadership-card";
-import { getAwards, getTeamMembers } from "@/lib/fetchers";
-import type { TeamMember } from "@/lib/types/hygraph";
+import { getAwards } from "@/lib/fetchers";
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -11,37 +11,6 @@ export const metadata: Metadata = {
     "Learn about Bost Custom Homes — a family-owned luxury home builder in the Triangle area since 1986. Meet our team, our values, and our commitment to craftsmanship.",
   alternates: { canonical: "/about" },
 };
-
-const leadership = [
-  {
-    id: "rex-bost",
-    name: "Rex Bost",
-    title: "President",
-    image: "/images/about/leadership-rex-bost.jpg",
-    bio: "Rex founded Bost Custom Homes in 1986 with a singular vision: to build homes that families would love for generations. With over four decades of experience in the Raleigh/Cary market, he has cultivated a team and a process centered on transparency, craftsmanship, and client partnership. His hands-on approach and relentless pursuit of quality remain the cornerstone of everything Bost builds today.",
-  },
-  {
-    id: "lori-ozaki",
-    name: "Lori Ozaki",
-    title: "Controller",
-    image: "/images/about/leadership-lori-ozaki.png",
-    bio: "Lori brings meticulous financial oversight and operational clarity to every project. As Controller, she ensures that budgets are managed with integrity and that clients always have a transparent view of their investment. Her systems and processes are a key reason Bost projects are delivered on time and on budget.",
-  },
-  {
-    id: "eric",
-    name: "Eric Lorem",
-    title: "VP of Operations",
-    image: "/images/about/leadership-eric.jpg",
-    bio: "Eric oversees the day-to-day execution of every Bost build, coordinating trade partners, timelines, and quality checkpoints with precision. His background in construction management and his commitment to clear communication means clients are never left wondering where their project stands.",
-  },
-  {
-    id: "evan-bost",
-    name: "Evan Bost",
-    title: "Director of Sales & Marketing",
-    image: "/images/about/leadership-evan-bost.jpg",
-    bio: "Evan leads client engagement and guides prospective homeowners through the early stages of their custom home journey. He combines a deep knowledge of the Bost process with a genuine passion for design, helping clients translate their aspirations into a clear, achievable vision before a single blueprint is drawn.",
-  },
-];
 
 const principles = [
   {
@@ -77,85 +46,8 @@ const principles = [
   },
 ];
 
-const staticTeam: TeamMember[] = [
-  {
-    id: "t1",
-    name: "Team Member",
-    title: "Project Manager",
-    image: { url: "/images/about/team-1.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Coordinates daily build activity from ground-breaking through punch list, keeping schedules, trades, and clients aligned. A Bost project manager is the single point of accountability on a job — the person who makes sure every decision is captured, every trade shows up prepared, and every homeowner knows exactly where their project stands.",
-    },
-  },
-  {
-    id: "t2",
-    name: "Team Member",
-    title: "Design Coordinator",
-    image: { url: "/images/about/team-2.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Guides homeowners through selections — from cabinetry and countertops to lighting and hardware — translating design intent into documented, build-ready specifications. The design coordinator is where aesthetic vision meets constructability, ensuring every choice is beautiful, cohesive, and ready for the field.",
-    },
-  },
-  {
-    id: "t3",
-    name: "Team Member",
-    title: "Site Superintendent",
-    image: { url: "/images/about/team-3.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Runs the job site day in and day out, holding every trade to Bost's standard of craftsmanship. Superintendents are the quality backbone of the company — walking the home constantly, catching the details that never make a punch list, and making sure the house is built right the first time.",
-    },
-  },
-  {
-    id: "t4",
-    name: "Team Member",
-    title: "Estimator",
-    image: { url: "/images/about/team-4.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Builds the detailed, line-by-line budget that turns a set of plans into a buildable project. Our estimators partner closely with architects and clients early in the process to surface cost implications before they become surprises, protecting both the design vision and the investment.",
-    },
-  },
-  {
-    id: "t5",
-    name: "Team Member",
-    title: "Project Manager",
-    image: { url: "/images/about/team-5.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Leads complex custom projects with a focus on clear communication and proactive problem-solving. Brings years of field and office experience together to anticipate issues before they reach the homeowner, and to make every week on site feel predictable and well-run.",
-    },
-  },
-  {
-    id: "t6",
-    name: "Team Member",
-    title: "Client Relations",
-    image: { url: "/images/about/team-6.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "The trusted point of contact for homeowners throughout the build, translating construction details into language that makes sense and advocating for the client at every step. Keeps the experience warm, organized, and transparent — from contract signing to the day the keys change hands.",
-    },
-  },
-  {
-    id: "t7",
-    name: "Team Member",
-    title: "Lead Carpenter",
-    image: { url: "/images/about/team-7.jpg", width: 400, height: 400 },
-    bio: {
-      html: "",
-      text: "Sets the bar for craftsmanship on every Bost home, handling the finish work and complex framing details that define a truly custom build. A steady presence on site whose pride in the work shows up in every miter, reveal, and hand-fit transition.",
-    },
-  },
-];
-
 export default async function AboutPage() {
-  const [teamMembers, awards] = await Promise.all([
-    getTeamMembers(),
-    getAwards(),
-  ]);
-  const team = teamMembers.length > 0 ? teamMembers : staticTeam;
+  const awards = await getAwards();
 
   return (
     <main className="pt-20">
@@ -169,10 +61,11 @@ export default async function AboutPage() {
             A Contagious Passion for Custom Homes
           </h1>
           <p className="max-w-2xl text-base text-muted-foreground leading-relaxed md:text-lg">
-            For over three decades, Bost Custom Homes has been crafting
-            exceptional residences that reflect the unique vision and lifestyle
-            of each homeowner. We are planners and executors, dreamers and
-            pragmatists—united by an unwavering commitment to the craft.
+            For nearly four decades, Bost Custom Homes has been crafting
+            executive residences that reflect the unique vision and lifestyle of
+            our incredible clients. We are planners and executors, dreamers and
+            pragmatists—united by an unwavering commitment to our Guiding
+            Principles.
           </p>
         </div>
       </section>
@@ -192,13 +85,12 @@ export default async function AboutPage() {
           <div className="max-w-xl text-right">
             <p className="mb-6 font-light text-lg text-white leading-relaxed md:text-xl lg:text-2xl">
               We&apos;re on a mission to create a delightful home building
-              journey for our clients—turning their vision into beautifully
+              journey for our clients, turning their vision into beautifully
               designed, precisely executed custom homes.
             </p>
             <p className="text-base text-white/70 leading-relaxed">
-              Every project we take on is a reflection of our values: honesty,
-              craftsmanship, and a genuine care for the families who will live
-              in these homes.
+              Every project we take on reflects our principles: Transparency,
+              Artistry, and Shared Vision.
             </p>
           </div>
         </div>
@@ -214,34 +106,37 @@ export default async function AboutPage() {
           </div>
           <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
             <p>
-              Rex Bost founded Bost Custom Homes in 1986 with a simple but
-              powerful belief: that building a home should be one of life&apos;s
-              great joys, not one of its great stresses. Starting in the
-              Raleigh/Cary area, Rex built the company from the ground up on a
-              foundation of integrity, personal service, and an obsessive
-              attention to detail.
+              Rex Bost founded Bost Custom Homes in 1986 with a simple
+              conviction: building a home should be an enjoyable and creative
+              process. From that first house in &rsquo;86, through the
+              90&rsquo;s and early aughts, he built the company on a foundation
+              of honest relationships, personal service, and an obsessive eye
+              for detail.
             </p>
             <p>
-              In the early years, Rex was on every job site himself—learning the
-              nuances of the land, the trades, and the clients who trusted him
-              with their most important investment. That hands-on ethos never
-              left. Today, every member of the Bost team operates with that same
-              owner-level accountability.
+              In the early days, Rex was on every job site thinking through the
+              details creatively, mastering the trades, collaborating with
+              clients, and executing craftsmanship. Today, that hands-on
+              approach is codified in our Guiding Principles and carried out by
+              every member of the team.
             </p>
             <p>
-              As Raleigh grew into one of the most dynamic housing markets in
-              the country, Bost Custom Homes grew with it—never chasing volume,
-              always prioritizing quality. We have built in some of the
-              area&apos;s most prestigious neighborhoods and have earned a
-              reputation that speaks for itself through referrals, repeat
-              clients, and homes that stand as enduring testaments to the craft.
+              As The Triangle continues to mature into one of the nation&apos;s
+              most dynamic housing markets, Bost Custom Homes evolves—never
+              chasing volume, always prioritizing artistry, honesty, and
+              continuous learning. We&apos;ve built in some of the area&apos;s
+              most prestigious neighborhoods and earned a reputation defined by
+              referrals, repeat clients, and homes that stand as testaments to
+              craftsmanship.
             </p>
             <p>
-              Today, Bost Custom Homes remains a family business in every sense
-              of the word. Rex&apos;s son Evan has joined the team, bringing a
-              new generation of energy and ideas while honoring the principles
-              that built the company. The mission has never changed: deliver an
-              exceptional home and an exceptional experience, every single time.
+              Today, Bost Homes is an employee-owned partnership. Rex Bost, Evan
+              Bost, Eric Sherman, and Lori Ozaki are at the helm with a combined
+              65 years&rsquo; experience in the company. Together they bring a
+              balance of skillsets and fresh ideas while staying true to the
+              principles that define our legacy. The mission hasn&apos;t
+              changed: deliver an exceptional, one-of-a-kind home and an
+              exceptional experience for every unique client.
             </p>
           </div>
         </div>
@@ -361,62 +256,32 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team — Org Chart */}
-      <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 text-center">
-            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-              Our Team
+      {/* Our Team — Coming Soon */}
+      <section className="px-6 py-24 md:px-12 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.25em]">
+            Our Team
+          </p>
+          <h2 className="mb-8 font-bold text-3xl text-bost-olive tracking-tight md:text-4xl lg:text-5xl">
+            Meet the Minds Behind the Craft
+          </h2>
+
+          <div className="relative mx-auto max-w-xl border border-bost-olive/10 bg-bost-cream p-10 md:p-14">
+            <div className="absolute top-0 left-0 h-1 w-16 bg-bost-yellow" />
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-bost-brick/10">
+              <HardHat aria-hidden className="h-6 w-6 text-bost-brick" />
+            </div>
+            <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-[0.25em]">
+              Under Construction
             </p>
-            <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
-              Meet the Minds Behind the Craft
-            </h2>
-          </div>
-
-          {/* Tier 1 — President */}
-          <div className="flex flex-col items-center">
-            <LeadershipCard
-              bio={leadership[0].bio}
-              image={leadership[0].image}
-              name={leadership[0].name}
-              size="lg"
-              title={leadership[0].title}
-            />
-
-            {/* Tier 2 — Leadership */}
-            <div className="mt-14 flex w-full flex-wrap justify-center gap-x-6 gap-y-10 md:mt-16 lg:gap-x-8 lg:gap-y-12">
-              {leadership.slice(1).map((leader) => (
-                <div
-                  className="flex w-full justify-center sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1.334rem)]"
-                  key={leader.id}
-                >
-                  <LeadershipCard
-                    bio={leader.bio}
-                    image={leader.image}
-                    name={leader.name}
-                    title={leader.title}
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Tier 3 — Team Members */}
-            <div className="mt-14 flex w-full flex-wrap justify-center gap-x-4 gap-y-8 md:mt-16 md:gap-x-6 md:gap-y-10 lg:gap-x-8">
-              {team.map((member) => (
-                <div
-                  className="flex w-[calc(50%-0.5rem)] justify-center md:w-[calc(33.333%-1rem)] lg:w-[calc(25%-1.5rem)]"
-                  key={member.id}
-                >
-                  <LeadershipCard
-                    bio={member.bio?.text}
-                    image={member.image?.url ?? ""}
-                    name={member.name}
-                    size="sm"
-                    title={member.title}
-                  />
-                </div>
-              ))}
-            </div>
+            <h3 className="mb-4 font-bold text-bost-olive text-xl tracking-tight md:text-2xl">
+              Profiles Coming Soon
+            </h3>
+            <p className="text-base text-bost-olive/70 leading-relaxed">
+              We&apos;re putting the finishing touches on profiles for the
+              leadership and craftsmen who bring every Bost home to life. Check
+              back soon to meet the team behind the work.
+            </p>
           </div>
         </div>
       </section>
@@ -433,19 +298,7 @@ export default async function AboutPage() {
               innovation, and calculated execution.
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-            {awards.map((award) => (
-              <div key={award.id}>
-                <p className="mb-2 font-bold text-2xl text-bost-blue md:text-3xl">
-                  {award.year}
-                </p>
-                <h3 className="mb-1 font-semibold text-sm text-white">
-                  {award.title}
-                </h3>
-                <p className="text-sm text-white/65">{award.description}</p>
-              </div>
-            ))}
-          </div>
+          <AwardsCarousel awards={awards} />
           <div className="relative mt-12 h-px w-full bg-white/15">
             <div className="absolute top-0 left-0 h-px w-16 bg-bost-yellow" />
           </div>

@@ -20,32 +20,32 @@ export default async function OurProcessPage() {
   return (
     <main className="pt-20">
       {/* Hero Section — Blueprint background */}
-      <section className="relative flex min-h-[70vh] items-center">
-        <div className="absolute inset-0 bg-bost-olive">
+      <section className="relative flex min-h-[60vh] items-center overflow-hidden">
+        <div className="absolute inset-0 bg-white">
           <Image
             alt="Architectural drawings and blueprints"
-            className="object-cover opacity-50"
+            className="translate-x-[25%] object-cover"
             fill
             priority
             sizes="100vw"
             src="/images/plan_sketch.png"
           />
+          <div className="absolute inset-0 bg-bost-cream/70" />
         </div>
-        <div className="relative z-10 mx-auto max-w-4xl px-6 py-24">
-          <p className="mb-4 font-medium text-bost-yellow text-xs uppercase tracking-[0.2em]">
-            Our Process
-          </p>
-          <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
-            A True Partnership From First
-            <span className="hidden md:inline">
-              <br />
-            </span>{" "}
-            Conversation to Final Walkthrough
-          </h1>
-          <p className="max-w-2xl text-base text-white/70 leading-relaxed md:text-lg">
-            Building a custom home is one of life&apos;s most significant
-            endeavors. We ensure the journey is as rewarding as the destination.
-          </p>
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
+          <div className="max-w-xl">
+            <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+              Our Process
+            </p>
+            <h1 className="mb-6 font-bold text-3xl text-bost-olive leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
+              A Transparent Partnership from First Conversation through Final
+              Walkthrough
+            </h1>
+            <p className="text-base text-muted-foreground leading-relaxed md:text-lg">
+              Commissioning a custom home is a most significant endeavor. We
+              want the journey to be as rewarding as the destination.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -60,33 +60,33 @@ export default async function OurProcessPage() {
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
               <Image
-                alt="Masonry construction detail"
+                alt="Concrete masonry framing under construction at a Bost custom home"
                 className="object-cover"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                src="/images/process/masonry-section.jpg"
+                src="/images/Sequence 04.00_01_35_00.Still003.jpg"
               />
             </div>
             <div>
               <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                Masonry
+                Masonry Framing
               </p>
               <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
-                Built with integrity,
+                Big bad wolf
                 <br />
-                from the ground up
+                not welcome here
               </h2>
               <p className="mb-8 text-base text-muted-foreground leading-relaxed">
-                We hold ourselves to the highest standards of construction
-                quality. From foundations to finish work, every element is
-                executed with precision and care by our trusted team of
-                craftsmen and trade partners.
+                Masonry framed homes offer uncompromising strength, efficiency,
+                and protection. Built like castles that have stood for
+                centuries, our masonry framed homes offer peace of mind for
+                discerning clients and generations to come.
               </p>
               <Button
                 className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
-                render={<Link href="/our-process/sustainability" />}
+                render={<Link href="/our-process/masonry-framing" />}
                 size="lg"
               >
                 Learn More
@@ -102,18 +102,19 @@ export default async function OurProcessPage() {
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
             <div className="order-2 md:order-1">
               <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                Sustainability
+                Uncompromising Standards
               </p>
               <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
-                Crafted for today, but designed
+                We believe custom homes
                 <br />
-                for tomorrow
+                are high performance homes
               </h2>
               <p className="mb-8 text-base text-muted-foreground leading-relaxed">
-                Our homes are designed to stand the test of time — both in
-                durability and in style. We incorporate sustainable building
-                practices and forward-thinking design so your home remains as
-                relevant and efficient decades from now as it is on move-in day.
+                Explore our standard specs and upgrades for energy efficiency,
+                power generation, water conservation, healthy air and water, and
+                indoor comfort. Viewing the home as a complete system, we help
+                clients achieve their desired sustainability, self-reliance, and
+                healthy indoor environment.
               </p>
               <Button
                 className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
@@ -123,13 +124,13 @@ export default async function OurProcessPage() {
                 Learn More
               </Button>
             </div>
-            <div className="relative order-1 aspect-[4/3] w-full overflow-hidden rounded-lg bg-muted md:order-2">
+            <div className="relative order-1 aspect-[4/3] w-full overflow-hidden bg-muted md:order-2">
               <Image
-                alt="Sustainable custom home by Bost Homes"
+                alt="Modern Bost custom home with solar panels and pool"
                 className="object-cover"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                src="/images/about/photo-strip-4.jpg"
+                src="/images/bos201015_292.jpg"
               />
             </div>
           </div>
@@ -138,30 +139,27 @@ export default async function OurProcessPage() {
 
       {/* Products & Expertise Section */}
       <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
-          {/* Two-column header */}
-          <div className="mb-12 grid grid-cols-1 items-start gap-10 md:grid-cols-2 md:gap-16">
-            <div>
-              <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                Products &amp; Expertise
-              </p>
-            </div>
-            <div>
-              <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
-                Materials That Matter, Expertise
-                <br />
-                That Elevates
-              </h2>
-              <p className="text-base text-muted-foreground leading-relaxed">
-                We source premium materials and partner with specialized
-                artisans to deliver a level of quality you can see and feel.
-                From hand-selected hardwoods to custom millwork, every material
-                is chosen with intention and installed with expertise.
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            Your Builder For Life
+          </p>
+          <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
+            Deploying our Expertise,
+            <br />
+            Meeting You Where You Are
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Lean on us during due diligence, through design, construction, move
+            in, and for whatever comes next. From urban infill flats to
+            agricultural homesteads spanning dozens of acres, from contemporary
+            innovations to revived classics, we&apos;ve guided our diverse
+            clients to their unique dream homes — sharing their vision and
+            forging their path together.
+          </p>
+        </div>
 
-          {/* Accordion FAQ */}
+        {/* Accordion FAQ */}
+        <div className="mx-auto mt-12 max-w-6xl">
           <ProcessAccordion />
         </div>
       </section>

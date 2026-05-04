@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";
 import { BostLogo } from "@/components/bost-logo";
 
@@ -7,16 +7,27 @@ const footerNavLinks = [
   { href: "/about", label: "About" },
   { href: "/our-process", label: "Our Process" },
   { href: "/featured-neighborhoods", label: "Neighborhoods" },
-  { href: "/media", label: "Media Hub" },
+  { href: "/blog", label: "Media Hub" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];
 
 const socialLinks = [
-  { href: "https://linkedin.com", label: "LinkedIn", icon: Linkedin },
-  { href: "https://instagram.com", label: "Instagram", icon: Instagram },
-  { href: "https://youtube.com", label: "YouTube", icon: Youtube },
-  { href: "https://x.com", label: "X (Twitter)", icon: Twitter },
+  {
+    href: "https://www.facebook.com/BostHomes/",
+    label: "Facebook",
+    icon: Facebook,
+  },
+  {
+    href: "https://www.instagram.com/bosthomes/",
+    label: "Instagram",
+    icon: Instagram,
+  },
+  {
+    href: "https://www.youtube.com/channel/UCPLpcdlD-yjgac0voBKPhnQ",
+    label: "YouTube",
+    icon: Youtube,
+  },
 ];
 
 function SiteFooter() {
