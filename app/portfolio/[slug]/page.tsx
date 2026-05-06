@@ -133,7 +133,7 @@ export default async function ProjectPage({
       {project.mainImage && (
         <section className="px-6 md:px-12 lg:px-24">
           <div className="mx-auto max-w-6xl">
-            <div className="relative aspect-video w-full overflow-hidden bg-muted">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted md:aspect-video">
               <Image
                 alt={project.mainImage.alt ?? project.name}
                 className="object-cover"
@@ -149,44 +149,44 @@ export default async function ProjectPage({
 
       {/* Overview + Highlights */}
       {!project.archived && (
-      <section className="px-6 py-14 md:px-12 md:py-20 lg:px-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
-            {/* Left: highlights */}
-            {project.highlights?.html && (
-              <div className="md:col-span-4">
-                <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                  Highlights
-                </p>
-                <div
-                  className="space-y-3 text-base text-foreground leading-relaxed [&_li]:relative [&_li]:pl-6 [&_li]:before:absolute [&_li]:before:top-[0.6em] [&_li]:before:left-0 [&_li]:before:h-px [&_li]:before:w-3 [&_li]:before:bg-bost-brick [&_ol]:space-y-3 [&_p]:text-muted-foreground [&_strong]:text-foreground [&_ul]:space-y-3"
-                  dangerouslySetInnerHTML={{
-                    __html: project.highlights.html,
-                  }}
-                />
-              </div>
-            )}
-
-            {/* Right: description */}
-            <div
-              className={
-                project.highlights?.html ? "md:col-span-8" : "md:col-span-12"
-              }
-            >
-              <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                Project Overview
-              </p>
-              {descriptionParagraphs.length > 0 && (
-                <div className="space-y-5 text-base text-foreground/80 leading-[1.75] md:text-lg">
-                  {descriptionParagraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 60)}>{paragraph}</p>
-                  ))}
+        <section className="px-6 py-14 md:px-12 md:py-20 lg:px-24">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-16">
+              {/* Left: highlights */}
+              {project.highlights?.html && (
+                <div className="md:col-span-4">
+                  <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                    Highlights
+                  </p>
+                  <div
+                    className="space-y-3 text-base text-foreground leading-relaxed [&_li]:relative [&_li]:pl-6 [&_li]:before:absolute [&_li]:before:top-[0.6em] [&_li]:before:left-0 [&_li]:before:h-px [&_li]:before:w-3 [&_li]:before:bg-bost-brick [&_ol]:space-y-3 [&_p]:text-muted-foreground [&_strong]:text-foreground [&_ul]:space-y-3"
+                    dangerouslySetInnerHTML={{
+                      __html: project.highlights.html,
+                    }}
+                  />
                 </div>
               )}
+
+              {/* Right: description */}
+              <div
+                className={
+                  project.highlights?.html ? "md:col-span-8" : "md:col-span-12"
+                }
+              >
+                <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                  Project Overview
+                </p>
+                {descriptionParagraphs.length > 0 && (
+                  <div className="space-y-5 text-base text-foreground/80 leading-[1.75] md:text-lg">
+                    {descriptionParagraphs.map((paragraph) => (
+                      <p key={paragraph.slice(0, 60)}>{paragraph}</p>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       )}
 
       {/* Testimonial — its own quiet beat */}

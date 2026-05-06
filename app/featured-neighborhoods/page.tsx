@@ -80,30 +80,21 @@ export default async function FeaturedNeighborhoodsPage() {
                       </div>
                     </div>
 
-                    {/* Learn More link */}
-                    <Link
-                      className="group mb-6 inline-flex items-center gap-2 font-medium text-sm text-white transition-opacity hover:opacity-70"
-                      href={`/featured-neighborhoods/${neighborhood.slug}`}
-                    >
-                      Learn More
-                      <ArrowRight
-                        className="transition-transform group-hover:translate-x-0.5"
-                        size={16}
-                      />
-                    </Link>
-
-                    {/* CTA text + button */}
-                    <p className="mb-5 text-sm text-white/65 leading-relaxed">
-                      Reach out today to explore whether this homesite suits
-                      your needs.
-                    </p>
                     <div>
                       <Button
-                        className="bg-bost-brick px-6 text-white hover:bg-bost-brick/80"
-                        render={<Link href="/contact" />}
+                        className="group bg-bost-brick px-6 text-white hover:bg-bost-brick/80"
+                        render={
+                          <Link
+                            href={`/featured-neighborhoods/${neighborhood.slug}`}
+                          />
+                        }
                         size="lg"
                       >
-                        Start a Project
+                        Learn More
+                        <ArrowRight
+                          aria-hidden
+                          className="size-4 transition-transform group-hover:translate-x-0.5"
+                        />
                       </Button>
                     </div>
                   </div>
