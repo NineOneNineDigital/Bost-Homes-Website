@@ -60,7 +60,7 @@ export function ProjectFeaturedGallery({
               src={heroTrio[0].url}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-1 md:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:gap-6">
             {heroTrio.slice(1).map((img, i) => (
               <div
                 className="relative aspect-[4/3] overflow-hidden bg-muted"
@@ -70,7 +70,7 @@ export function ProjectFeaturedGallery({
                   alt={img.alt ?? `${projectName} — featured detail ${i + 2}`}
                   className="object-cover"
                   fill
-                  sizes="(min-width: 768px) 33vw, 50vw"
+                  sizes="(min-width: 768px) 33vw, 100vw"
                   src={img.url}
                 />
               </div>

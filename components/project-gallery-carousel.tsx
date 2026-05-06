@@ -2,12 +2,47 @@
 
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  type TouchEvent as ReactTouchEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import type { Asset } from "@/lib/types/hygraph";
 
 interface Props {
   images: Asset[];
   projectName: string;
+}
+
+const SWIPE_THRESHOLD_PX = 40;
+
+function useSwipeNav(onPrev: () => void, onNext: () => void) {
+  const startX = useRef<number | null>(null);
+
+  const onTouchStart = useCallback((e: ReactTouchEvent) => {
+    startX.current = e.touches[0]?.clientX ?? null;
+  }, []);
+
+  const onTouchEnd = useCallback(
+    (e: ReactTouchEvent) => {
+      const start = startX.current;
+      startX.current = null;
+      const end = e.changedTouches[0]?.clientX;
+      if (start === null || end === undefined) {
+        return;
+      }
+      const dx = end - start;
+      if (Math.abs(dx) < SWIPE_THRESHOLD_PX) {
+        return;
+      }
+      (dx < 0 ? onNext : onPrev)();
+    },
+    [onPrev, onNext]
+  );
+
+  return { onTouchStart, onTouchEnd };
 }
 
 export function ProjectGalleryCarousel({ images, projectName }: Props) {
@@ -35,6 +70,8 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
   const next = useCallback(() => {
     goTo(index + 1);
   }, [goTo, index]);
+
+  const { onTouchStart, onTouchEnd } = useSwipeNav(prev, next);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -88,7 +125,11 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
   return (
     <>
       <div className="relative">
-        <div className="group relative aspect-video w-full overflow-hidden bg-bost-olive">
+        <div
+          className="group relative aspect-[4/3] w-full overflow-hidden bg-bost-olive md:aspect-video"
+          onTouchEnd={onTouchEnd}
+          onTouchStart={onTouchStart}
+        >
           <button
             aria-label="Enlarge image"
             className="absolute inset-0 z-0 cursor-zoom-in"
@@ -138,19 +179,20 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           </div>
 
           <button
-            className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 bg-bost-olive/80 px-3 py-1.5 font-medium text-[11px] text-white uppercase tracking-[0.2em] backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white"
+            aria-label="Enlarge image"
+            className="absolute top-4 right-4 z-10 inline-flex items-center gap-2 bg-bost-olive/80 p-2 font-medium text-[11px] text-white uppercase tracking-[0.2em] backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white sm:px-3 sm:py-1.5"
             onClick={() => setLightboxOpen(true)}
             type="button"
           >
             <Expand aria-hidden className="size-3.5" />
-            <span>Enlarge</span>
+            <span className="hidden sm:inline">Enlarge</span>
           </button>
 
           {count > 1 && (
             <>
               <button
                 aria-label="Previous image"
-                className="absolute top-1/2 left-4 z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center bg-bost-olive/80 text-white backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white"
+                className="absolute top-1/2 left-4 z-10 hidden size-12 -translate-y-1/2 items-center justify-center bg-bost-olive/80 text-white backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white md:inline-flex"
                 onClick={prev}
                 type="button"
               >
@@ -158,7 +200,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
               </button>
               <button
                 aria-label="Next image"
-                className="absolute top-1/2 right-4 z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center bg-bost-olive/80 text-white backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white"
+                className="absolute top-1/2 right-4 z-10 hidden size-12 -translate-y-1/2 items-center justify-center bg-bost-olive/80 text-white backdrop-blur-sm transition hover:bg-bost-olive focus-visible:outline-2 focus-visible:outline-white md:inline-flex"
                 onClick={next}
                 type="button"
               >
@@ -236,6 +278,8 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           aria-label="Image lightbox"
           aria-modal="true"
           className="fixed inset-0 z-50 bg-black/95"
+          onTouchEnd={onTouchEnd}
+          onTouchStart={onTouchStart}
           role="dialog"
         >
           <button
