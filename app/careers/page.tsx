@@ -1,15 +1,15 @@
+import { CtaSection } from "@/components/cta-section";
+import { Button } from "@/components/ui/button";
+import { getJobOpenings } from "@/lib/fetchers";
 import { Briefcase, Clock, Heart, MapPin, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { CtaSection } from "@/components/cta-section";
-import { Button } from "@/components/ui/button";
-import { getJobOpenings } from "@/lib/fetchers";
 
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join the Bost Custom Homes team. We're looking for talented, passionate people who share our commitment to craftsmanship, integrity, and exceptional client experiences.",
+    "We're always looking for passionately dedicated people who share our commitment to craftsmanship, integrity, and delivering an exceptional client experience.",
   alternates: { canonical: "/careers" },
 };
 
@@ -30,7 +30,7 @@ const benefits = [
     icon: Clock,
     title: "Work-Life Balance",
     description:
-      "Paid time off, flexible scheduling, and a culture that respects your time outside of work.",
+      "Paid time off, flexible operations, and a family culture that respects your time here and outside of work.",
   },
   {
     icon: Briefcase,
@@ -43,27 +43,27 @@ const benefits = [
 const values = [
   {
     number: "01",
-    title: "Craftsmanship",
+    title: "Execution",
     description:
       "We take pride in every detail. If you care deeply about doing excellent work, you'll fit right in.",
   },
   {
     number: "02",
-    title: "Integrity",
+    title: "Transparency",
     description:
-      "We do what we say and say what we mean. Honesty and transparency are non-negotiable.",
+      "We share openly and build trust through clarity. Honesty is non-negotiable.",
   },
   {
     number: "03",
-    title: "Collaboration",
+    title: "Humility",
     description:
-      "Great homes are built by great teams. We value open communication, mutual respect, and shared accountability.",
+      "We remain humble and open to new perspectives. We look for good listeners.",
   },
   {
     number: "04",
-    title: "Growth",
+    title: "Shared Vision",
     description:
-      "We invest in our people. Whether you're early in your career or a seasoned professional, there's always room to learn and lead.",
+      "We place our client’s vision at the center. You should be excited about bringing your client’s idea into reality.",
   },
 ];
 
@@ -87,9 +87,9 @@ export default async function CareersPage() {
             Build Your Career with Bost Custom Homes
           </h1>
           <p className="max-w-2xl text-base text-muted-foreground leading-relaxed md:text-lg">
-            We're always looking for talented, passionate people who share our
+            We're always looking for passionately dedicated people who share our
             commitment to craftsmanship, integrity, and delivering an
-            exceptional experience for every client.
+            exceptional client experience.
           </p>
         </div>
       </section>
@@ -108,14 +108,14 @@ export default async function CareersPage() {
         <div className="absolute inset-0 flex items-center justify-end px-6 md:px-12 lg:px-24">
           <div className="max-w-xl text-right">
             <p className="mb-6 font-light text-lg text-white leading-relaxed md:text-xl lg:text-2xl">
-              Join a team where your work matters—where every project is a
-              testament to the care, skill, and dedication of the people who
-              built it.
+              Join a team where your work matters; where every completed project
+              is a testament to the care, skill, and dedication of the people
+              who built it.
             </p>
             <p className="text-base text-white/70 leading-relaxed">
-              At Bost Custom Homes, you're not just filling a role. You're
-              becoming part of a family that has been building exceptional homes
-              in the Triangle for over three decades.
+              Working at Bost Custom Homes, you're not just filling a role.
+              You're becoming part of a family with nearly four decades of home
+              building and community involvement.
             </p>
           </div>
         </div>
@@ -125,10 +125,10 @@ export default async function CareersPage() {
       <section className="bg-bost-olive px-6 py-20 text-white md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <p className="mb-4 font-medium text-white/60 text-xs uppercase tracking-[0.2em]">
-            What We Value
+            Hiring on our Principles
           </p>
-          <h2 className="mb-16 max-w-xl font-bold text-3xl leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
-            The Kind of People We Look For
+          <h2 className="mb-16 max-w-xl font-bold text-2xl leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
+            The Convictions We Look For
           </h2>
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value) => (
