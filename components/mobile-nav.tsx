@@ -14,7 +14,6 @@ const mobileNavLinks = [
   { href: "/our-process", label: "Our Process" },
   { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
   { href: "/blog", label: "Media Hub" },
-  { href: "/careers", label: "Careers" },
 ];
 
 function MobileNav({ lightIcon = false }: { lightIcon?: boolean }) {
