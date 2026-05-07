@@ -15,7 +15,6 @@ const navLinks = [
   { href: "/our-process", label: "Approach" },
   { href: "/about", label: "Story" },
   { href: "/blog", label: "Media Hub" },
-  { href: "/careers", label: "Careers" },
 ];
 
 function SiteHeader() {
