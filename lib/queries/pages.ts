@@ -38,10 +38,10 @@ export const PAGE_CONTENT_QUERY = gql`
 
 export const TESTIMONIALS_QUERY = gql`
   query Testimonials {
-    testimonials {
+    testimonials(orderBy: createdAt_DESC) {
       id
       quote
-      author
+      author: authorName
     }
   }
 `;
