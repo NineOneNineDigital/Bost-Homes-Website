@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { Button } from "@/components/ui/button";
@@ -79,47 +79,47 @@ export default async function Page() {
   return (
     <main>
       {/* ── 1. HERO ───────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-svh flex-col">
-        {/* Background image */}
-        <div className="absolute inset-0 bg-bost-olive">
+      <section className="relative flex flex-col md:min-h-svh">
+        {/* Background image — natural aspect on mobile, fill on desktop */}
+        <div className="relative aspect-[1024/683] w-full bg-bost-olive md:absolute md:inset-0 md:aspect-auto">
           <Image
             alt="Bost Custom Homes — Canyon Crest"
-            className="object-cover"
+            className="object-cover md:object-cover"
             fill
             priority
             sizes="100vw"
             src="/images/home/hero.jpg"
           />
         </div>
-        {/* Content — lower-left in translucent olive shape */}
-        <div className="relative z-10 mt-auto px-6 pb-24 md:px-12 lg:px-24">
+        {/* Content — stacked below on mobile, overlay lower-left on desktop */}
+        <div className="relative z-10 bg-bost-olive px-6 py-12 md:mt-auto md:bg-transparent md:px-12 md:py-0 md:pb-24 lg:px-24">
           <div className="mx-auto max-w-7xl">
             <div
-              className="max-w-xl bg-bost-olive/75 px-8 py-8 backdrop-blur-sm md:px-10 md:py-10"
+              className="bg-bost-olive/75 px-8 py-8 backdrop-blur-sm md:max-w-xl md:px-10 md:py-10"
               style={{
                 clipPath:
                   "polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%)",
               }}
             >
-            <p className="mb-3 font-medium text-white/80 text-xs uppercase tracking-[0.3em]">
-              Welcome
-            </p>
-            <h1 className="mb-4 font-bold text-2xl text-white leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
-              Designed for Distinction.
-              <br />
-              Built for the Art of Living.
-            </h1>
-            <p className="max-w-md text-sm text-white/75 leading-relaxed">
-              Your vision defines our process—translating your passion into a
-              truly custom home, built with calculated execution and timeless
-              craftsmanship.
-            </p>
-          </div>
+              <p className="mb-3 font-medium text-white/80 text-xs uppercase tracking-[0.3em]">
+                Welcome
+              </p>
+              <h1 className="mb-4 font-bold text-2xl text-white leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
+                Designed for Distinction.
+                <br />
+                Built for the Art of Living.
+              </h1>
+              <p className="max-w-md text-sm text-white/75 leading-relaxed">
+                Your vision defines our process—translating your passion into a
+                truly custom home, built with calculated execution and timeless
+                craftsmanship.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-0">
+        {/* Scroll indicator — desktop only */}
+        <div className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-0 md:flex">
           <ChevronDown className="size-5 animate-bounce text-white/60" />
           <ChevronDown className="-mt-3 size-5 animate-bounce text-white/60" />
         </div>

@@ -1,11 +1,15 @@
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ArrowLeft, Calendar, History, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/fetchers";
-import { formatBlogCategory, formatPostDate } from "@/lib/utils";
+import {
+  formatBlogCategory,
+  formatPostDate,
+  getMeaningfulUpdatedDate,
+} from "@/lib/utils";
 
 export async function generateStaticParams() {
   const slugs = await getBlogPostSlugs();
@@ -60,12 +64,18 @@ export default async function BlogPostPage({
     return notFound();
   }
 
+  const updatedDate = getMeaningfulUpdatedDate(
+    post.updatedAt,
+    post.originalDate ?? post.publishedAt
+  );
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
     datePublished: post.originalDate ?? post.publishedAt,
+    dateModified: post.updatedAt ?? post.originalDate ?? post.publishedAt,
     author: post.author
       ? { "@type": "Person", name: post.author }
       : { "@type": "Organization", name: "Bost Custom Homes" },
@@ -117,6 +127,12 @@ export default async function BlogPostPage({
               <Calendar className="size-4" />
               {formatPostDate(post.originalDate ?? post.publishedAt)}
             </span>
+            {updatedDate && (
+              <span className="flex items-center gap-1.5">
+                <History className="size-4" />
+                Updated {formatPostDate(updatedDate)}
+              </span>
+            )}
           </div>
         </div>
       </section>

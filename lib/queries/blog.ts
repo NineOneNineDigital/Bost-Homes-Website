@@ -15,6 +15,7 @@ const BLOG_POST_FIELDS = gql`
     author
     originalDate
     publishedAt
+    updatedAt
   }
 `;
 
@@ -61,6 +62,7 @@ export const BLOG_POST_BY_SLUG_QUERY = gql`
       author
       originalDate
       publishedAt
+      updatedAt
     }
   }
 `;

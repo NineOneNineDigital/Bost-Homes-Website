@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BostLogo } from "@/components/bost-logo";
-import { MobileNav } from "@/components/mobile-nav";
+import { MobileNav, type MobileNavProject } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,11 @@ const navLinks = [
   { href: "/blog", label: "Media Hub" },
 ];
 
-function SiteHeader() {
+function SiteHeader({
+  featuredProjects = [],
+}: {
+  featuredProjects?: MobileNavProject[];
+}) {
   const pathname = usePathname();
   const hasDarkHero = darkHeroRoutes.has(pathname);
   const [scrolled, setScrolled] = useState(false);
@@ -82,7 +86,10 @@ function SiteHeader() {
           >
             Start a Project
           </Button>
-          <MobileNav lightIcon={useLightText} />
+          <MobileNav
+            featuredProjects={featuredProjects}
+            lightIcon={useLightText}
+          />
         </div>
       </div>
     </header>

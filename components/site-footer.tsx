@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Youtube } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { BostLogo } from "@/components/bost-logo";
 
 const footerNavLinks = [
@@ -38,9 +38,9 @@ function SiteFooter() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
           {/* Logo + tagline */}
           <div className="shrink-0">
-            <BostLogo className="mb-2" variant="light" />
-            <p className="text-sm text-white/50">
-              Custom homes in the Triangle since 1986.
+            <BostLogo className="mb-3" variant="light" />
+            <p className="font-medium text-sm text-white italic">
+              Built for the art of living
             </p>
           </div>
 

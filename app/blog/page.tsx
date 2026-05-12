@@ -1,11 +1,16 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { BlogFilter } from "@/components/blog-filter";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPosts } from "@/lib/fetchers";
 import type { BlogCategory } from "@/lib/types/hygraph";
-import { cn, formatBlogCategory, formatPostDate } from "@/lib/utils";
+import {
+  cn,
+  formatBlogCategory,
+  formatPostDate,
+  getMeaningfulUpdatedDate,
+} from "@/lib/utils";
 
 const VALID_CATEGORIES: BlogCategory[] = [
   "DESIGN",
@@ -148,6 +153,17 @@ export default async function BlogPage({
                         )}
                       </span>
                     )}
+                    {(() => {
+                      const updated = getMeaningfulUpdatedDate(
+                        featuredPost.updatedAt,
+                        featuredPost.originalDate ?? featuredPost.publishedAt
+                      );
+                      return updated ? (
+                        <span className="text-muted-foreground/80">
+                          · Updated {formatPostDate(updated)}
+                        </span>
+                      ) : null;
+                    })()}
                   </div>
                   <h2 className="mb-4 font-bold text-2xl leading-tight tracking-tight transition-colors group-hover:text-bost-brick md:text-3xl lg:text-4xl">
                     {featuredPost.title}
@@ -199,6 +215,17 @@ export default async function BlogPage({
                           )}
                         </span>
                       )}
+                      {(() => {
+                        const updated = getMeaningfulUpdatedDate(
+                          post.updatedAt,
+                          post.originalDate ?? post.publishedAt
+                        );
+                        return updated ? (
+                          <span className="text-muted-foreground/80">
+                            · Updated {formatPostDate(updated)}
+                          </span>
+                        ) : null;
+                      })()}
                     </div>
                     <h3 className="mb-3 font-semibold text-lg leading-snug tracking-tight transition-colors group-hover:text-bost-brick">
                       {post.title}

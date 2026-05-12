@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
@@ -16,15 +16,37 @@ const mobileNavLinks = [
   { href: "/blog", label: "Media Hub" },
 ];
 
-function MobileNav({ lightIcon = false }: { lightIcon?: boolean }) {
+export type MobileNavProject = {
+  slug: string;
+  name: string;
+  location: string;
+  image: { url: string; width: number; height: number; alt?: string } | null;
+};
+
+function MobileNav({
+  lightIcon = false,
+  featuredProjects = [],
+}: {
+  lightIcon?: boolean;
+  featuredProjects?: MobileNavProject[];
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isOpen && featuredProjects.length > 1) {
+      setFeaturedIndex(Math.floor(Math.random() * featuredProjects.length));
+    }
+  }, [isOpen, featuredProjects.length]);
+
+  const featuredProject = featuredProjects[featuredIndex] ?? featuredProjects[0];
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -96,34 +118,40 @@ function MobileNav({ lightIcon = false }: { lightIcon?: boolean }) {
           Start a Project
         </Link>
 
-        {/* Featured Projects Section */}
-        <div className="mt-auto pb-8">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-            Featured Projects
-          </p>
-          <Link
-            className="group block overflow-hidden rounded-lg"
-            href="/portfolio"
-            onClick={close}
-          >
-            <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-              <Image
-                alt="Featured project by Bost Custom Homes"
-                className="object-cover"
-                fill
-                sizes="(max-width: 1024px) 100vw, 0vw"
-                src="/images/about/photo-strip-1.jpg"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-              <div className="absolute bottom-3 left-3">
-                <p className="font-medium text-sm text-white">Project Name</p>
-                <p className="text-white/70 text-xs">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </p>
+        {/* Featured Project Section */}
+        {featuredProject && (
+          <div className="mt-auto pt-6 pb-8">
+            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+              Featured Project
+            </p>
+            <Link
+              className="group block overflow-hidden rounded-lg"
+              href={`/portfolio/${featuredProject.slug}`}
+              onClick={close}
+            >
+              <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+                {featuredProject.image && (
+                  <Image
+                    alt={featuredProject.image.alt ?? featuredProject.name}
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="100vw"
+                    src={featuredProject.image.url}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute right-3 bottom-3 left-3">
+                  <p className="font-semibold text-base text-white leading-tight">
+                    {featuredProject.name}
+                  </p>
+                  <p className="mt-0.5 text-white/75 text-xs">
+                    {featuredProject.location}
+                  </p>
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
+            </Link>
+          </div>
+        )}
       </nav>
     </div>
   );
