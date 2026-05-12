@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import { ProcessAccordion } from "@/components/process-accordion";
 import { ProcessCarousel } from "@/components/process-carousel";
@@ -18,13 +18,13 @@ export default async function OurProcessPage() {
   const steps = await getProcessSteps();
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero Section — Blueprint background */}
       <section className="relative flex min-h-[60vh] items-center overflow-hidden">
         <div className="absolute inset-0 bg-white">
           <Image
             alt="Architectural drawings and blueprints"
-            className="translate-x-[25%] object-cover"
+            className="translate-x-[25%] translate-y-[20%] object-cover"
             fill
             priority
             sizes="100vw"
@@ -32,7 +32,7 @@ export default async function OurProcessPage() {
           />
           <div className="absolute inset-0 bg-bost-cream/70" />
         </div>
-        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 md:py-24">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-36 pb-20 md:pt-44 md:pb-24">
           <div className="max-w-xl">
             <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
               Our Process

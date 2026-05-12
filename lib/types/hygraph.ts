@@ -46,6 +46,7 @@ export interface BlogPost {
   publishedAt: string;
   slug: string;
   title: string;
+  updatedAt: string;
 }
 
 export interface Lot {

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Archivo, Geist_Mono } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { getFeaturedProjects } from "@/lib/fetchers";
 import { cn } from "@/lib/utils";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-sans" });
@@ -115,30 +117,41 @@ const jsonLd = {
   slogan: "Designed for Distinction. Built for the Art of Living.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const featuredProjects = (await getFeaturedProjects())
+    .map((project) => ({
+      slug: project.slug,
+      name: project.name,
+      location: project.location,
+      image: project.mainImage ?? project.images?.[0] ?? null,
+    }))
+    .filter((project) => project.image !== null);
+
   return (
-    <html
-      className={cn(
-        "antialiased",
-        fontMono.variable,
-        "font-sans",
-        archivo.variable
-      )}
-      lang="en"
-    >
-      <body>
-        <script
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          type="application/ld+json"
-        />
-        <SiteHeader />
-        <div>{children}</div>
-        <SiteFooter />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        className={cn(
+          "antialiased",
+          fontMono.variable,
+          "font-sans",
+          archivo.variable
+        )}
+        lang="en"
+      >
+        <body>
+          <script
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            type="application/ld+json"
+          />
+          <SiteHeader featuredProjects={featuredProjects} />
+          <div>{children}</div>
+          <SiteFooter />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

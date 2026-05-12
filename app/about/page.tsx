@@ -4,6 +4,7 @@ import Image from "next/image";
 import { AwardsCarousel } from "@/components/awards-carousel";
 import { CtaSection } from "@/components/cta-section";
 import { getAwards } from "@/lib/fetchers";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -142,55 +143,62 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Photo Strip */}
-      <section className="w-full overflow-hidden">
-        <div className="flex">
-          {[
-            {
-              src: "historic_image_1991",
-              alt: "Bost Custom Homes 1991",
-              position: "object-center",
-            },
-            {
-              src: "historic_image_1992",
-              alt: "Bost Custom Homes 1992",
-              position: "object-top",
-            },
-            {
-              src: "historic_image_2002",
-              alt: "Bost Custom Homes 2002",
-              position: "object-center",
-            },
-          ].map((photo) => (
-            <div
-              className="relative h-[280px] flex-1 md:h-[360px] lg:h-[420px]"
-              key={photo.src}
-            >
-              <Image
-                alt={photo.alt}
-                className={`object-cover ${photo.position}`}
-                fill
-                sizes="33vw"
-                src={`/images/${photo.src}.jpg`}
-              />
-            </div>
-          ))}
+      {/* Photo Grid */}
+      <section className="px-6 pb-20 md:px-12 md:pb-28 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+            {[
+              {
+                src: "historic_image_1991.jpg",
+                alt: "Bost Custom Homes 1991",
+                tall: false,
+              },
+              {
+                src: "historic_image_1992.jpg",
+                alt: "Bost Custom Homes 1992",
+                tall: true,
+              },
+              {
+                src: "historic_image_2002.jpg",
+                alt: "Bost Custom Homes 2002",
+                tall: false,
+              },
+              {
+                src: "bosthalfad.jpg",
+                alt: "Bost Custom Homes 20th anniversary advertisement, 1986–2006",
+                tall: false,
+              },
+              {
+                src: "2016_JimmyAllen_322_HBAPOHAwards.jpg",
+                alt: "Rex Bost receiving the 2016 HBA Parade of Homes Lifetime Achievement Award",
+                tall: false,
+              },
+            ].map((photo) => (
+              <div
+                className={cn(
+                  "relative overflow-hidden",
+                  photo.tall
+                    ? "aspect-[3/4] md:col-start-2 md:row-span-2 md:aspect-auto"
+                    : "aspect-[8/5]"
+                )}
+                key={photo.src}
+              >
+                <Image
+                  alt={photo.alt}
+                  className="object-cover"
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  src={`/images/${photo.src}`}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Mission & Vision */}
       <section className="bg-bost-olive px-6 py-24 md:px-12 md:py-32 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 max-w-xl">
-            <p className="mb-3 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
-              Who We Are
-            </p>
-            <p className="text-base text-white/60 leading-relaxed">
-              Our mission and vision serve as the foundation for all brand
-              decisions. By aligning with them, we ensure every expression of
-              the brand remains purposeful, consistent, and true to who we are.
-            </p>
-          </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="relative overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10 lg:p-12">
               <div className="absolute top-0 left-0 h-1 w-full bg-bost-yellow" />

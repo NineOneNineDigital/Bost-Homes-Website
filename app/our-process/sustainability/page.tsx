@@ -1,7 +1,7 @@
 import { Check, Leaf } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import { getGreenFeatures, getPageContent } from "@/lib/fetchers";
 

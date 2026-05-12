@@ -78,7 +78,7 @@ export const JOB_OPENINGS_QUERY = gql`
 
 export const GREEN_FEATURES_QUERY = gql`
   query GreenFeatures {
-    greenFeatures(orderBy: sortOrder_ASC) {
+    greenFeatures(orderBy: sortOrder_ASC, first: 100) {
       id
       title: featureTitle
       description

@@ -4,7 +4,7 @@ import { getJobOpenings } from "@/lib/fetchers";
 import { Briefcase, Clock, Heart, MapPin, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export const metadata: Metadata = {
   title: "Careers",
