@@ -56,43 +56,25 @@ export default async function OurProcessPage() {
         </div>
       </section>
 
-      {/* Masonry Section */}
+      {/* Products & Expertise Section */}
       <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-              <Image
-                alt="Concrete masonry framing under construction at a Bost custom home"
-                className="object-cover"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                src="/images/Sequence 04.00_01_35_00.Still003.jpg"
-              />
-            </div>
-            <div>
-              <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-                Masonry Framing
-              </p>
-              <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
-                Big bad wolf
-                <br />
-                not welcome here
-              </h2>
-              <p className="mb-8 text-base text-muted-foreground leading-relaxed">
-                Masonry framed homes offer uncompromising strength, efficiency,
-                and protection. Built like castles that have stood for
-                centuries, our masonry framed homes offer peace of mind for
-                discerning clients and generations to come.
-              </p>
-              <Button
-                className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
-                render={<Link href="/our-process/masonry-framing" />}
-                size="lg"
-              >
-                Learn More
-              </Button>
-            </div>
-          </div>
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            Your Builder For Life
+          </p>
+          <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
+            Deploying our Expertise,
+            <br />
+            Meeting You Where You Are
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Lean on us during due diligence, through design, construction, move
+            in, and for whatever comes next. From urban infill flats to
+            agricultural homesteads spanning dozens of acres, from contemporary
+            innovations to revived classics, we&apos;ve guided our diverse
+            clients to their unique dream homes — sharing their vision and
+            forging their path together.
+          </p>
         </div>
       </section>
 
@@ -137,29 +119,49 @@ export default async function OurProcessPage() {
         </div>
       </section>
 
-      {/* Products & Expertise Section */}
+      {/* Masonry Section */}
       <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
-            Your Builder For Life
-          </p>
-          <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
-            Deploying our Expertise,
-            <br />
-            Meeting You Where You Are
-          </h2>
-          <p className="text-base text-muted-foreground leading-relaxed">
-            Lean on us during due diligence, through design, construction, move
-            in, and for whatever comes next. From urban infill flats to
-            agricultural homesteads spanning dozens of acres, from contemporary
-            innovations to revived classics, we&apos;ve guided our diverse
-            clients to their unique dream homes — sharing their vision and
-            forging their path together.
-          </p>
+        <div className="mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+              <Image
+                alt="Concrete masonry framing under construction at a Bost custom home"
+                className="object-cover"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                src="/images/Sequence 04.00_01_35_00.Still003.jpg"
+              />
+            </div>
+            <div>
+              <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                Masonry Framing
+              </p>
+              <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
+                Big bad wolf
+                <br />
+                not welcome here
+              </h2>
+              <p className="mb-8 text-base text-muted-foreground leading-relaxed">
+                Masonry framed homes offer uncompromising strength, efficiency,
+                and protection. Built like castles that have stood for
+                centuries, our masonry framed homes offer peace of mind for
+                discerning clients and generations to come.
+              </p>
+              <Button
+                className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
+                render={<Link href="/our-process/masonry-framing" />}
+                size="lg"
+              >
+                Learn More
+              </Button>
+            </div>
+          </div>
         </div>
+      </section>
 
-        {/* Accordion FAQ */}
-        <div className="mx-auto mt-12 max-w-6xl">
+      {/* FAQ Section */}
+      <section className="bg-bost-gray-lightest px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
           <ProcessAccordion />
         </div>
       </section>

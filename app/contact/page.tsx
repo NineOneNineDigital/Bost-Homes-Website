@@ -122,6 +122,15 @@ export default function ContactPage() {
                 <span className="text-muted-foreground">Fax:</span> (919)
                 460-1986
               </p>
+              <p className="text-sm">
+                <span className="text-muted-foreground">Email:</span>{" "}
+                <a
+                  className="font-medium hover:text-bost-brick"
+                  href="mailto:info@bosthomes.com"
+                >
+                  info@bosthomes.com
+                </a>
+              </p>
               <p className="text-muted-foreground text-sm">License #43957</p>
             </div>
           </div>
