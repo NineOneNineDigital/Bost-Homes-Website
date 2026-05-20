@@ -165,11 +165,11 @@ export default async function Page() {
             {/* Right column — team photo */}
             <div className="relative aspect-[16/10] w-full overflow-hidden">
               <Image
-                alt="Bost Custom Homes luxury interior"
+                alt="The Bost Custom Homes team"
                 className="object-cover"
                 fill
                 sizes="(min-width: 1024px) 66vw, 100vw"
-                src="/images/home/who-we-are.jpg"
+                src="/images/team-photo.jpg"
               />
             </div>
           </div>

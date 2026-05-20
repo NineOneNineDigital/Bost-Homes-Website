@@ -71,6 +71,14 @@ function SiteFooter() {
                 (919) 460-1983
               </a>
             </p>
+            <p>
+              <a
+                className="transition-colors hover:text-white"
+                href="mailto:info@bosthomes.com"
+              >
+                info@bosthomes.com
+              </a>
+            </p>
           </address>
         </div>
       </div>
@@ -81,14 +89,6 @@ function SiteFooter() {
           <p className="text-white/40 text-xs">
             &copy; {new Date().getFullYear()} Bost Custom Homes. All rights
             reserved.
-            <span className="mx-1.5">&middot;</span>
-            <span className="cursor-pointer transition-colors hover:text-white/60">
-              Terms
-            </span>
-            <span className="mx-1.5">&middot;</span>
-            <span className="cursor-pointer transition-colors hover:text-white/60">
-              Privacy
-            </span>
           </p>
           <div className="flex items-center gap-3">
             {socialLinks.map((social) => (
