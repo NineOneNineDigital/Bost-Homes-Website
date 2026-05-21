@@ -154,10 +154,10 @@ export default async function Page() {
               </p>
               <Button
                 className="bg-bost-brick px-6 text-white hover:bg-bost-brick/90"
-                render={<Link href="/about" />}
+                render={<Link href="/about#our-story" />}
                 size="lg"
               >
-                Our Approach
+                Our Story
                 <ArrowRight className="ml-1 size-4" />
               </Button>
             </div>

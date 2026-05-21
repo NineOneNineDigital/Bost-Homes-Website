@@ -5,14 +5,14 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { BostLogo } from "@/components/bost-logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const mobileNavLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About Us" },
-  { href: "/our-process", label: "Our Process" },
-  { href: "/featured-neighborhoods", label: "Featured Neighborhoods" },
+  { href: "/our-process", label: "Approach" },
+  { href: "/about", label: "Story" },
   { href: "/blog", label: "Media Hub" },
 ];
 
@@ -86,7 +86,10 @@ function MobileNav({
       role="dialog"
     >
       {/* Header */}
-      <div className="flex items-center justify-end px-6 py-5">
+      <div className="flex items-center justify-between px-6 py-5">
+        <Link aria-label="Bost Custom Homes home" href="/" onClick={close}>
+          <BostLogo />
+        </Link>
         <Button
           aria-label="Close navigation menu"
           onClick={close}

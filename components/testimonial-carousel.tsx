@@ -13,20 +13,14 @@ function TestimonialCarousel({
   testimonials: Testimonial[];
 }) {
   const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
-
-  const goTo = useCallback((index: number, dir: "left" | "right") => {
-    setDirection(dir);
-    setActive(index);
-  }, []);
 
   const next = useCallback(() => {
-    goTo((active + 1) % testimonials.length, "right");
-  }, [active, testimonials.length, goTo]);
+    setActive((i) => (i + 1) % testimonials.length);
+  }, [testimonials.length]);
 
   const prev = useCallback(() => {
-    goTo((active - 1 + testimonials.length) % testimonials.length, "left");
-  }, [active, testimonials.length, goTo]);
+    setActive((i) => (i - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
 
   useEffect(() => {
     if (testimonials.length <= 1) {
@@ -35,8 +29,6 @@ function TestimonialCarousel({
     const timer = setInterval(next, AUTO_ROTATE_MS);
     return () => clearInterval(timer);
   }, [next, testimonials.length]);
-
-  const current = testimonials[active];
 
   return (
     <section className="bg-white px-8 py-20 md:px-16 md:py-28">
@@ -60,25 +52,32 @@ function TestimonialCarousel({
             <ChevronLeft className="size-5" />
           </button>
 
-          {/* Quote content */}
-          <div className="min-h-[140px] flex-1 text-center md:min-h-[120px]">
-            <blockquote
-              className={cn(
-                "mb-6 transition-opacity duration-500",
-                direction === "right" ? "animate-fade-in" : "animate-fade-in"
-              )}
-              key={current.id}
-            >
-              <p className="text-bost-black/70 text-lg italic leading-relaxed md:text-xl">
-                &ldquo;{current.quote}&rdquo;
-              </p>
-            </blockquote>
+          {/* Quote content — fixed height; testimonials are absolutely positioned so they cannot affect container size */}
+          <div className="relative h-[440px] flex-1 overflow-hidden sm:h-[320px] md:h-[240px]">
+            {testimonials.map((t, i) => (
+              <div
+                aria-hidden={i !== active}
+                className={cn(
+                  "absolute inset-0 flex flex-col justify-center text-center transition-opacity duration-500",
+                  i === active
+                    ? "opacity-100"
+                    : "pointer-events-none opacity-0"
+                )}
+                key={t.id}
+              >
+                <blockquote className="mb-6">
+                  <p className="text-bost-black/70 text-lg italic leading-relaxed md:text-xl">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                </blockquote>
 
-            <div className="mx-auto mb-4 h-px w-10 bg-bost-gray-light" />
+                <div className="mx-auto mb-4 h-px w-10 bg-bost-gray-light" />
 
-            <cite className="block font-semibold text-bost-black text-sm not-italic tracking-wide">
-              {current.author}
-            </cite>
+                <cite className="block font-semibold text-bost-black text-sm not-italic tracking-wide">
+                  {t.author}
+                </cite>
+              </div>
+            ))}
           </div>
 
           {/* Right arrow */}
@@ -103,7 +102,7 @@ function TestimonialCarousel({
                   i === active ? "bg-bost-olive" : "bg-transparent"
                 )}
                 key={t.id}
-                onClick={() => goTo(i, i > active ? "right" : "left")}
+                onClick={() => setActive(i)}
                 type="button"
               >
                 <span
