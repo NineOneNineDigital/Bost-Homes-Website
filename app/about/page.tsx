@@ -98,7 +98,10 @@ export default async function AboutPage() {
       </section>
 
       {/* Our Story */}
-      <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
+      <section
+        className="scroll-mt-24 px-6 py-20 md:px-12 md:py-28 lg:px-24"
+        id="our-story"
+      >
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-[180px_1fr] md:gap-16 lg:grid-cols-[300px_1fr] lg:gap-20">
           <div>
             <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
@@ -173,10 +176,11 @@ export default async function AboutPage() {
                 alt: "Rex Bost receiving the 2016 HBA Parade of Homes Lifetime Achievement Award",
                 tall: false,
               },
-            ].map((photo) => (
+            ].map((photo, index) => (
               <div
                 className={cn(
                   "relative overflow-hidden",
+                  index > 0 && "hidden md:block",
                   photo.tall
                     ? "aspect-[3/4] md:col-start-2 md:row-span-2 md:aspect-auto"
                     : "aspect-[8/5]"
