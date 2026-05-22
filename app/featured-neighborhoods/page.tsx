@@ -108,7 +108,7 @@ export default async function FeaturedNeighborhoodsPage() {
                         alt={neighborhood.image.alt ?? neighborhood.name}
                         className="object-cover"
                         fill
-                        sizes="(min-width: 768px) 50vw, 100vw"
+                        sizes="(min-width: 1280px) 600px, (min-width: 768px) 50vw, 100vw"
                         src={neighborhood.image.url}
                       />
                     ) : (

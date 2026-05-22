@@ -135,7 +135,7 @@ export default async function BlogPage({
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       fill
                       priority
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes="(min-width: 1280px) 640px, (min-width: 768px) 50vw, 100vw"
                       src={featuredPost.featuredImage.url}
                     />
                   )}
@@ -198,7 +198,7 @@ export default async function BlogPage({
                         alt={post.title}
                         className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        sizes="(min-width: 1280px) 400px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         src={post.featuredImage.url}
                       />
                     )}
