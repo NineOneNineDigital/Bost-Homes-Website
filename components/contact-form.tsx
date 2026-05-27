@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import Script from "next/script";
+import { useActionState, useEffect, useRef, useState } from "react";
 
 import {
   type ContactFormState,
@@ -8,6 +9,16 @@ import {
 } from "@/app/contact/actions";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+declare global {
+  interface Window {
+    turnstile?: {
+      reset: (widget?: string | HTMLElement) => void;
+    };
+  }
+}
+
+type InquiryType = "home" | "general";
 
 const remodelingOptions = ["Yes", "No", "Not Sure"];
 const architectOptions = ["Yes", "No", "In Progress"];
@@ -110,11 +121,46 @@ function SelectField({
   );
 }
 
+function InquiryToggleButton({
+  active,
+  label,
+  onClick,
+}: {
+  active: boolean;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      aria-pressed={active}
+      className={cn(
+        "h-10 rounded-md font-medium text-sm transition-colors",
+        active
+          ? "bg-bost-olive text-bost-cream shadow-sm"
+          : "text-foreground/60 hover:text-foreground"
+      )}
+      onClick={onClick}
+      type="button"
+    >
+      {label}
+    </button>
+  );
+}
+
 export function ContactForm() {
+  const [inquiryType, setInquiryType] = useState<InquiryType>("home");
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
     initialState
   );
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+  const turnstileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (state.status === "error" && window.turnstile && turnstileRef.current) {
+      window.turnstile.reset(turnstileRef.current);
+    }
+  }, [state.status]);
 
   if (state.status === "success") {
     return (
@@ -126,6 +172,8 @@ export function ContactForm() {
       </div>
     );
   }
+
+  const isHome = inquiryType === "home";
 
   return (
     <form
@@ -145,6 +193,27 @@ export function ContactForm() {
           />
         </label>
       </div>
+
+      {/* Inquiry Type Toggle */}
+      <fieldset>
+        <legend className="mb-2 font-medium text-foreground/80 text-xs">
+          What&apos;s this about?
+        </legend>
+        <div className="grid grid-cols-2 gap-1 rounded-lg bg-white p-1 ring-1 ring-border">
+          <InquiryToggleButton
+            active={isHome}
+            label="Custom Home"
+            onClick={() => setInquiryType("home")}
+          />
+          <InquiryToggleButton
+            active={!isHome}
+            label="General Inquiry"
+            onClick={() => setInquiryType("general")}
+          />
+        </div>
+      </fieldset>
+
+      <input name="inquiryType" type="hidden" value={inquiryType} />
 
       {/* Name Row */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -179,31 +248,35 @@ export function ContactForm() {
         />
       </div>
 
-      {/* Select Fields — 2x2 grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <SelectField
-          label="Are you inquiring about remodeling services?"
-          name="remodeling"
-          options={remodelingOptions}
-        />
-        <SelectField
-          label="Do you have plans drawn from an architect?"
-          name="architect"
-          options={architectOptions}
-        />
-      </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <SelectField
-          label="Do you own a homesite?"
-          name="homesite"
-          options={homesiteOptions}
-        />
-        <SelectField
-          label="What is your budget range?"
-          name="budget"
-          options={budgetOptions}
-        />
-      </div>
+      {/* Home-specific Select Fields */}
+      {isHome && (
+        <>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <SelectField
+              label="Are you inquiring about remodeling services?"
+              name="remodeling"
+              options={remodelingOptions}
+            />
+            <SelectField
+              label="Do you have plans drawn from an architect?"
+              name="architect"
+              options={architectOptions}
+            />
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <SelectField
+              label="Do you own a homesite?"
+              name="homesite"
+              options={homesiteOptions}
+            />
+            <SelectField
+              label="What is your budget range?"
+              name="budget"
+              options={budgetOptions}
+            />
+          </div>
+        </>
+      )}
 
       {/* Message */}
       <div className="flex flex-col gap-1.5">
@@ -211,7 +284,7 @@ export function ContactForm() {
           className="font-medium text-foreground/80 text-xs"
           htmlFor="message"
         >
-          Tell us more about your vision...
+          {isHome ? "Tell us more about your vision..." : "How can we help?"}
         </label>
         <textarea
           className={cn(
@@ -221,10 +294,29 @@ export function ContactForm() {
           )}
           id="message"
           name="message"
-          placeholder="What's your dream..."
+          placeholder={
+            isHome
+              ? "What's your dream..."
+              : "Share a few details about what you're looking for..."
+          }
           rows={5}
         />
       </div>
+
+      {turnstileSiteKey && (
+        <>
+          <Script
+            src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            strategy="afterInteractive"
+          />
+          <div
+            className="cf-turnstile"
+            data-sitekey={turnstileSiteKey}
+            data-theme="light"
+            ref={turnstileRef}
+          />
+        </>
+      )}
 
       {state.status === "error" && (
         <p

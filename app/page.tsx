@@ -88,7 +88,7 @@ export default async function Page() {
             fill
             priority
             sizes="100vw"
-            src="/images/home/hero.jpg"
+            src="/images/Bosthomes-Hero-Image.jpg"
           />
         </div>
         {/* Content — stacked below on mobile, overlay lower-left on desktop */}
