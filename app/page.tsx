@@ -11,6 +11,10 @@ import {
   getTestimonials,
 } from "@/lib/fetchers";
 
+// Revalidate hourly so featured projects, neighborhoods, and testimonials
+// reflect Hygraph changes instead of being frozen to the build-time snapshot.
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "Bost Custom Homes | Luxury Custom Home Builder in Cary, NC",
   description:

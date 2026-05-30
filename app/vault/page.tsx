@@ -5,6 +5,11 @@ import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getArchivedProjects } from "@/lib/fetchers";
 
+// Revalidate hourly so the archive grid reflects Hygraph changes instead of
+// being frozen to the build-time snapshot (an empty or failed list at build
+// time would otherwise stay baked in until the next deploy).
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "The Vault",
   description:

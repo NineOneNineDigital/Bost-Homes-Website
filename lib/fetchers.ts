@@ -1,4 +1,4 @@
-import { hygraph } from "@/lib/hygraph";
+import { hygraph, isHygraphConfigured } from "@/lib/hygraph";
 import {
   BLOG_POST_BY_SLUG_QUERY,
   BLOG_POST_SLUGS_QUERY,
@@ -40,7 +40,19 @@ import type {
 /**
  * Safe wrapper around hygraph.request that returns a fallback value
  * when the query fails (e.g. model not yet created in Hygraph).
+ *
+ * During a production build a query failure is rethrown rather than swallowed:
+ * silently baking an empty page into the static prerender hides real failures
+ * (a transient CDN hiccup once froze empty /portfolio and /vault grids into the
+ * deploy). Failing the build loudly surfaces that. At request time we keep the
+ * graceful fallback so a momentary outage degrades a single render instead of
+ * throwing a 500 at visitors. When Hygraph is intentionally not configured
+ * (e.g. a preview/CI build without secrets) we always fall back, since the
+ * documented behavior is to build with empty content rather than fail.
  */
+const FAIL_BUILD_ON_ERROR =
+  process.env.NEXT_PHASE === "phase-production-build" && isHygraphConfigured;
+
 async function safeRequest<T>(
   query: string,
   variables: Record<string, unknown> | undefined,
@@ -49,6 +61,9 @@ async function safeRequest<T>(
   try {
     return await hygraph.request<T>(query, variables);
   } catch (error) {
+    if (FAIL_BUILD_ON_ERROR) {
+      throw error;
+    }
     console.warn("[Hygraph] Query failed, using fallback:", error);
     return fallback;
   }

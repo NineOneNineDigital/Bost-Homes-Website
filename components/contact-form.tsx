@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-type InquiryType = "home" | "general";
+type InquiryType = "home" | "general" | "vendor";
 
 const remodelingOptions = ["Yes", "No", "Not Sure"];
 const architectOptions = ["Yes", "No", "In Progress"];
@@ -32,6 +32,18 @@ const budgetOptions = [
 ];
 
 const initialState: ContactFormState = { status: "idle" };
+
+const messageLabels: Record<InquiryType, string> = {
+  home: "Tell us more about your vision...",
+  general: "How can we help?",
+  vendor: "Tell us about your product or service",
+};
+
+const messagePlaceholders: Record<InquiryType, string> = {
+  home: "What's your dream...",
+  general: "Share a few details about what you're looking for...",
+  vendor: "Briefly describe what you provide and why it's a fit...",
+};
 
 const inputStyles = cn(
   "h-11 w-full rounded-md border border-border bg-white px-3 text-foreground text-sm",
@@ -134,7 +146,7 @@ function InquiryToggleButton({
     <button
       aria-pressed={active}
       className={cn(
-        "h-10 rounded-md font-medium text-sm transition-colors",
+        "h-10 whitespace-nowrap rounded-md px-1 font-medium text-xs transition-colors sm:text-sm",
         active
           ? "bg-bost-olive text-bost-cream shadow-sm"
           : "text-foreground/60 hover:text-foreground"
@@ -174,6 +186,7 @@ export function ContactForm() {
   }
 
   const isHome = inquiryType === "home";
+  const isVendor = inquiryType === "vendor";
 
   return (
     <form
@@ -199,16 +212,21 @@ export function ContactForm() {
         <legend className="mb-2 font-medium text-foreground/80 text-xs">
           What&apos;s this about?
         </legend>
-        <div className="grid grid-cols-2 gap-1 rounded-lg bg-white p-1 ring-1 ring-border">
+        <div className="grid grid-cols-3 gap-1 rounded-lg bg-white p-1 ring-1 ring-border">
           <InquiryToggleButton
             active={isHome}
             label="Custom Home"
             onClick={() => setInquiryType("home")}
           />
           <InquiryToggleButton
-            active={!isHome}
-            label="General Inquiry"
+            active={inquiryType === "general"}
+            label="General"
             onClick={() => setInquiryType("general")}
+          />
+          <InquiryToggleButton
+            active={isVendor}
+            label="Vendor"
+            onClick={() => setInquiryType("vendor")}
           />
         </div>
       </fieldset>
@@ -278,13 +296,29 @@ export function ContactForm() {
         </>
       )}
 
+      {/* Vendor-specific Fields */}
+      {isVendor && (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <InputField
+            label="Company"
+            name="company"
+            placeholder="Acme Building Supply"
+          />
+          <InputField
+            label="What you offer"
+            name="offering"
+            placeholder="e.g. HVAC, lumber, marketing"
+          />
+        </div>
+      )}
+
       {/* Message */}
       <div className="flex flex-col gap-1.5">
         <label
           className="font-medium text-foreground/80 text-xs"
           htmlFor="message"
         >
-          {isHome ? "Tell us more about your vision..." : "How can we help?"}
+          {messageLabels[inquiryType]}
         </label>
         <textarea
           className={cn(
@@ -294,11 +328,7 @@ export function ContactForm() {
           )}
           id="message"
           name="message"
-          placeholder={
-            isHome
-              ? "What's your dream..."
-              : "Share a few details about what you're looking for..."
-          }
+          placeholder={messagePlaceholders[inquiryType]}
           rows={5}
         />
       </div>
