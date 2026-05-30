@@ -49,18 +49,41 @@ export type ContactFormState =
   | { status: "success" }
   | { status: "error"; message: string };
 
-const SELECT_LABELS: Record<string, string> = {
+type InquiryType = "home" | "general" | "vendor";
+
+const HOME_DETAIL_LABELS: Record<string, string> = {
   remodeling: "Remodeling services",
   architect: "Architect plans",
   homesite: "Owns homesite",
   budget: "Budget range",
 };
 
-function buildNote(formData: FormData, includeHomeDetails: boolean): string {
+const VENDOR_DETAIL_LABELS: Record<string, string> = {
+  company: "Company",
+  offering: "Offering",
+};
+
+const TAG_BY_TYPE: Record<InquiryType, string> = {
+  home: "Website Contact Form",
+  general: "Website General Inquiry",
+  vendor: "Website Vendor Inquiry",
+};
+
+const DETAIL_LABELS_BY_TYPE: Record<
+  InquiryType,
+  Record<string, string> | null
+> = {
+  home: HOME_DETAIL_LABELS,
+  general: null,
+  vendor: VENDOR_DETAIL_LABELS,
+};
+
+function buildNote(formData: FormData, inquiryType: InquiryType): string {
   const message = (formData.get("message") as string | null)?.trim() ?? "";
+  const detailLabels = DETAIL_LABELS_BY_TYPE[inquiryType];
   const detailLines: string[] = [];
-  if (includeHomeDetails) {
-    for (const [field, label] of Object.entries(SELECT_LABELS)) {
+  if (detailLabels) {
+    for (const [field, label] of Object.entries(detailLabels)) {
       const value = (formData.get(field) as string | null)?.trim();
       if (value) {
         detailLines.push(`${label}: ${value}`);
@@ -111,10 +134,11 @@ export async function submitContactForm(
   const lastName = ((formData.get("lastName") as string | null) ?? "").trim();
   const email = ((formData.get("email") as string | null) ?? "").trim();
   const phone = ((formData.get("phone") as string | null) ?? "").trim();
-  const inquiryType = (
+  const rawType = (
     (formData.get("inquiryType") as string | null) ?? "home"
   ).trim();
-  const isHomeInquiry = inquiryType !== "general";
+  const inquiryType: InquiryType =
+    rawType === "general" || rawType === "vendor" ? rawType : "home";
 
   if (!(firstName && lastName && email)) {
     return {
@@ -131,14 +155,11 @@ export async function submitContactForm(
   if (phone) {
     payload.set("PHONE", phone);
   }
-  const note = buildNote(formData, isHomeInquiry);
+  const note = buildNote(formData, inquiryType);
   if (note) {
     payload.set("NOTE", note);
   }
-  payload.set(
-    "TAG",
-    isHomeInquiry ? "Website Contact Form" : "Website General Inquiry"
-  );
+  payload.set("TAG", TAG_BY_TYPE[inquiryType]);
 
   try {
     const res = await fetch(CAPSULE_NEWLEAD_URL, {

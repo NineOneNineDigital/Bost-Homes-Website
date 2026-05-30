@@ -1,4 +1,5 @@
-import { hygraph } from "@/lib/hygraph";
+import { unstable_cache } from "next/cache";
+import { hygraph, isHygraphConfigured } from "@/lib/hygraph";
 import {
   BLOG_POST_BY_SLUG_QUERY,
   BLOG_POST_SLUGS_QUERY,
@@ -40,7 +41,19 @@ import type {
 /**
  * Safe wrapper around hygraph.request that returns a fallback value
  * when the query fails (e.g. model not yet created in Hygraph).
+ *
+ * During a production build a query failure is rethrown rather than swallowed:
+ * silently baking an empty page into the static prerender hides real failures
+ * (a transient CDN hiccup once froze empty /portfolio and /vault grids into the
+ * deploy). Failing the build loudly surfaces that. At request time we keep the
+ * graceful fallback so a momentary outage degrades a single render instead of
+ * throwing a 500 at visitors. When Hygraph is intentionally not configured
+ * (e.g. a preview/CI build without secrets) we always fall back, since the
+ * documented behavior is to build with empty content rather than fail.
  */
+const FAIL_BUILD_ON_ERROR =
+  process.env.NEXT_PHASE === "phase-production-build" && isHygraphConfigured;
+
 async function safeRequest<T>(
   query: string,
   variables: Record<string, unknown> | undefined,
@@ -49,6 +62,9 @@ async function safeRequest<T>(
   try {
     return await hygraph.request<T>(query, variables);
   } catch (error) {
+    if (FAIL_BUILD_ON_ERROR) {
+      throw error;
+    }
     console.warn("[Hygraph] Query failed, using fallback:", error);
     return fallback;
   }
@@ -56,12 +72,21 @@ async function safeRequest<T>(
 
 // --- Projects ---
 
-export async function getFeaturedProjects(): Promise<Project[]> {
-  const { completed_Project } = await safeRequest<{
-    completed_Project: Project[];
-  }>(FEATURED_PROJECTS_QUERY, undefined, { completed_Project: [] });
-  return completed_Project;
-}
+// The homepage and every project detail page request the same featured list.
+// During a build that's one redundant read per prerendered page — which helped
+// trip Hygraph's read limit. Cache the result so all those renders share a
+// single query; the 1h window matches the pages' `revalidate`, so it stays as
+// fresh as the pages that consume it. Tagged for future on-demand purging.
+export const getFeaturedProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const { completed_Project } = await safeRequest<{
+      completed_Project: Project[];
+    }>(FEATURED_PROJECTS_QUERY, undefined, { completed_Project: [] });
+    return completed_Project;
+  },
+  ["featured-projects"],
+  { revalidate: 3600, tags: ["projects", "featured-projects"] }
+);
 
 export async function getAllProjects(): Promise<Project[]> {
   const { completed_Project } = await safeRequest<{
