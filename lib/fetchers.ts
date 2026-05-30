@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { hygraph, isHygraphConfigured } from "@/lib/hygraph";
 import {
   BLOG_POST_BY_SLUG_QUERY,
@@ -71,12 +72,21 @@ async function safeRequest<T>(
 
 // --- Projects ---
 
-export async function getFeaturedProjects(): Promise<Project[]> {
-  const { completed_Project } = await safeRequest<{
-    completed_Project: Project[];
-  }>(FEATURED_PROJECTS_QUERY, undefined, { completed_Project: [] });
-  return completed_Project;
-}
+// The homepage and every project detail page request the same featured list.
+// During a build that's one redundant read per prerendered page — which helped
+// trip Hygraph's read limit. Cache the result so all those renders share a
+// single query; the 1h window matches the pages' `revalidate`, so it stays as
+// fresh as the pages that consume it. Tagged for future on-demand purging.
+export const getFeaturedProjects = unstable_cache(
+  async (): Promise<Project[]> => {
+    const { completed_Project } = await safeRequest<{
+      completed_Project: Project[];
+    }>(FEATURED_PROJECTS_QUERY, undefined, { completed_Project: [] });
+    return completed_Project;
+  },
+  ["featured-projects"],
+  { revalidate: 3600, tags: ["projects", "featured-projects"] }
+);
 
 export async function getAllProjects(): Promise<Project[]> {
   const { completed_Project } = await safeRequest<{
