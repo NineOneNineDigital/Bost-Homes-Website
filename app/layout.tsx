@@ -113,7 +113,7 @@ const jsonLd = {
     "https://www.youtube.com/@bostcustomhomes",
   ],
   image: "https://www.bostcustomhomes.com/images/shared/cta-background.jpg",
-  priceRange: "$500,000 - $2,000,000+",
+  priceRange: "$500,000 - $3,500,000+",
   slogan: "Designed for Distinction. Built for the Art of Living.",
 };
 
