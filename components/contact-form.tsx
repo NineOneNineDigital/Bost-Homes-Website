@@ -24,11 +24,10 @@ const remodelingOptions = ["Yes", "No", "Not Sure"];
 const architectOptions = ["Yes", "No", "In Progress"];
 const homesiteOptions = ["Yes", "No", "Looking"];
 const budgetOptions = [
-  "$500K - $750K",
-  "$750K - $1M",
-  "$1M - $1.5M",
-  "$1.5M - $2M",
-  "$2M+",
+  "<$1.5M",
+  "$1.5M - $2.5M",
+  "$2.5M - $3.5M",
+  "$3.5M+",
 ];
 
 const initialState: ContactFormState = { status: "idle" };
