@@ -36,7 +36,7 @@ function TestimonialCarousel({
         {/* Accent line */}
         <div className="mx-auto mb-8 h-px w-16 bg-bost-brick" />
 
-        <p className="mb-6 text-center font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+        <p className="mb-6 text-center font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
           What Our Clients Say
         </p>
 
@@ -59,9 +59,7 @@ function TestimonialCarousel({
                 aria-hidden={i !== active}
                 className={cn(
                   "absolute inset-0 flex flex-col justify-center text-center transition-opacity duration-500",
-                  i === active
-                    ? "opacity-100"
-                    : "pointer-events-none opacity-0"
+                  i === active ? "opacity-100" : "pointer-events-none opacity-0"
                 )}
                 key={t.id}
               >

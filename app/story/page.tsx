@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Our Story",
   description:
     "Learn about Bost Custom Homes — a family-owned luxury home builder in the Triangle area since 1986. Meet our team, our values, and our commitment to craftsmanship.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/story" },
 };
 
 const principles = [
@@ -55,7 +55,7 @@ export default async function AboutPage() {
       {/* Header Section */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             About
           </p>
           <h1 className="mb-6 max-w-3xl font-bold text-4xl leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
@@ -104,7 +104,7 @@ export default async function AboutPage() {
       >
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-[180px_1fr] md:gap-16 lg:grid-cols-[300px_1fr] lg:gap-20">
           <div>
-            <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <p className="font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
               Our Story
             </p>
           </div>
@@ -206,10 +206,10 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="relative overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10 lg:p-12">
               <div className="absolute top-0 left-0 h-1 w-full bg-bost-yellow" />
-              <p className="mb-6 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
+              <p className="mb-6 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
                 Our Mission
               </p>
-              <p className="font-bold text-white text-xl leading-snug md:text-2xl lg:text-3xl">
+              <p className="font-extrabold text-white text-xl leading-snug md:text-2xl lg:text-3xl">
                 We create a delightful home building journey for our
                 clients—turning their vision into beautifully designed,
                 precisely executed custom homes.
@@ -217,7 +217,7 @@ export default async function AboutPage() {
             </div>
             <div className="relative overflow-hidden border border-white/10 bg-white/5 p-8 backdrop-blur-sm md:p-10 lg:p-12">
               <div className="absolute top-0 left-0 h-1 w-full bg-bost-blue" />
-              <p className="mb-6 font-medium text-bost-blue text-xs uppercase tracking-[0.25em]">
+              <p className="mb-6 font-black text-bost-blue text-sm uppercase tracking-[0.25em]">
                 Our Vision
               </p>
               <p className="font-bold text-white text-xl leading-snug md:text-2xl lg:text-3xl">
@@ -235,14 +235,14 @@ export default async function AboutPage() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-xl">
-              <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.25em]">
+              <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
                 Guiding Principles
               </p>
               <h2 className="font-bold text-3xl text-bost-olive tracking-tight md:text-4xl">
                 What TEACHES Us
               </h2>
             </div>
-            <p className="max-w-sm text-bost-olive/60 text-sm leading-relaxed">
+            <p className="max-w-sm text-bost-olive/60 text-base leading-relaxed">
               Our guiding principles shape every aspect of how we work—from the
               quality of our craftsmanship to the relationships we build.
             </p>
@@ -259,7 +259,7 @@ export default async function AboutPage() {
                 <h3 className="mb-2 font-bold text-bost-olive text-lg tracking-tight transition-colors group-hover:text-white">
                   {principle.name}
                 </h3>
-                <p className="text-bost-olive/60 text-sm leading-relaxed transition-colors group-hover:text-white/80">
+                <p className="text-bost-olive/60 text-base leading-relaxed transition-colors group-hover:text-white/80">
                   {principle.description}
                 </p>
               </div>
@@ -271,7 +271,7 @@ export default async function AboutPage() {
       {/* Our Team — Coming Soon */}
       <section className="px-6 py-24 md:px-12 md:py-32 lg:px-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.25em]">
+          <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
             Our Team
           </p>
           <h2 className="mb-8 font-bold text-3xl text-bost-olive tracking-tight md:text-4xl lg:text-5xl">
@@ -283,7 +283,7 @@ export default async function AboutPage() {
             <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-bost-brick/10">
               <HardHat aria-hidden className="h-6 w-6 text-bost-brick" />
             </div>
-            <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-[0.25em]">
+            <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
               Under Construction
             </p>
             <h3 className="mb-4 font-bold text-bost-olive text-xl tracking-tight md:text-2xl">
@@ -302,7 +302,7 @@ export default async function AboutPage() {
       <section className="bg-bost-olive px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-14">
-            <p className="mb-3 font-semibold text-bost-blue text-xs uppercase tracking-[0.2em]">
+            <p className="mb-3 font-black text-bost-blue text-sm uppercase tracking-[0.2em]">
               Awards &amp; Recognition
             </p>
             <h2 className="max-w-2xl font-bold text-2xl text-white italic leading-snug tracking-tight md:text-3xl">

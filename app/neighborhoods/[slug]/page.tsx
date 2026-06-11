@@ -1,8 +1,8 @@
 import { ArrowRight, Check, MapPin, Ruler, TreePine } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoodBySlug, getNeighborhoods } from "@/lib/fetchers";
@@ -52,7 +52,7 @@ export async function generateMetadata({
     description:
       neighborhood.description.slice(0, 155) ||
       `Explore available homesites in ${neighborhood.name} — a featured neighborhood by Bost Custom Homes.`,
-    alternates: { canonical: `/featured-neighborhoods/${slug}` },
+    alternates: { canonical: `/neighborhoods/${slug}` },
   };
 }
 
@@ -82,7 +82,7 @@ export default async function NeighborhoodPage({
               <li>
                 <Link
                   className="hover:text-white/80"
-                  href="/featured-neighborhoods"
+                  href="/neighborhoods"
                 >
                   Neighborhoods
                 </Link>
@@ -103,7 +103,7 @@ export default async function NeighborhoodPage({
               </p>
               <div className="flex gap-8">
                 <div>
-                  <p className="mb-1 font-semibold text-bost-blue text-xs uppercase tracking-widest">
+                  <p className="mb-1 font-black text-bost-blue text-sm uppercase tracking-widest">
                     Available Lots
                   </p>
                   <p className="font-bold text-2xl text-white">
@@ -111,7 +111,7 @@ export default async function NeighborhoodPage({
                   </p>
                 </div>
                 <div>
-                  <p className="mb-1 font-semibold text-bost-blue text-xs uppercase tracking-widest">
+                  <p className="mb-1 font-black text-bost-blue text-sm uppercase tracking-widest">
                     Total Lots
                   </p>
                   <p className="font-bold text-2xl text-white">
@@ -142,7 +142,7 @@ export default async function NeighborhoodPage({
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12">
-            <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+            <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
               Available Homesites
             </p>
             <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
@@ -204,7 +204,7 @@ function LotCard({ lot, slug }: { lot: Lot; slug: string }) {
 
       {/* Description */}
       {lot.description && (
-        <p className="mb-4 flex-1 text-muted-foreground text-sm leading-relaxed">
+        <p className="mb-4 flex-1 text-muted-foreground text-base leading-relaxed">
           {lot.description}
         </p>
       )}

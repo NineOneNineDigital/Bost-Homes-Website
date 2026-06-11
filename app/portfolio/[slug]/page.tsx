@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import {
   ProjectFeaturedGallery,
@@ -77,7 +77,7 @@ export default async function ProjectPage({
         <div className="mx-auto max-w-6xl">
           <nav
             aria-label="Breadcrumb"
-            className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]"
+            className="font-black text-muted-foreground text-sm uppercase tracking-[0.2em]"
           >
             <Link
               className="hover:text-foreground"
@@ -94,7 +94,7 @@ export default async function ProjectPage({
       {/* Title + metadata */}
       <section className="px-6 pt-6 pb-10 md:px-12 md:pt-10 md:pb-14 lg:px-24">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             {project.archived ? "Vault" : "Portfolio"}
           </p>
           <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
@@ -105,7 +105,7 @@ export default async function ProjectPage({
               <div className="flex flex-row gap-x-12 md:shrink-0 md:pb-2">
                 {project.location && (
                   <div>
-                    <p className="mb-1 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                    <p className="mb-1 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                       Location
                     </p>
                     <p className="font-medium text-base text-foreground md:text-lg">
@@ -115,7 +115,7 @@ export default async function ProjectPage({
                 )}
                 {project.year && (
                   <div>
-                    <p className="mb-1 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                    <p className="mb-1 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                       Completion
                     </p>
                     <p className="font-medium text-base text-foreground md:text-lg">
@@ -155,7 +155,7 @@ export default async function ProjectPage({
               {/* Left: highlights */}
               {project.highlights?.html && (
                 <div className="md:col-span-4">
-                  <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                  <p className="mb-6 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                     Highlights
                   </p>
                   <div
@@ -173,7 +173,7 @@ export default async function ProjectPage({
                   project.highlights?.html ? "md:col-span-8" : "md:col-span-12"
                 }
               >
-                <p className="mb-6 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                <p className="mb-6 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                   Project Overview
                 </p>
                 {descriptionParagraphs.length > 0 && (
@@ -219,7 +219,7 @@ export default async function ProjectPage({
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex items-end justify-between gap-6 md:mb-14">
               <div>
-                <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                   Project Gallery
                 </p>
                 <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
@@ -246,7 +246,7 @@ export default async function ProjectPage({
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 flex items-end justify-between gap-6 md:mb-14">
               <div>
-                <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+                <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                   Explore More
                 </p>
                 <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
@@ -287,7 +287,7 @@ export default async function ProjectPage({
                   </div>
                   <div className="absolute inset-x-0 bottom-0 p-5">
                     {rp.location && (
-                      <p className="mb-1 font-medium text-[11px] text-white/70 uppercase tracking-[0.2em]">
+                      <p className="mb-1 font-black text-sm text-white/70 uppercase tracking-[0.2em]">
                         {rp.location}
                       </p>
                     )}

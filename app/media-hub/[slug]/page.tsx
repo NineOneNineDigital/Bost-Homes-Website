@@ -31,7 +31,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt.slice(0, 155),
-    alternates: { canonical: `/blog/${slug}` },
+    alternates: { canonical: `/media-hub/${slug}` },
     openGraph: {
       type: "article",
       title: post.title,
@@ -99,7 +99,7 @@ export default async function BlogPostPage({
         <div className="mx-auto max-w-4xl">
           <Link
             className="inline-flex items-center gap-2 text-muted-foreground text-sm transition-colors hover:text-foreground"
-            href="/blog"
+            href="/media-hub"
           >
             <ArrowLeft className="size-4" />
             Back to Media Hub

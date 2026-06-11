@@ -80,13 +80,13 @@ function ProcessCarousel({ steps }: { steps: ProcessStep[] }) {
           >
             <div className="h-1.5 w-full bg-bost-blue" />
             <div className="p-8">
-              <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+              <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                 Step {step.number}
               </p>
               <h3 className="mb-3 font-semibold text-foreground text-lg leading-snug">
                 {step.number}. {step.title}
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-base leading-relaxed">
                 {step.description}
               </p>
             </div>

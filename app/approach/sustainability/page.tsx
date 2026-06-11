@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Green Building & Sustainability",
   description:
     "Bost Custom Homes has pioneered green building in NC for over 20 years. Learn about our HERS-rated energy efficient homes and sustainable construction practices.",
-  alternates: { canonical: "/our-process/sustainability" },
+  alternates: { canonical: "/approach/sustainability" },
 };
 
 export default async function SustainabilityPage() {
@@ -42,7 +42,7 @@ export default async function SustainabilityPage() {
                   <li>
                     <Link
                       className="transition-colors hover:text-white"
-                      href="/our-process"
+                      href="/approach"
                     >
                       Our Process
                     </Link>
@@ -58,7 +58,7 @@ export default async function SustainabilityPage() {
           <div className="absolute inset-0 flex items-end px-6 pb-14 md:items-center md:px-12 md:pb-0 lg:px-24">
             <div className="mx-auto w-full max-w-7xl">
               <div className="max-w-2xl">
-                <p className="mb-4 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
+                <p className="mb-4 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
                   Our Process
                 </p>
                 <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
@@ -79,7 +79,7 @@ export default async function SustainabilityPage() {
             <nav aria-label="Breadcrumb" className="mb-6">
               <ol className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest">
                 <li>
-                  <Link className="hover:text-foreground" href="/our-process">
+                  <Link className="hover:text-foreground" href="/approach">
                     Our Process
                   </Link>
                 </li>
@@ -105,7 +105,7 @@ export default async function SustainabilityPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
             <div>
-              <p className="mb-3 font-medium text-bost-blue text-xs uppercase tracking-[0.2em]">
+              <p className="mb-3 font-black text-bost-blue text-sm uppercase tracking-[0.2em]">
                 Third-Party Verified
               </p>
               <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
@@ -127,12 +127,12 @@ export default async function SustainabilityPage() {
             <div className="flex flex-col items-center gap-6">
               <div className="flex size-52 flex-col items-center justify-center rounded-full border-4 border-bost-blue md:size-64">
                 <p className="font-bold text-5xl text-white md:text-6xl">16</p>
-                <p className="mt-1 text-bost-blue text-sm uppercase tracking-widest">
+                <p className="mt-1 font-black text-bost-blue text-sm uppercase tracking-widest">
                   HERS Score
                 </p>
                 <p className="mt-1 text-white/50 text-xs">2026 Bost Model</p>
               </div>
-              <p className="max-w-sm text-center text-sm text-white/70 leading-relaxed">
+              <p className="max-w-sm text-center text-base text-white/70 leading-relaxed">
                 Score of the 2026 Bost Model Home, achieved through a systematic
                 combination of tight air barrier, premium windows, passive solar
                 design, SPF insulation, high efficiency HVAC, photovoltaic
@@ -147,7 +147,7 @@ export default async function SustainabilityPage() {
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl">
-            <p className="mb-3 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+            <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
               Products &amp; Techniques
             </p>
             <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
@@ -161,7 +161,7 @@ export default async function SustainabilityPage() {
           </div>
           {featured.length > 0 && (
             <>
-              <p className="mb-6 font-semibold text-bost-olive text-sm uppercase tracking-[0.2em]">
+              <p className="mb-6 font-black text-bost-olive text-sm uppercase tracking-[0.2em]">
                 Standard
               </p>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -176,7 +176,7 @@ export default async function SustainabilityPage() {
                     <h3 className="mb-2 font-semibold text-foreground text-lg leading-snug">
                       {feature.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <p className="text-muted-foreground text-base leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export default async function SustainabilityPage() {
 
           {additional.length > 0 && (
             <div className="mt-16">
-              <p className="mb-6 font-semibold text-bost-olive text-sm uppercase tracking-[0.2em]">
+              <p className="mb-6 font-black text-bost-olive text-sm uppercase tracking-[0.2em]">
                 Optional
               </p>
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">

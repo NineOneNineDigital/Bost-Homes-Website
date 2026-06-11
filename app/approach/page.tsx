@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Our Process",
   description:
     "Discover how Bost Custom Homes builds your dream home — from first conversation to final walkthrough. A true partnership built on transparency and craftsmanship.",
-  alternates: { canonical: "/our-process" },
+  alternates: { canonical: "/approach" },
 };
 
 export default async function OurProcessPage() {
@@ -34,7 +34,7 @@ export default async function OurProcessPage() {
         </div>
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-36 pb-20 md:pt-44 md:pb-24">
           <div className="max-w-xl">
-            <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+            <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
               Our Process
             </p>
             <h1 className="mb-6 font-bold text-3xl text-bost-olive leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
@@ -59,7 +59,7 @@ export default async function OurProcessPage() {
       {/* Products & Expertise Section */}
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             Your Builder For Life
           </p>
           <h2 className="mb-4 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
@@ -83,7 +83,7 @@ export default async function OurProcessPage() {
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
             <div className="order-2 md:order-1">
-              <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+              <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                 Uncompromising Standards
               </p>
               <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
@@ -100,7 +100,7 @@ export default async function OurProcessPage() {
               </p>
               <Button
                 className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
-                render={<Link href="/our-process/sustainability" />}
+                render={<Link href="/approach/sustainability" />}
                 size="lg"
               >
                 Learn More
@@ -133,7 +133,7 @@ export default async function OurProcessPage() {
               />
             </div>
             <div>
-              <p className="mb-3 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+              <p className="mb-3 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                 Masonry Framing
               </p>
               <h2 className="mb-6 font-bold text-2xl leading-snug tracking-tight md:text-3xl lg:text-4xl">
@@ -149,7 +149,7 @@ export default async function OurProcessPage() {
               </p>
               <Button
                 className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
-                render={<Link href="/our-process/masonry-framing" />}
+                render={<Link href="/approach/masonry-framing" />}
                 size="lg"
               >
                 Learn More

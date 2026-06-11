@@ -4,10 +4,10 @@ import { BostLogo } from "@/components/bost-logo";
 
 const footerNavLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/about", label: "About" },
-  { href: "/our-process", label: "Our Process" },
-  { href: "/featured-neighborhoods", label: "Neighborhoods" },
-  { href: "/blog", label: "Media Hub" },
+  { href: "/story", label: "Story" },
+  { href: "/approach", label: "Approach" },
+  { href: "/neighborhoods", label: "Neighborhoods" },
+  { href: "/media-hub", label: "Media Hub" },
   { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
 ];

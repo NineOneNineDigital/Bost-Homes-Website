@@ -63,11 +63,17 @@ function AccordionItem({
           <Plus className="size-4 shrink-0 text-muted-foreground" />
         )}
       </button>
-      {open && (
-        <p className="mt-3 text-muted-foreground text-sm leading-relaxed">
-          {description}
-        </p>
-      )}
+      <div
+        className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
+          open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="min-h-0">
+          <p className="mt-3 text-muted-foreground text-base leading-relaxed">
+            {description}
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
