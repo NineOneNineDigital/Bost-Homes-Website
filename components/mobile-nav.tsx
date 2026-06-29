@@ -11,9 +11,9 @@ import { cn } from "@/lib/utils";
 
 const mobileNavLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/our-process", label: "Approach" },
-  { href: "/about", label: "Story" },
-  { href: "/blog", label: "Media Hub" },
+  { href: "/approach", label: "Approach" },
+  { href: "/story", label: "Story" },
+  { href: "/media-hub", label: "Media Hub" },
 ];
 
 export type MobileNavProject = {
@@ -46,7 +46,8 @@ function MobileNav({
     }
   }, [isOpen, featuredProjects.length]);
 
-  const featuredProject = featuredProjects[featuredIndex] ?? featuredProjects[0];
+  const featuredProject =
+    featuredProjects[featuredIndex] ?? featuredProjects[0];
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -114,7 +115,7 @@ function MobileNav({
           </Link>
         ))}
         <Link
-          className="py-5 font-medium text-2xl text-bost-brick transition-colors hover:text-bost-brick/80"
+          className="py-5 font-bold text-2xl text-bost-brick transition-colors hover:text-bost-brick/80"
           href="/contact"
           onClick={close}
         >
@@ -124,7 +125,7 @@ function MobileNav({
         {/* Featured Project Section */}
         {featuredProject && (
           <div className="mt-auto pt-6 pb-8">
-            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
               Featured Project
             </p>
             <Link

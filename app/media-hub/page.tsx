@@ -36,7 +36,7 @@ function buildHref(params: URLSearchParams, page: number): string {
     next.set("page", String(page));
   }
   const query = next.toString();
-  return query ? `/blog?${query}` : "/blog";
+  return query ? `/media-hub?${query}` : "/media-hub";
 }
 
 export default async function BlogPage({
@@ -79,7 +79,7 @@ export default async function BlogPage({
       {/* Header */}
       <section className="px-6 py-16 md:px-12 md:py-20 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-widest">
+          <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-widest">
             Media Hub
           </p>
           <h1 className="mb-4 max-w-3xl font-bold text-3xl leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
@@ -111,7 +111,7 @@ export default async function BlogPage({
             </p>
             <Link
               className="inline-flex items-center font-medium text-bost-brick hover:underline"
-              href="/blog"
+              href="/media-hub"
             >
               View all articles &rarr;
             </Link>
@@ -125,7 +125,7 @@ export default async function BlogPage({
           <div className="mx-auto max-w-7xl">
             <Link
               className="group block overflow-hidden rounded-lg border border-border/50 transition-shadow hover:shadow-lg"
-              href={`/blog/${featuredPost.slug}`}
+              href={`/media-hub/${featuredPost.slug}`}
             >
               <div className="grid md:grid-cols-2">
                 <div className="relative aspect-[16/10] bg-muted md:aspect-auto md:min-h-[360px]">
@@ -189,7 +189,7 @@ export default async function BlogPage({
               {gridPosts.map((post) => (
                 <Link
                   className="group flex flex-col overflow-hidden rounded-lg border border-border/50 transition-shadow hover:shadow-md"
-                  href={`/blog/${post.slug}`}
+                  href={`/media-hub/${post.slug}`}
                   key={post.id}
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
@@ -230,7 +230,7 @@ export default async function BlogPage({
                     <h3 className="mb-3 font-semibold text-lg leading-snug tracking-tight transition-colors group-hover:text-bost-brick">
                       {post.title}
                     </h3>
-                    <p className="mb-5 line-clamp-3 text-muted-foreground text-sm leading-relaxed">
+                    <p className="mb-5 line-clamp-3 text-muted-foreground text-base leading-relaxed">
                       {post.excerpt}
                     </p>
                     <span className="mt-auto font-medium text-bost-brick text-sm">

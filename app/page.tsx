@@ -105,7 +105,7 @@ export default async function Page() {
                   "polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%)",
               }}
             >
-              <p className="mb-3 font-medium text-white/80 text-xs uppercase tracking-[0.3em]">
+              <p className="mb-3 font-black text-sm text-white/80 uppercase tracking-[0.3em]">
                 Welcome
               </p>
               <h1 className="mb-4 font-bold text-2xl text-white leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
@@ -113,7 +113,7 @@ export default async function Page() {
                 <br />
                 Built for the Art of Living.
               </h1>
-              <p className="max-w-md text-sm text-white/75 leading-relaxed">
+              <p className="max-w-md text-base text-white/75 leading-relaxed">
                 Your vision defines our process—translating your passion into a
                 truly custom home, built with calculated execution and timeless
                 craftsmanship.
@@ -134,7 +134,7 @@ export default async function Page() {
         <div className="mx-auto max-w-7xl">
           {/* Top row: eyebrow left, bold statement right */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_2fr] lg:gap-20">
-            <p className="font-medium text-bost-black/50 text-xs uppercase tracking-[0.2em]">
+            <p className="font-black text-bost-black/50 text-sm uppercase tracking-[0.2em]">
               Who We Are
             </p>
             <p className="font-bold text-bost-black text-xl leading-snug md:text-2xl lg:text-3xl lg:leading-normal">
@@ -149,7 +149,7 @@ export default async function Page() {
             {/* Left column — body text + button */}
             <div>
               <div className="mb-6 h-px w-48 bg-bost-gray-light" />
-              <p className="mb-8 text-bost-black/65 text-sm leading-relaxed">
+              <p className="mb-8 text-bost-black/65 text-base leading-relaxed">
                 We&apos;ve been crafting custom homes rooted in artistry,
                 transparency, and calculated execution for nearly four decades.
                 Our work begins with listening—because a custom home should
@@ -158,7 +158,7 @@ export default async function Page() {
               </p>
               <Button
                 className="bg-bost-brick px-6 text-white hover:bg-bost-brick/90"
-                render={<Link href="/about#our-story" />}
+                render={<Link href="/story#our-story" />}
                 size="lg"
               >
                 Our Story
@@ -196,7 +196,7 @@ export default async function Page() {
 
         <div className="relative mx-auto max-w-7xl">
           {/* Section header */}
-          <p className="mb-10 font-medium text-bost-gray-lightest text-xs uppercase tracking-[0.3em]">
+          <p className="mb-10 font-black text-bost-gray-lightest text-sm uppercase tracking-[0.3em]">
             Featured Projects
           </p>
 
@@ -226,7 +226,7 @@ export default async function Page() {
                       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                         {project.location && (
-                          <p className="mb-1 font-medium text-[11px] text-white/75 uppercase tracking-[0.2em]">
+                          <p className="mb-1 font-black text-sm text-white/75 uppercase tracking-[0.2em]">
                             {project.location}
                           </p>
                         )}
@@ -248,7 +248,7 @@ export default async function Page() {
           {/* CTA button */}
           <div className="mt-10 flex justify-center">
             <Button
-              className="border-white/60 bg-transparent px-8 text-white hover:border-white hover:bg-white/10"
+              className="border-white/60 bg-transparent px-8 text-white hover:border-white hover:bg-white/10 hover:text-white"
               render={<Link href="/portfolio" />}
               size="lg"
               variant="outline"
@@ -277,7 +277,7 @@ export default async function Page() {
                   <br />
                   Future Classic Neighborhoods
                 </h2>
-                <p className="mb-8 text-sm text-white/65 leading-relaxed">
+                <p className="mb-8 text-base text-white/65 leading-relaxed">
                   We strategically invest in luxury estate lots and infill sites
                   throughout Raleigh, Cary, Durham, and surrounding areas. The
                   perfect address to call home may be available for reservation
@@ -287,7 +287,7 @@ export default async function Page() {
               <div>
                 <Button
                   className="bg-bost-brick px-6 text-white hover:bg-bost-brick/90"
-                  render={<Link href="/featured-neighborhoods" />}
+                  render={<Link href="/neighborhoods" />}
                   size="lg"
                 >
                   Available Homesites
@@ -298,7 +298,7 @@ export default async function Page() {
 
             {/* Right: live availability panel from Hygraph */}
             <div className="flex flex-col bg-bost-cream p-8 md:p-12">
-              <p className="mb-6 font-medium text-bost-olive/60 text-xs uppercase tracking-[0.2em]">
+              <p className="mb-6 font-black text-bost-olive/60 text-sm uppercase tracking-[0.2em]">
                 Current Availability
               </p>
               <div className="mb-8 grid grid-cols-3 gap-4 border-bost-olive/10 border-b pb-8">
@@ -335,7 +335,7 @@ export default async function Page() {
                     <li key={n.id}>
                       <Link
                         className="group -mx-3 flex items-center justify-between gap-4 rounded-sm px-3 py-4 transition-colors hover:bg-bost-olive/5"
-                        href={`/featured-neighborhoods/${n.slug}`}
+                        href={`/neighborhoods/${n.slug}`}
                       >
                         <div className="min-w-0">
                           <p className="truncate font-semibold text-bost-olive text-sm md:text-base">

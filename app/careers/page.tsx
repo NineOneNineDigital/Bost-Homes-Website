@@ -1,10 +1,10 @@
-import { CtaSection } from "@/components/cta-section";
-import { Button } from "@/components/ui/button";
-import { getJobOpenings } from "@/lib/fetchers";
 import { Briefcase, Clock, Heart, MapPin, TrendingUp } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { CtaSection } from "@/components/cta-section";
+import { Button } from "@/components/ui/button";
+import { getJobOpenings } from "@/lib/fetchers";
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -80,7 +80,7 @@ export default async function CareersPage() {
       {/* Header */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             Careers
           </p>
           <h1 className="mb-6 max-w-3xl font-bold text-4xl leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
@@ -124,7 +124,7 @@ export default async function CareersPage() {
       {/* What We Value */}
       <section className="bg-bost-olive px-6 py-20 text-white md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-4 font-medium text-white/60 text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-sm text-white/60 uppercase tracking-[0.2em]">
             Hiring on our Principles
           </p>
           <h2 className="mb-16 max-w-xl font-bold text-2xl leading-[1.1] tracking-tight md:text-3xl lg:text-4xl">
@@ -139,7 +139,7 @@ export default async function CareersPage() {
                 <h3 className="mb-3 font-semibold text-lg text-white">
                   {value.title}
                 </h3>
-                <p className="text-sm text-white/70 leading-relaxed">
+                <p className="text-base text-white/70 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -155,7 +155,7 @@ export default async function CareersPage() {
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
               Benefits
             </p>
             <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
@@ -171,7 +171,7 @@ export default async function CareersPage() {
                 <h3 className="mb-2 font-semibold text-base">
                   {benefit.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-muted-foreground text-base leading-relaxed">
                   {benefit.description}
                 </p>
               </div>
@@ -184,7 +184,7 @@ export default async function CareersPage() {
       <section className="bg-bost-gray-lightest px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 text-center">
-            <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
               Open Positions
             </p>
             <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
@@ -202,7 +202,7 @@ export default async function CareersPage() {
                     <h3 className="mb-2 font-semibold text-lg tracking-tight md:text-xl">
                       {job.title}
                     </h3>
-                    <p className="mb-3 text-muted-foreground text-sm leading-relaxed">
+                    <p className="mb-3 text-muted-foreground text-base leading-relaxed">
                       {job.summary}
                     </p>
                     <div className="flex flex-wrap items-center gap-3">
@@ -243,7 +243,7 @@ export default async function CareersPage() {
       {/* General Application CTA */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             Don&apos;t See Your Role?
           </p>
           <h2 className="mb-6 font-bold text-3xl tracking-tight md:text-4xl">

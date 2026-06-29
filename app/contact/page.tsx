@@ -1,7 +1,8 @@
-import { MapPin, Phone, Plus } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { ContactFaq } from "@/components/contact-faq";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
@@ -58,31 +59,14 @@ export default function ContactPage() {
       <section className="bg-bost-cream px-6 py-16 md:px-12 md:py-20 lg:px-24">
         <div className="mx-auto max-w-3xl">
           <div className="mb-10 text-center md:mb-12">
-            <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-[0.25em]">
+            <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
               Frequently Asked
             </p>
             <h2 className="font-bold text-3xl tracking-tight md:text-4xl">
               Answers before you reach out
             </h2>
           </div>
-          <ul className="space-y-3">
-            {faqs.map((faq) => (
-              <li key={faq.question}>
-                <details className="group rounded-xl border border-bost-olive/10 bg-white px-5 py-4 transition-colors open:border-bost-olive/20 md:px-6 md:py-5">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-semibold text-base text-bost-olive md:text-lg [&::-webkit-details-marker]:hidden">
-                    <span>{faq.question}</span>
-                    <Plus
-                      aria-hidden="true"
-                      className="size-5 shrink-0 text-bost-brick transition-transform duration-200 group-open:rotate-45"
-                    />
-                  </summary>
-                  <p className="mt-3 text-muted-foreground leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </details>
-              </li>
-            ))}
-          </ul>
+          <ContactFaq faqs={faqs} />
         </div>
       </section>
 
@@ -141,7 +125,7 @@ export default function ContactPage() {
       <section className="bg-bost-olive px-6 pb-24 md:px-12 md:pb-32 lg:px-24">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
           <div className="order-2 md:order-1">
-            <p className="mb-3 font-semibold text-bost-yellow text-xs uppercase tracking-[0.25em]">
+            <p className="mb-3 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
               Your Blueprint
             </p>
             <h2 className="font-bold text-3xl text-white leading-tight tracking-tight md:text-4xl lg:text-[2.75rem]">

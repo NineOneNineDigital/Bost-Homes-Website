@@ -212,7 +212,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
 
         {count > 1 && (
           <div className="mt-5 flex items-center justify-between gap-4">
-            <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+            <p className="font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
               <span className="text-foreground">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -355,7 +355,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
             </>
           )}
 
-          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-medium text-white/80 text-xs uppercase tracking-[0.2em]">
+          <p className="absolute bottom-6 left-1/2 -translate-x-1/2 font-black text-sm text-white/80 uppercase tracking-[0.2em]">
             <span className="text-white">
               {String(index + 1).padStart(2, "0")}
             </span>

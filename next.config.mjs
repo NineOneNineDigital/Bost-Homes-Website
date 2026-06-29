@@ -15,6 +15,34 @@ const nextConfig = {
     deviceSizes: [640, 828, 1200, 1920],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
   },
+  async redirects() {
+    return [
+      // Route renames — preserve old URLs for SEO and existing links.
+      { source: "/our-process", destination: "/approach", permanent: true },
+      {
+        source: "/our-process/:path*",
+        destination: "/approach/:path*",
+        permanent: true,
+      },
+      { source: "/about", destination: "/story", permanent: true },
+      {
+        source: "/featured-neighborhoods",
+        destination: "/neighborhoods",
+        permanent: true,
+      },
+      {
+        source: "/featured-neighborhoods/:slug",
+        destination: "/neighborhoods/:slug",
+        permanent: true,
+      },
+      { source: "/blog", destination: "/media-hub", permanent: true },
+      {
+        source: "/blog/:slug",
+        destination: "/media-hub/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -25,7 +25,7 @@ export default async function VaultPage() {
       {/* Hero */}
       <section className="bg-bost-olive px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-4xl text-center">
-          <p className="mb-3 font-semibold text-bost-brick text-xs uppercase tracking-widest">
+          <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-widest">
             The Vault
           </p>
           <h1 className="mb-4 font-bold text-4xl text-white tracking-tight md:text-5xl lg:text-6xl">
@@ -65,7 +65,7 @@ export default async function VaultPage() {
                       <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                         {project.location && (
-                          <p className="mb-1 font-medium text-[11px] text-white/75 uppercase tracking-[0.2em]">
+                          <p className="mb-1 font-black text-sm text-white/75 uppercase tracking-[0.2em]">
                             {project.location}
                           </p>
                         )}
@@ -83,7 +83,7 @@ export default async function VaultPage() {
       ) : (
         <section className="bg-bost-cream px-6 py-24 md:px-12 md:py-32 lg:px-24">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+            <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
               The Archive Is Being Curated
             </p>
             <h2 className="mb-6 font-bold text-3xl text-bost-olive leading-tight tracking-tight md:text-4xl lg:text-5xl">

@@ -29,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${BASE_URL}/about`,
+      url: `${BASE_URL}/story`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
@@ -41,25 +41,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/our-process`,
+      url: `${BASE_URL}/approach`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/our-process/sustainability`,
+      url: `${BASE_URL}/approach/sustainability`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/featured-neighborhoods`,
+      url: `${BASE_URL}/neighborhoods`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/blog`,
+      url: `${BASE_URL}/media-hub`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
@@ -86,14 +86,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const neighborhoodRoutes: MetadataRoute.Sitemap = neighborhoods.map((n) => ({
-    url: `${BASE_URL}/featured-neighborhoods/${n.slug}`,
+    url: `${BASE_URL}/neighborhoods/${n.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
   const blogRoutes: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${BASE_URL}/blog/${slug}`,
+    url: `${BASE_URL}/media-hub/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.6,

@@ -63,7 +63,7 @@ export function LeadershipCard({
           )}
         </div>
         <h3 className={`font-bold tracking-tight ${s.heading}`}>{name}</h3>
-        <p className="font-medium text-bost-brick text-xs uppercase tracking-[0.15em]">
+        <p className="font-black text-bost-brick text-sm uppercase tracking-[0.15em]">
           {title}
         </p>
       </div>
@@ -87,10 +87,10 @@ export function LeadershipCard({
                   <Dialog.Title className="mb-1 font-bold text-xl tracking-tight">
                     {name}
                   </Dialog.Title>
-                  <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.15em]">
+                  <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.15em]">
                     {title}
                   </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="whitespace-pre-line text-base text-muted-foreground leading-relaxed">
                     {bio}
                   </p>
                 </div>

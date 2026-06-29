@@ -101,7 +101,7 @@ function AwardsCarousel({ awards }: { awards: Award[] }) {
             <h3 className="mb-3 font-semibold text-base text-white leading-snug">
               {award.title}
             </h3>
-            <p className="text-sm text-white/65 leading-relaxed">
+            <p className="text-base text-white/65 leading-relaxed">
               {award.description}
             </p>
           </article>

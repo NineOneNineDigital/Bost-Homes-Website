@@ -8,13 +8,13 @@ import { MobileNav, type MobileNavProject } from "@/components/mobile-nav";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const darkHeroRoutes = new Set(["/", "/featured-neighborhoods"]);
+const darkHeroRoutes = new Set(["/", "/neighborhoods"]);
 
 const navLinks = [
   { href: "/portfolio", label: "Portfolio" },
-  { href: "/our-process", label: "Approach" },
-  { href: "/about", label: "Story" },
-  { href: "/blog", label: "Media Hub" },
+  { href: "/approach", label: "Approach" },
+  { href: "/story", label: "Story" },
+  { href: "/media-hub", label: "Media Hub" },
 ];
 
 function SiteHeader({
@@ -80,7 +80,7 @@ function SiteHeader({
         {/* Desktop CTA + Mobile hamburger */}
         <div className="flex items-center gap-4">
           <Button
-            className="hidden bg-bost-brick text-white hover:bg-bost-brick/90 lg:inline-flex"
+            className="hidden bg-bost-brick text-white font-bold hover:bg-bost-brick/90 lg:inline-flex"
             render={<Link href="/contact" />}
             size="lg"
           >

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Featured Neighborhoods",
   description:
     "Discover shovel-ready lots in Raleigh's most sought-after communities. Bost Custom Homes offers hand-selected homesites throughout the Triangle area.",
-  alternates: { canonical: "/featured-neighborhoods" },
+  alternates: { canonical: "/neighborhoods" },
 };
 
 export default async function FeaturedNeighborhoodsPage() {
@@ -21,7 +21,7 @@ export default async function FeaturedNeighborhoodsPage() {
       {/* Hero */}
       <section className="px-6 py-20 md:px-12 md:py-28 lg:px-24">
         <div className="mx-auto max-w-7xl">
-          <p className="mb-4 font-semibold text-white/75 text-xs uppercase tracking-widest">
+          <p className="mb-4 font-black text-sm text-white/75 uppercase tracking-widest">
             Featured Neighborhoods
           </p>
           <h1 className="mb-6 max-w-3xl font-bold text-4xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
@@ -61,13 +61,13 @@ export default async function FeaturedNeighborhoodsPage() {
                     {/* Metadata */}
                     <div className="mb-8 grid grid-cols-2 gap-6">
                       <div>
-                        <p className="mb-1 font-semibold text-bost-blue text-xs uppercase tracking-widest">
+                        <p className="mb-1 font-black text-bost-blue text-sm uppercase tracking-widest">
                           Location
                         </p>
                         <p className="text-sm text-white/80">Raleigh, NC</p>
                       </div>
                       <div>
-                        <p className="mb-1 font-semibold text-bost-blue text-xs uppercase tracking-widest">
+                        <p className="mb-1 font-black text-bost-blue text-sm uppercase tracking-widest">
                           Available Lots
                         </p>
                         <p className="text-sm text-white/80">
@@ -85,7 +85,7 @@ export default async function FeaturedNeighborhoodsPage() {
                         className="group bg-bost-brick px-6 text-white hover:bg-bost-brick/80"
                         render={
                           <Link
-                            href={`/featured-neighborhoods/${neighborhood.slug}`}
+                            href={`/neighborhoods/${neighborhood.slug}`}
                           />
                         }
                         size="lg"

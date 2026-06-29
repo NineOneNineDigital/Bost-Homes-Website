@@ -25,7 +25,7 @@ export default async function PortfolioPage() {
       {/* Hero */}
       <section className="px-6 py-16 md:px-12 md:py-24 lg:px-24">
         <div className="mx-auto max-w-6xl">
-          <p className="mb-4 font-medium text-muted-foreground text-xs uppercase tracking-[0.2em]">
+          <p className="mb-4 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
             Portfolio
           </p>
           <h1 className="mb-6 max-w-4xl font-bold text-4xl leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
@@ -64,7 +64,7 @@ export default async function PortfolioPage() {
                     <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                       {project.location && (
-                        <p className="mb-1 font-medium text-[11px] text-white/75 uppercase tracking-[0.2em]">
+                        <p className="mb-1 font-black text-sm text-white/75 uppercase tracking-[0.2em]">
                           {project.location}
                         </p>
                       )}

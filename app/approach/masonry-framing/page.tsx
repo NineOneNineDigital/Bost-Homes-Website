@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
 import { CtaSection } from "@/components/cta-section";
 import { getPageContent } from "@/lib/fetchers";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Masonry Framing",
   description:
     "Bost Custom Homes has been a leader in residential concrete masonry construction since pioneering the technique in the Triangle Area in 1999.",
-  alternates: { canonical: `/our-process/${SLUG}` },
+  alternates: { canonical: `/approach/${SLUG}` },
 };
 
 export default async function MasonryFramingPage() {
@@ -43,7 +43,7 @@ export default async function MasonryFramingPage() {
                     <li>
                       <Link
                         className="transition-colors hover:text-white"
-                        href="/our-process"
+                        href="/approach"
                       >
                         Our Process
                       </Link>
@@ -59,7 +59,7 @@ export default async function MasonryFramingPage() {
             <div className="absolute inset-0 flex items-end px-6 pb-14 md:items-center md:px-12 md:pb-0 lg:px-24">
               <div className="mx-auto w-full max-w-7xl">
                 <div className="max-w-2xl">
-                  <p className="mb-4 font-medium text-bost-yellow text-xs uppercase tracking-[0.25em]">
+                  <p className="mb-4 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
                     Our Process
                   </p>
                   <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
@@ -80,7 +80,7 @@ export default async function MasonryFramingPage() {
               <nav aria-label="Breadcrumb" className="mb-6">
                 <ol className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest">
                   <li>
-                    <Link className="hover:text-foreground" href="/our-process">
+                    <Link className="hover:text-foreground" href="/approach">
                       Our Process
                     </Link>
                   </li>
@@ -90,7 +90,7 @@ export default async function MasonryFramingPage() {
                   <li className="text-foreground">Masonry Framing</li>
                 </ol>
               </nav>
-              <p className="mb-4 font-medium text-bost-brick text-xs uppercase tracking-[0.2em]">
+              <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
                 Our Process
               </p>
               <h1 className="mb-6 font-bold text-3xl text-bost-olive leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
