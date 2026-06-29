@@ -5,7 +5,7 @@ export const TEAM_MEMBERS_QUERY = gql`
     teamMembers(orderBy: createdAt_ASC) {
       id
       name
-      title
+      title: jobTitle
       image {
         url
         width

@@ -90,7 +90,7 @@ export function LeadershipCard({
                   <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.15em]">
                     {title}
                   </p>
-                  <p className="text-muted-foreground text-base leading-relaxed">
+                  <p className="whitespace-pre-line text-base text-muted-foreground leading-relaxed">
                     {bio}
                   </p>
                 </div>
