@@ -1,17 +1,10 @@
+import { HardHat } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { AwardsCarousel } from "@/components/awards-carousel";
 import { CtaSection } from "@/components/cta-section";
-import { LeadershipCard } from "@/components/leadership-card";
-import { getAwards, getTeamMembers } from "@/lib/fetchers";
+import { getAwards } from "@/lib/fetchers";
 import { cn } from "@/lib/utils";
-
-// Strip Hygraph's literal "\n" plain-text markers; rely on whitespace-pre-line.
-const cleanBio = (text?: string) =>
-  text
-    ?.replace(/\\n/g, "\n")
-    .replace(/[^\S\n]+/g, " ")
-    .trim();
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -55,11 +48,7 @@ const principles = [
 ];
 
 export default async function AboutPage() {
-  const [awards, teamMembers] = await Promise.all([
-    getAwards(),
-    getTeamMembers(),
-  ]);
-  const team = teamMembers.filter((member) => member.image?.url);
+  const awards = await getAwards();
 
   return (
     <main className="pt-20">
@@ -279,32 +268,35 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Our Team */}
-      {team.length > 0 && (
-        <section className="px-6 py-24 md:px-12 md:py-32 lg:px-24">
-          <div className="mx-auto max-w-7xl text-center">
-            <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
-              Our Team
-            </p>
-            <h2 className="mb-16 font-bold text-3xl text-bost-olive tracking-tight md:text-4xl lg:text-5xl">
-              Meet the Minds Behind the Craft
-            </h2>
+      {/* Our Team — Coming Soon */}
+      <section className="px-6 py-24 md:px-12 md:py-32 lg:px-24">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
+            Our Team
+          </p>
+          <h2 className="mb-8 font-bold text-3xl text-bost-olive tracking-tight md:text-4xl lg:text-5xl">
+            Meet the Minds Behind the Craft
+          </h2>
 
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-12">
-              {team.map((member) => (
-                <LeadershipCard
-                  bio={cleanBio(member.bio?.text)}
-                  image={member.image?.url ?? ""}
-                  key={member.id}
-                  name={member.name}
-                  size="lg"
-                  title={member.title}
-                />
-              ))}
+          <div className="relative mx-auto max-w-xl border border-bost-olive/10 bg-bost-cream p-10 md:p-14">
+            <div className="absolute top-0 left-0 h-1 w-16 bg-bost-yellow" />
+            <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-bost-brick/10">
+              <HardHat aria-hidden className="h-6 w-6 text-bost-brick" />
             </div>
+            <p className="mb-3 font-black text-bost-brick text-sm uppercase tracking-[0.25em]">
+              Under Construction
+            </p>
+            <h3 className="mb-4 font-bold text-bost-olive text-xl tracking-tight md:text-2xl">
+              Profiles Coming Soon
+            </h3>
+            <p className="text-base text-bost-olive/70 leading-relaxed">
+              We&apos;re putting the finishing touches on profiles for the
+              leadership and craftsmen who bring every Bost home to life. Check
+              back soon to meet the team behind the work.
+            </p>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* Awards */}
       <section className="bg-bost-olive px-6 py-20 md:px-12 md:py-28 lg:px-24">
