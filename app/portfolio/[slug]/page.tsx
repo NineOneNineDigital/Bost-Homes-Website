@@ -15,8 +15,6 @@ import {
   getProjectSlugs,
 } from "@/lib/fetchers";
 
-const PARAGRAPH_BREAK = /\n\s*\n/;
-
 export async function generateStaticParams() {
   const slugs = await getProjectSlugs();
   return slugs.map((slug) => ({ slug }));
@@ -33,7 +31,11 @@ export async function generateMetadata({
     return { title: "Project Not Found" };
   }
   const description = project.description?.text
-    ? project.description.text.slice(0, 155)
+    ? project.description.text
+        .replace(/\\n/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 155)
     : `${project.name} — a luxury custom home built by Bost Custom Homes in ${project.location}.`;
   return {
     title: project.name,
@@ -59,12 +61,6 @@ export default async function ProjectPage({
 
   const images = project.images ?? [];
   const featuredImages = project.featuredImages ?? [];
-
-  const descriptionParagraphs =
-    project.description?.text
-      ?.split(PARAGRAPH_BREAK)
-      .map((p) => p.trim())
-      .filter(Boolean) ?? [];
 
   const related = featuredProjects
     .filter((p) => p.slug !== project.slug)
@@ -176,12 +172,13 @@ export default async function ProjectPage({
                 <p className="mb-6 font-black text-muted-foreground text-sm uppercase tracking-[0.2em]">
                   Project Overview
                 </p>
-                {descriptionParagraphs.length > 0 && (
-                  <div className="space-y-5 text-base text-foreground/80 leading-[1.75] md:text-lg">
-                    {descriptionParagraphs.map((paragraph) => (
-                      <p key={paragraph.slice(0, 60)}>{paragraph}</p>
-                    ))}
-                  </div>
+                {project.description?.html && (
+                  <div
+                    className="space-y-5 text-base text-foreground/80 leading-[1.75] md:text-lg"
+                    dangerouslySetInnerHTML={{
+                      __html: project.description.html,
+                    }}
+                  />
                 )}
               </div>
             </div>
