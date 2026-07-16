@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import {
   ProjectFeaturedGallery,
@@ -130,7 +130,7 @@ export default async function ProjectPage({
         <section className="px-6 md:px-12 lg:px-24">
           <div className="mx-auto max-w-6xl">
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted md:aspect-video">
-              <Image
+              <CmsImage
                 alt={project.mainImage.alt ?? project.name}
                 className="object-cover"
                 fill
@@ -270,7 +270,7 @@ export default async function ProjectPage({
                 >
                   <div className="relative aspect-[4/3] w-full bg-muted">
                     {rp.images?.[0] ? (
-                      <Image
+                      <CmsImage
                         alt={rp.name}
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         fill

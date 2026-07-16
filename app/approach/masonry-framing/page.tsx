@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { getPageContent } from "@/lib/fetchers";
 
@@ -27,7 +27,7 @@ export default async function MasonryFramingPage() {
       {page.hero &&
         (page.hero.backgroundImage ? (
           <section className="relative h-[480px] w-full overflow-hidden md:h-[560px] lg:h-[620px]">
-            <Image
+            <CmsImage
               alt={page.hero.backgroundImage.alt ?? page.hero.heading}
               className="object-cover [object-position:center_75%]"
               fill
@@ -129,7 +129,7 @@ export default async function MasonryFramingPage() {
                         : "md:order-2"
                     }`}
                   >
-                    <Image
+                    <CmsImage
                       alt={section.image.alt ?? section.heading}
                       className="object-cover"
                       fill

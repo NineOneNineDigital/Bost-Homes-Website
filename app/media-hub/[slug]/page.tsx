@@ -1,8 +1,8 @@
 import { ArrowLeft, Calendar, History, User } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
+import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/fetchers";
 import {
@@ -142,7 +142,7 @@ export default async function BlogPostPage({
         <section className="px-6 pb-10 md:px-12 lg:px-24">
           <div className="mx-auto max-w-4xl">
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-muted">
-              <Image
+              <CmsImage
                 alt={post.title}
                 className="object-cover"
                 fill

@@ -1,7 +1,7 @@
 import { Check, Leaf } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { getGreenFeatures, getPageContent } from "@/lib/fetchers";
 
@@ -26,7 +26,7 @@ export default async function SustainabilityPage() {
       {/* Hero */}
       {page?.hero?.backgroundImage ? (
         <section className="relative h-[480px] w-full overflow-hidden md:h-[560px] lg:h-[620px]">
-          <Image
+          <CmsImage
             alt={page.hero.backgroundImage.alt ?? page.hero.heading}
             className="object-cover"
             fill
@@ -176,7 +176,7 @@ export default async function SustainabilityPage() {
                     <h3 className="mb-2 font-semibold text-foreground text-lg leading-snug">
                       {feature.title}
                     </h3>
-                    <p className="text-muted-foreground text-base leading-relaxed">
+                    <p className="text-base text-muted-foreground leading-relaxed">
                       {feature.description}
                     </p>
                   </div>

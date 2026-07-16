@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getArchivedProjects } from "@/lib/fetchers";
@@ -54,7 +54,7 @@ export default async function VaultPage() {
                   >
                     <div className="relative aspect-[4/5] w-full bg-muted">
                       {cardImage && (
-                        <Image
+                        <CmsImage
                           alt={project.name}
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                           fill

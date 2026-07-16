@@ -1,11 +1,11 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { BostLogo } from "@/components/bost-logo";
+import { CmsImage } from "@/components/cms-image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -135,7 +135,7 @@ function MobileNav({
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-muted">
                 {featuredProject.image && (
-                  <Image
+                  <CmsImage
                     alt={featuredProject.image.alt ?? featuredProject.name}
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     fill

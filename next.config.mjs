@@ -7,12 +7,18 @@ const nextConfig = {
         hostname: "*.graphassets.com",
       },
     ],
+    // NB: no `loaderFile` here on purpose. Setting a custom loader globally
+    // disables Next's /_next/image endpoint, which would 404 every /public
+    // asset (including a 13MB hero). Hygraph images opt in per-call-site via
+    // <CmsImage>; /public keeps using Vercel's optimizer.
+    //
     // Hygraph URLs are content-addressed and our /public assets are immutable
     // per deploy, so cache aggressively to minimize re-transformation.
     minimumCacheTTL: 2_678_400,
-    // Trimmed from the Next 16 defaults to cut variant count roughly in half
-    // while still covering common breakpoints up to retina desktop.
-    deviceSizes: [640, 828, 1200, 1920],
+    // 1920 dropped: 221 of 334 CMS sources are only 1024px wide, so that tier
+    // was a pure upscale — extra bytes and, previously, an extra billed
+    // transformation for pixels identical to the 1200 variant.
+    deviceSizes: [640, 828, 1200],
     imageSizes: [16, 32, 64, 96, 128, 256, 384],
   },
   async redirects() {

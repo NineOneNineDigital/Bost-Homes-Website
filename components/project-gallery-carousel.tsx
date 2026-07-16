@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import Image from "next/image";
 import {
   type TouchEvent as ReactTouchEvent,
   useCallback,
@@ -9,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { CmsImage } from "@/components/cms-image";
 import type { Asset } from "@/lib/types/hygraph";
 
 interface Props {
@@ -50,8 +50,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const thumbStripRef = useRef<HTMLDivElement>(null);
   const count = images.length;
-  const nextIndex = count > 0 ? (index + 1) % count : 0;
-  const prevIndex = count > 0 ? (index - 1 + count) % count : 0;
 
   const goTo = useCallback(
     (next: number) => {
@@ -136,7 +134,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
             onClick={() => setLightboxOpen(true)}
             type="button"
           >
-            <Image
+            <CmsImage
               alt={current.alt ?? `${projectName} — photo ${index + 1}`}
               className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               fill
@@ -145,30 +143,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
               src={current.url}
             />
           </button>
-
-          {/* Warm the cache for adjacent images so prev/next is instant. */}
-          {count > 1 && nextIndex !== index && (
-            <div aria-hidden className="hidden">
-              <Image
-                alt=""
-                height={images[nextIndex].height ?? 720}
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                src={images[nextIndex].url}
-                width={images[nextIndex].width ?? 1280}
-              />
-            </div>
-          )}
-          {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
-            <div aria-hidden className="hidden">
-              <Image
-                alt=""
-                height={images[prevIndex].height ?? 720}
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                src={images[prevIndex].url}
-                width={images[prevIndex].width ?? 1280}
-              />
-            </div>
-          )}
 
           <div className="pointer-events-none absolute top-4 left-4 z-10 inline-flex items-center gap-2 bg-bost-olive/80 px-3 py-1.5 font-medium text-[11px] text-white uppercase tracking-[0.2em] backdrop-blur-sm">
             <span>{String(index + 1).padStart(2, "0")}</span>
@@ -259,7 +233,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
                 onClick={() => goTo(i)}
                 type="button"
               >
-                <Image
+                <CmsImage
                   alt=""
                   className="object-cover"
                   fill
@@ -291,7 +265,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
 
           <div className="pointer-events-none relative flex h-full w-full items-center justify-center p-4 md:p-10">
             <div className="relative h-full w-full max-w-6xl">
-              <Image
+              <CmsImage
                 alt={current.alt ?? `${projectName} — photo ${index + 1}`}
                 className="object-contain"
                 fill
@@ -300,30 +274,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
               />
             </div>
           </div>
-
-          {/* Preload adjacent lightbox images so prev/next is instant. */}
-          {count > 1 && nextIndex !== index && (
-            <div aria-hidden className="hidden">
-              <Image
-                alt=""
-                height={images[nextIndex].height ?? 1080}
-                sizes="100vw"
-                src={images[nextIndex].url}
-                width={images[nextIndex].width ?? 1920}
-              />
-            </div>
-          )}
-          {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
-            <div aria-hidden className="hidden">
-              <Image
-                alt=""
-                height={images[prevIndex].height ?? 1080}
-                sizes="100vw"
-                src={images[prevIndex].url}
-                width={images[prevIndex].width ?? 1920}
-              />
-            </div>
-          )}
 
           <button
             aria-label="Close lightbox"
