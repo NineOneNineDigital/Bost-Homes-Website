@@ -10,12 +10,19 @@
  * a global custom loader disables Next's /_next/image endpoint entirely, which
  * 404s every /public asset (verified — see next.config.mjs).
  *
- * Two details that are easy to get wrong:
+ * Three details that are easy to get wrong:
  *
+ * - `strip:true` drops EXIF/XMP, which Hygraph otherwise carries over from the
+ *   original camera JPEG. That metadata is a flat ~38KB on every derivative
+ *   regardless of size, so without it a 128px thumbnail is 42KB of which only
+ *   3.5KB is pixels. sharp strips by default; Hygraph does not.
  * - `quality` must come AFTER `output=format:webp`; it configures the encoder,
  *   and placing it earlier is silently ignored (260KB vs 143KB at width 828).
  * - `fit:max` never enlarges, so a 1024px source requested at w=1200 returns
  *   1024px. Dropping it defaults to `fit:clip`, which upscales to 1200px.
+ *
+ * Hygraph ignores unrecognised params silently rather than erroring, so a typo
+ * here degrades quietly. Verify byte sizes when changing this chain.
  *
  * The comma in `resize=width:N,fit:max` is safe inside a srcset: the HTML
  * parser collects candidate URLs up to whitespace, not commas. Verified in
@@ -54,5 +61,5 @@ export function hygraphImageLoader({
   const handle = src.slice(lastSlash + 1);
   const q = quality ?? DEFAULT_QUALITY;
 
-  return `${base}/resize=width:${width},fit:max/output=format:webp/quality=value:${q}/${handle}`;
+  return `${base}/resize=width:${width},fit:max/output=format:webp,strip:true/quality=value:${q}/${handle}`;
 }

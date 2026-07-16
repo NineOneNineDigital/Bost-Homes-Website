@@ -50,8 +50,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const thumbStripRef = useRef<HTMLDivElement>(null);
   const count = images.length;
-  const nextIndex = count > 0 ? (index + 1) % count : 0;
-  const prevIndex = count > 0 ? (index - 1 + count) % count : 0;
 
   const goTo = useCallback(
     (next: number) => {
@@ -145,30 +143,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
               src={current.url}
             />
           </button>
-
-          {/* Warm the cache for adjacent images so prev/next is instant. */}
-          {count > 1 && nextIndex !== index && (
-            <div aria-hidden className="hidden">
-              <CmsImage
-                alt=""
-                height={images[nextIndex].height ?? 720}
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                src={images[nextIndex].url}
-                width={images[nextIndex].width ?? 1280}
-              />
-            </div>
-          )}
-          {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
-            <div aria-hidden className="hidden">
-              <CmsImage
-                alt=""
-                height={images[prevIndex].height ?? 720}
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                src={images[prevIndex].url}
-                width={images[prevIndex].width ?? 1280}
-              />
-            </div>
-          )}
 
           <div className="pointer-events-none absolute top-4 left-4 z-10 inline-flex items-center gap-2 bg-bost-olive/80 px-3 py-1.5 font-medium text-[11px] text-white uppercase tracking-[0.2em] backdrop-blur-sm">
             <span>{String(index + 1).padStart(2, "0")}</span>
@@ -300,30 +274,6 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
               />
             </div>
           </div>
-
-          {/* Preload adjacent lightbox images so prev/next is instant. */}
-          {count > 1 && nextIndex !== index && (
-            <div aria-hidden className="hidden">
-              <CmsImage
-                alt=""
-                height={images[nextIndex].height ?? 1080}
-                sizes="100vw"
-                src={images[nextIndex].url}
-                width={images[nextIndex].width ?? 1920}
-              />
-            </div>
-          )}
-          {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
-            <div aria-hidden className="hidden">
-              <CmsImage
-                alt=""
-                height={images[prevIndex].height ?? 1080}
-                sizes="100vw"
-                src={images[prevIndex].url}
-                width={images[prevIndex].width ?? 1920}
-              />
-            </div>
-          )}
 
           <button
             aria-label="Close lightbox"
