@@ -1,7 +1,7 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { Button } from "@/components/ui/button";
@@ -86,7 +86,7 @@ export default async function Page() {
       <section className="relative flex flex-col md:min-h-svh">
         {/* Background image — natural aspect on mobile, fill on desktop */}
         <div className="relative aspect-[1024/683] w-full bg-bost-olive md:absolute md:inset-0 md:aspect-auto">
-          <Image
+          <CmsImage
             alt="Bost Custom Homes — Canyon Crest"
             className="object-cover md:object-cover"
             fill
@@ -149,7 +149,7 @@ export default async function Page() {
             {/* Left column — body text + button */}
             <div>
               <div className="mb-6 h-px w-48 bg-bost-gray-light" />
-              <p className="mb-8 text-bost-black/65 text-base leading-relaxed">
+              <p className="mb-8 text-base text-bost-black/65 leading-relaxed">
                 We&apos;ve been crafting custom homes rooted in artistry,
                 transparency, and calculated execution for nearly four decades.
                 Our work begins with listening—because a custom home should
@@ -168,7 +168,7 @@ export default async function Page() {
 
             {/* Right column — team photo */}
             <div className="relative aspect-[16/10] w-full overflow-hidden">
-              <Image
+              <CmsImage
                 alt="The Bost Custom Homes team"
                 className="object-cover"
                 fill
@@ -213,7 +213,7 @@ export default async function Page() {
                   >
                     <div className="relative aspect-square w-full bg-bost-olive/40">
                       {cardImage ? (
-                        <Image
+                        <CmsImage
                           alt={project.name}
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                           fill

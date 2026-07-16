@@ -1,5 +1,5 @@
 import { Quote } from "lucide-react";
-import Image from "next/image";
+import { CmsImage } from "@/components/cms-image";
 import type { Asset } from "@/lib/types/hygraph";
 
 export function ProjectTestimonial({
@@ -43,10 +43,13 @@ export function ProjectFeaturedGallery({
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
       {images.map((img, i) => (
-        <div className="relative aspect-[4/3] overflow-hidden bg-muted" key={img.url}>
-          <Image
+        <div
+          className="relative aspect-[4/3] overflow-hidden bg-muted"
+          key={img.url}
+        >
+          <CmsImage
             alt={img.alt ?? `${projectName} — featured detail ${i + 1}`}
             className="object-cover"
             fill

@@ -2,8 +2,8 @@
 
 import { Dialog } from "@base-ui/react/dialog";
 import { X } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
+import { CmsImage } from "@/components/cms-image";
 
 interface LeadershipCardProps {
   bio?: string;
@@ -45,7 +45,7 @@ export function LeadershipCard({
     <>
       <div className={`${s.card} text-center`}>
         <div className="group relative mx-auto mb-4 aspect-[3/4] w-full overflow-hidden">
-          <Image
+          <CmsImage
             alt={name}
             className="object-cover object-top"
             fill
@@ -75,7 +75,7 @@ export function LeadershipCard({
             <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
               <div className="flex flex-col md:flex-row">
                 <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
-                  <Image
+                  <CmsImage
                     alt={name}
                     className="object-cover object-top"
                     fill

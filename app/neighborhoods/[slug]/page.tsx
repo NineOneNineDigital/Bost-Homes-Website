@@ -1,8 +1,8 @@
 import { ArrowRight, Check, MapPin, Ruler, TreePine } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoodBySlug, getNeighborhoods } from "@/lib/fetchers";
@@ -80,10 +80,7 @@ export default async function NeighborhoodPage({
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-widest">
               <li>
-                <Link
-                  className="hover:text-white/80"
-                  href="/neighborhoods"
-                >
+                <Link className="hover:text-white/80" href="/neighborhoods">
                   Neighborhoods
                 </Link>
               </li>
@@ -122,7 +119,7 @@ export default async function NeighborhoodPage({
             </div>
             <div className="relative aspect-[4/3] overflow-hidden">
               {neighborhood.image ? (
-                <Image
+                <CmsImage
                   alt={neighborhood.name}
                   className="object-cover"
                   fill
@@ -204,7 +201,7 @@ function LotCard({ lot, slug }: { lot: Lot; slug: string }) {
 
       {/* Description */}
       {lot.description && (
-        <p className="mb-4 flex-1 text-muted-foreground text-base leading-relaxed">
+        <p className="mb-4 flex-1 text-base text-muted-foreground leading-relaxed">
           {lot.description}
         </p>
       )}
