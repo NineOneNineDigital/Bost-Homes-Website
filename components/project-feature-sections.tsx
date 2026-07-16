@@ -31,6 +31,24 @@ export function ProjectTestimonial({
   );
 }
 
+/**
+ * `sizes` has to describe the *rendered slot*, not the viewport share.
+ *
+ * This grid sits in a `max-w-6xl` (1152px) container with `lg:px-24`, so past
+ * a 1344px viewport it stops growing and each of the three columns is a fixed
+ * 368px. Declaring `33vw` claimed 475px at 1440px and made the browser pick the
+ * 640w candidate for a 368px slot — 1.74x linear, ~3x the pixels.
+ *
+ * The vw values below are deliberate slight over-estimates of each breakpoint's
+ * true slot (never under-serve), and they must stay in sync with the grid and
+ * the section's padding in app/portfolio/[slug]/page.tsx. Keeping a vw unit in
+ * the string also matters mechanically: Next derives the srcset candidates from
+ * the smallest vw it can find, and a `calc()` built on `100vw` would read as
+ * 100 and drop the small widths from the srcset entirely.
+ */
+const FEATURED_SIZES =
+  "(min-width: 1344px) 368px, (min-width: 1024px) 27vw, (min-width: 640px) 47vw, 90vw";
+
 export function ProjectFeaturedGallery({
   images,
   projectName,
@@ -53,8 +71,7 @@ export function ProjectFeaturedGallery({
             alt={img.alt ?? `${projectName} — featured detail ${i + 1}`}
             className="object-cover"
             fill
-            loading={i < 3 ? undefined : "lazy"}
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes={FEATURED_SIZES}
             src={img.url}
           />
         </div>
