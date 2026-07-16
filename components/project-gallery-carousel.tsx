@@ -1,7 +1,6 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import Image from "next/image";
 import {
   type TouchEvent as ReactTouchEvent,
   useCallback,
@@ -9,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { CmsImage } from "@/components/cms-image";
 import type { Asset } from "@/lib/types/hygraph";
 
 interface Props {
@@ -136,7 +136,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
             onClick={() => setLightboxOpen(true)}
             type="button"
           >
-            <Image
+            <CmsImage
               alt={current.alt ?? `${projectName} — photo ${index + 1}`}
               className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
               fill
@@ -149,7 +149,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           {/* Warm the cache for adjacent images so prev/next is instant. */}
           {count > 1 && nextIndex !== index && (
             <div aria-hidden className="hidden">
-              <Image
+              <CmsImage
                 alt=""
                 height={images[nextIndex].height ?? 720}
                 sizes="(min-width: 1280px) 1152px, 100vw"
@@ -160,7 +160,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           )}
           {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
             <div aria-hidden className="hidden">
-              <Image
+              <CmsImage
                 alt=""
                 height={images[prevIndex].height ?? 720}
                 sizes="(min-width: 1280px) 1152px, 100vw"
@@ -259,7 +259,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
                 onClick={() => goTo(i)}
                 type="button"
               >
-                <Image
+                <CmsImage
                   alt=""
                   className="object-cover"
                   fill
@@ -291,7 +291,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
 
           <div className="pointer-events-none relative flex h-full w-full items-center justify-center p-4 md:p-10">
             <div className="relative h-full w-full max-w-6xl">
-              <Image
+              <CmsImage
                 alt={current.alt ?? `${projectName} — photo ${index + 1}`}
                 className="object-contain"
                 fill
@@ -304,7 +304,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           {/* Preload adjacent lightbox images so prev/next is instant. */}
           {count > 1 && nextIndex !== index && (
             <div aria-hidden className="hidden">
-              <Image
+              <CmsImage
                 alt=""
                 height={images[nextIndex].height ?? 1080}
                 sizes="100vw"
@@ -315,7 +315,7 @@ export function ProjectGalleryCarousel({ images, projectName }: Props) {
           )}
           {count > 2 && prevIndex !== index && prevIndex !== nextIndex && (
             <div aria-hidden className="hidden">
-              <Image
+              <CmsImage
                 alt=""
                 height={images[prevIndex].height ?? 1080}
                 sizes="100vw"

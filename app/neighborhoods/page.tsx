@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoods } from "@/lib/fetchers";
@@ -84,9 +84,7 @@ export default async function FeaturedNeighborhoodsPage() {
                       <Button
                         className="group bg-bost-brick px-6 text-white hover:bg-bost-brick/80"
                         render={
-                          <Link
-                            href={`/neighborhoods/${neighborhood.slug}`}
-                          />
+                          <Link href={`/neighborhoods/${neighborhood.slug}`} />
                         }
                         size="lg"
                       >
@@ -104,7 +102,7 @@ export default async function FeaturedNeighborhoodsPage() {
                     className={`relative aspect-[4/3] overflow-hidden ${isEven ? "order-1 md:order-1" : "order-1 md:order-2"}`}
                   >
                     {neighborhood.image ? (
-                      <Image
+                      <CmsImage
                         alt={neighborhood.image.alt ?? neighborhood.name}
                         className="object-cover"
                         fill

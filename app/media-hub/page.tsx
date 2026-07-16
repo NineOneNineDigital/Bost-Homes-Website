@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { BlogFilter } from "@/components/blog-filter";
+import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
 import { getBlogPosts } from "@/lib/fetchers";
 import type { BlogCategory } from "@/lib/types/hygraph";
@@ -130,7 +130,7 @@ export default async function BlogPage({
               <div className="grid md:grid-cols-2">
                 <div className="relative aspect-[16/10] bg-muted md:aspect-auto md:min-h-[360px]">
                   {featuredPost.featuredImage && (
-                    <Image
+                    <CmsImage
                       alt={featuredPost.title}
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       fill
@@ -194,7 +194,7 @@ export default async function BlogPage({
                 >
                   <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                     {post.featuredImage && (
-                      <Image
+                      <CmsImage
                         alt={post.title}
                         className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                         fill
@@ -230,7 +230,7 @@ export default async function BlogPage({
                     <h3 className="mb-3 font-semibold text-lg leading-snug tracking-tight transition-colors group-hover:text-bost-brick">
                       {post.title}
                     </h3>
-                    <p className="mb-5 line-clamp-3 text-muted-foreground text-base leading-relaxed">
+                    <p className="mb-5 line-clamp-3 text-base text-muted-foreground leading-relaxed">
                       {post.excerpt}
                     </p>
                     <span className="mt-auto font-medium text-bost-brick text-sm">
