@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Link } from "next-view-transitions";
 import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
+import { MarkdownText } from "@/components/markdown-text";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoods } from "@/lib/fetchers";
 
@@ -54,9 +55,13 @@ export default async function FeaturedNeighborhoodsPage() {
                     <h2 className="mb-5 font-bold text-3xl text-white leading-tight tracking-tight md:text-4xl lg:text-5xl">
                       {neighborhood.name}
                     </h2>
-                    <p className="mb-8 text-base text-white/65 leading-relaxed">
-                      {neighborhood.description}
-                    </p>
+                    <div className="mb-8">
+                      <MarkdownText
+                        className="text-base text-white/65 leading-relaxed"
+                        linkClassName="text-white hover:text-bost-yellow"
+                        text={neighborhood.description}
+                      />
+                    </div>
 
                     {/* Metadata */}
                     <div className="mb-8 grid grid-cols-2 gap-6">

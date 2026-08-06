@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
 import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
+import { MarkdownText, stripMarkdown } from "@/components/markdown-text";
 import { Button } from "@/components/ui/button";
 import { getNeighborhoodBySlug, getNeighborhoods } from "@/lib/fetchers";
 import type { Lot } from "@/lib/types/hygraph";
@@ -50,7 +51,7 @@ export async function generateMetadata({
   return {
     title: neighborhood.name,
     description:
-      neighborhood.description.slice(0, 155) ||
+      stripMarkdown(neighborhood.description).slice(0, 155) ||
       `Explore available homesites in ${neighborhood.name} — a featured neighborhood by Bost Custom Homes.`,
     alternates: { canonical: `/neighborhoods/${slug}` },
   };
@@ -95,9 +96,13 @@ export default async function NeighborhoodPage({
               <h1 className="mb-6 font-bold text-4xl text-white leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
                 {neighborhood.name}
               </h1>
-              <p className="mb-8 text-base text-white/70 leading-relaxed md:text-lg">
-                {neighborhood.description}
-              </p>
+              <div className="mb-8">
+                <MarkdownText
+                  className="text-base text-white/70 leading-relaxed md:text-lg"
+                  linkClassName="text-white hover:text-bost-yellow"
+                  text={neighborhood.description}
+                />
+              </div>
               <div className="flex gap-8">
                 <div>
                   <p className="mb-1 font-black text-bost-blue text-sm uppercase tracking-widest">
@@ -201,9 +206,13 @@ function LotCard({ lot, slug }: { lot: Lot; slug: string }) {
 
       {/* Description */}
       {lot.description && (
-        <p className="mb-4 flex-1 text-base text-muted-foreground leading-relaxed">
-          {lot.description}
-        </p>
+        <div className="mb-4 flex-1">
+          <MarkdownText
+            className="text-base text-muted-foreground leading-relaxed"
+            linkClassName="text-bost-brick hover:text-bost-olive"
+            text={lot.description}
+          />
+        </div>
       )}
 
       {/* Features */}
