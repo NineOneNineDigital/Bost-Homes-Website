@@ -166,14 +166,16 @@ export default async function Page() {
               </Button>
             </div>
 
-            {/* Right column — team photo */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden">
+            {/* Right column — team photo. The slot matches the photo's own
+                19:10 aspect: the team spans the full frame, so a taller slot
+                would crop the people on either end out of shot. */}
+            <div className="relative aspect-[19/10] w-full overflow-hidden">
               <CmsImage
                 alt="The Bost Custom Homes team"
                 className="object-cover"
                 fill
                 sizes="(min-width: 1280px) 720px, (min-width: 1024px) 66vw, 100vw"
-                src="/images/team-photo.jpg"
+                src="/images/team-photo-v3.jpg"
               />
             </div>
           </div>
