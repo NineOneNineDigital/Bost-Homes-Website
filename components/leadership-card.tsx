@@ -1,9 +1,10 @@
 "use client";
 
 import { Dialog } from "@base-ui/react/dialog";
-import { X } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import { CmsImage } from "@/components/cms-image";
+import { useSwipeNav } from "@/hooks/use-swipe-nav";
 import { cn } from "@/lib/utils";
 
 interface CardImage {
@@ -16,7 +17,7 @@ interface LeadershipCardProps {
   bio?: string;
   image: CardImage;
   name: string;
-  /** Candid/alternate shot from Hygraph, shown in the bio dialog when set. */
+  /** Candid/alternate shot from Hygraph, shown alongside the headshot. */
   secondaryImage?: CardImage;
   size?: "lg" | "md" | "sm";
   title: string;
@@ -49,17 +50,49 @@ export function LeadershipCard({
   size = "md",
 }: LeadershipCardProps) {
   const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
   const s = sizeClasses[size];
 
-  // Headshots are uniformly 3:4, so the grid crops nothing. Secondary shots are
-  // candids of any orientation (9:16 through 4:3), which a fixed frame would
-  // gut — up to 62% of one. So the dialog sizes every photo from its real
-  // dimensions: always stacked above the bio, never cropped, with the height
-  // clamped per orientation so the name and opening lines stay above the fold.
-  const photo = secondaryImage ?? image;
-  const hasDimensions = Boolean(photo.width && photo.height);
-  const isLandscape =
-    hasDimensions && (photo.width ?? 0) >= (photo.height ?? 0);
+  // Headshot first, then any candid. Hygraph editors sometimes point both
+  // fields at the same asset, which would otherwise render a two-slide
+  // carousel of identical photos.
+  const photos = [image, secondaryImage].filter(
+    (p, i, all): p is CardImage =>
+      Boolean(p?.url) && all.findIndex((o) => o?.url === p?.url) === i
+  );
+  const count = photos.length;
+  const photo = photos[index] ?? photos[0];
+
+  const goTo = useCallback(
+    (next: number) => setIndex(((next % count) + count) % count),
+    [count]
+  );
+  const prev = useCallback(() => goTo(index - 1), [goTo, index]);
+  const next = useCallback(() => goTo(index + 1), [goTo, index]);
+  const { onTouchStart, onTouchEnd } = useSwipeNav(prev, next);
+
+  // Reopening should start from the headshot rather than wherever the last
+  // visit left off.
+  useEffect(() => {
+    if (!open) {
+      setIndex(0);
+    }
+  }, [open]);
+
+  useEffect(() => {
+    if (!(open && count > 1)) {
+      return;
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "ArrowLeft") {
+        prev();
+      } else if (e.key === "ArrowRight") {
+        next();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, count, prev, next]);
 
   return (
     <>
@@ -92,37 +125,70 @@ export function LeadershipCard({
         <Dialog.Root onOpenChange={setOpen} open={open}>
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
+            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
               <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain">
-                <div className="flex shrink-0 items-center justify-center bg-bost-gray-lightest">
-                  {hasDimensions ? (
-                    <CmsImage
-                      alt={name}
-                      className={cn(
-                        // h-auto/w-auto keep the natural ratio; the max-*
-                        // clamps bound the image without ever cropping it.
-                        "mx-auto h-auto w-auto max-w-full object-contain",
-                        isLandscape
-                          ? "max-h-[38dvh] md:max-h-[42dvh]"
-                          : "max-h-[50dvh] md:max-h-[52dvh]"
-                      )}
-                      height={photo.height ?? 0}
-                      sizes="(min-width: 448px) 448px, 90vw"
-                      src={photo.url}
-                      width={photo.width ?? 0}
-                    />
-                  ) : (
-                    <div className="relative aspect-[3/4] w-full">
-                      <CmsImage
-                        alt={name}
-                        className="object-cover object-top"
-                        fill
-                        sizes="(min-width: 448px) 448px, 90vw"
-                        src={photo.url}
-                      />
-                    </div>
+                {/* Photos range from 9:16 to 4:3, so the band is a fixed height
+                    with object-contain: nothing is cropped, and slides don't
+                    resize the dialog as you swipe between them. */}
+                <div
+                  className="group relative h-[38dvh] w-full shrink-0 bg-bost-gray-lightest md:h-[46dvh]"
+                  onTouchEnd={onTouchEnd}
+                  onTouchStart={onTouchStart}
+                >
+                  <CmsImage
+                    alt={
+                      count > 1
+                        ? `${name} — photo ${index + 1} of ${count}`
+                        : name
+                    }
+                    className="object-contain"
+                    fill
+                    sizes="(min-width: 768px) 672px, 90vw"
+                    src={photo.url}
+                  />
+
+                  {count > 1 && (
+                    <>
+                      <button
+                        aria-label="Previous photo"
+                        className="absolute top-1/2 left-2 -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-2 opacity-0 shadow transition-opacity hover:bg-white focus-visible:opacity-100 group-hover:opacity-100 md:opacity-70"
+                        onClick={prev}
+                        type="button"
+                      >
+                        <ChevronLeft className="size-5" />
+                      </button>
+                      <button
+                        aria-label="Next photo"
+                        className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer rounded-full bg-white/80 p-2 opacity-0 shadow transition-opacity hover:bg-white focus-visible:opacity-100 group-hover:opacity-100 md:opacity-70"
+                        onClick={next}
+                        type="button"
+                      >
+                        <ChevronRight className="size-5" />
+                      </button>
+                    </>
                   )}
                 </div>
+
+                {count > 1 && (
+                  <div className="flex shrink-0 justify-center gap-2 bg-white pt-4">
+                    {photos.map((p, i) => (
+                      <button
+                        aria-current={i === index}
+                        aria-label={`Show photo ${i + 1}`}
+                        className={cn(
+                          "size-2 cursor-pointer rounded-full transition-colors",
+                          i === index
+                            ? "bg-bost-olive"
+                            : "bg-bost-olive/30 hover:bg-bost-olive/60"
+                        )}
+                        key={p.url}
+                        onClick={() => goTo(i)}
+                        type="button"
+                      />
+                    ))}
+                  </div>
+                )}
+
                 <div className="flex-1 p-6 md:p-8">
                   <Dialog.Title className="mb-1 font-bold text-xl tracking-tight">
                     {name}
