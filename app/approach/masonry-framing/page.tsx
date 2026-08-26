@@ -45,7 +45,7 @@ export default async function MasonryFramingPage() {
                         className="transition-colors hover:text-white"
                         href="/approach"
                       >
-                        Our Process
+                        Approach
                       </Link>
                     </li>
                     <li>
@@ -60,7 +60,7 @@ export default async function MasonryFramingPage() {
               <div className="mx-auto w-full max-w-7xl">
                 <div className="max-w-2xl">
                   <p className="mb-4 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
-                    Our Process
+                    Approach
                   </p>
                   <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
                     {page.hero.heading}
@@ -81,7 +81,7 @@ export default async function MasonryFramingPage() {
                 <ol className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest">
                   <li>
                     <Link className="hover:text-foreground" href="/approach">
-                      Our Process
+                      Approach
                     </Link>
                   </li>
                   <li>
@@ -91,7 +91,7 @@ export default async function MasonryFramingPage() {
                 </ol>
               </nav>
               <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
-                Our Process
+                Approach
               </p>
               <h1 className="mb-6 font-bold text-3xl text-bost-olive leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
                 {page.hero.heading}

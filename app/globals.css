@@ -117,6 +117,21 @@
   html {
     @apply font-sans;
   }
+  /* Tailwind v4's preflight sets `cursor: default` on buttons, so in-page
+     actions felt inert next to links. Restore the pointer for anything
+     interactive that isn't disabled. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for],
+  select:not(:disabled),
+  [type="button"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="checkbox"]:not(:disabled),
+  [type="radio"]:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 @keyframes fade-in {

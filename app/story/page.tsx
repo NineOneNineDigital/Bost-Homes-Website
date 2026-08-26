@@ -297,6 +297,7 @@ export default async function AboutPage() {
                   image={member.image?.url ?? ""}
                   key={member.id}
                   name={member.name}
+                  secondaryImage={member.secondaryImage?.url}
                   size="lg"
                   title={member.title}
                 />

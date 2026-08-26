@@ -9,6 +9,8 @@ interface LeadershipCardProps {
   bio?: string;
   image: string;
   name: string;
+  /** Candid/alternate shot from Hygraph, shown in the bio dialog when set. */
+  secondaryImage?: string;
   size?: "lg" | "md" | "sm";
   title: string;
 }
@@ -35,11 +37,13 @@ export function LeadershipCard({
   name,
   title,
   image,
+  secondaryImage,
   bio,
   size = "md",
 }: LeadershipCardProps) {
   const [open, setOpen] = useState(false);
   const s = sizeClasses[size];
+  const dialogImage = secondaryImage || image;
 
   return (
     <>
@@ -54,7 +58,7 @@ export function LeadershipCard({
           />
           {bio && (
             <button
-              className="absolute right-2 bottom-2 rounded bg-bost-olive/70 px-3 py-1.5 font-medium text-white text-xs uppercase tracking-wider backdrop-blur-sm transition-all hover:bg-bost-olive/90"
+              className="absolute right-2 bottom-2 cursor-pointer rounded bg-bost-olive/70 px-3 py-1.5 font-medium text-white text-xs uppercase tracking-wider backdrop-blur-sm transition-all hover:bg-bost-olive/90"
               onClick={() => setOpen(true)}
               type="button"
             >
@@ -72,15 +76,15 @@ export function LeadershipCard({
         <Dialog.Root onOpenChange={setOpen} open={open}>
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
-              <div className="flex flex-col md:flex-row">
-                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
+            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
+              <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain md:flex-row">
+                <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
                   <CmsImage
                     alt={name}
                     className="object-cover object-top"
                     fill
-                    sizes="256px"
-                    src={image}
+                    sizes="(min-width: 768px) 256px, 90vw"
+                    src={dialogImage}
                   />
                 </div>
                 <div className="flex-1 p-6 md:p-8">
@@ -95,7 +99,7 @@ export function LeadershipCard({
                   </p>
                 </div>
               </div>
-              <Dialog.Close className="absolute top-3 right-3 rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20">
+              <Dialog.Close className="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20">
                 <X className="size-4" />
                 <span className="sr-only">Close</span>
               </Dialog.Close>
