@@ -53,8 +53,9 @@ export function LeadershipCard({
 
   // Headshots are uniformly 3:4, so the grid crops nothing. Secondary shots are
   // candids of any orientation (9:16 through 4:3), which a fixed frame would
-  // gut — up to 62% of one. Drive the dialog layout off the real dimensions
-  // instead: landscape stacks full-width, portrait sits beside the bio.
+  // gut — up to 62% of one. So the dialog sizes every photo from its real
+  // dimensions: always stacked above the bio, never cropped, with the height
+  // clamped per orientation so the name and opening lines stay above the fold.
   const photo = secondaryImage ?? image;
   const hasDimensions = Boolean(photo.width && photo.height);
   const isLandscape =
@@ -91,19 +92,9 @@ export function LeadershipCard({
         <Dialog.Root onOpenChange={setOpen} open={open}>
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
-              <div
-                className={cn(
-                  "flex min-h-0 flex-col overflow-y-auto overscroll-contain",
-                  !isLandscape && "md:flex-row"
-                )}
-              >
-                <div
-                  className={cn(
-                    "flex shrink-0 items-center justify-center bg-bost-gray-lightest",
-                    !isLandscape && "md:w-56 lg:w-64"
-                  )}
-                >
+            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
+              <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain">
+                <div className="flex shrink-0 items-center justify-center bg-bost-gray-lightest">
                   {hasDimensions ? (
                     <CmsImage
                       alt={name}
@@ -112,11 +103,11 @@ export function LeadershipCard({
                         // clamps bound the image without ever cropping it.
                         "mx-auto h-auto w-auto max-w-full object-contain",
                         isLandscape
-                          ? "max-h-[40dvh] md:max-h-[50dvh]"
-                          : "max-h-[45dvh] md:max-h-[70dvh]"
+                          ? "max-h-[38dvh] md:max-h-[42dvh]"
+                          : "max-h-[50dvh] md:max-h-[52dvh]"
                       )}
                       height={photo.height ?? 0}
-                      sizes="(min-width: 768px) 640px, 90vw"
+                      sizes="(min-width: 448px) 448px, 90vw"
                       src={photo.url}
                       width={photo.width ?? 0}
                     />
@@ -126,7 +117,7 @@ export function LeadershipCard({
                         alt={name}
                         className="object-cover object-top"
                         fill
-                        sizes="(min-width: 768px) 256px, 90vw"
+                        sizes="(min-width: 448px) 448px, 90vw"
                         src={photo.url}
                       />
                     </div>
