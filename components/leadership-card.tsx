@@ -4,13 +4,20 @@ import { Dialog } from "@base-ui/react/dialog";
 import { X } from "lucide-react";
 import { useState } from "react";
 import { CmsImage } from "@/components/cms-image";
+import { cn } from "@/lib/utils";
+
+interface CardImage {
+  height?: number;
+  url: string;
+  width?: number;
+}
 
 interface LeadershipCardProps {
   bio?: string;
-  image: string;
+  image: CardImage;
   name: string;
   /** Candid/alternate shot from Hygraph, shown in the bio dialog when set. */
-  secondaryImage?: string;
+  secondaryImage?: CardImage;
   size?: "lg" | "md" | "sm";
   title: string;
 }
@@ -43,7 +50,15 @@ export function LeadershipCard({
 }: LeadershipCardProps) {
   const [open, setOpen] = useState(false);
   const s = sizeClasses[size];
-  const dialogImage = secondaryImage || image;
+
+  // Headshots are uniformly 3:4, so the grid crops nothing. Secondary shots are
+  // candids of any orientation (9:16 through 4:3), which a fixed frame would
+  // gut — up to 62% of one. Drive the dialog layout off the real dimensions
+  // instead: landscape stacks full-width, portrait sits beside the bio.
+  const photo = secondaryImage ?? image;
+  const hasDimensions = Boolean(photo.width && photo.height);
+  const isLandscape =
+    hasDimensions && (photo.width ?? 0) >= (photo.height ?? 0);
 
   return (
     <>
@@ -54,7 +69,7 @@ export function LeadershipCard({
             className="object-cover object-top"
             fill
             sizes={s.imgSize}
-            src={image}
+            src={image.url}
           />
           {bio && (
             <button
@@ -77,15 +92,45 @@ export function LeadershipCard({
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
             <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
-              <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain md:flex-row">
-                <div className="relative aspect-[3/2] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
-                  <CmsImage
-                    alt={name}
-                    className="object-cover object-top"
-                    fill
-                    sizes="(min-width: 768px) 256px, 90vw"
-                    src={dialogImage}
-                  />
+              <div
+                className={cn(
+                  "flex min-h-0 flex-col overflow-y-auto overscroll-contain",
+                  !isLandscape && "md:flex-row"
+                )}
+              >
+                <div
+                  className={cn(
+                    "flex shrink-0 items-center justify-center bg-bost-gray-lightest",
+                    !isLandscape && "md:w-56 lg:w-64"
+                  )}
+                >
+                  {hasDimensions ? (
+                    <CmsImage
+                      alt={name}
+                      className={cn(
+                        // h-auto/w-auto keep the natural ratio; the max-*
+                        // clamps bound the image without ever cropping it.
+                        "mx-auto h-auto w-auto max-w-full object-contain",
+                        isLandscape
+                          ? "max-h-[40dvh] md:max-h-[50dvh]"
+                          : "max-h-[45dvh] md:max-h-[70dvh]"
+                      )}
+                      height={photo.height ?? 0}
+                      sizes="(min-width: 768px) 640px, 90vw"
+                      src={photo.url}
+                      width={photo.width ?? 0}
+                    />
+                  ) : (
+                    <div className="relative aspect-[3/4] w-full">
+                      <CmsImage
+                        alt={name}
+                        className="object-cover object-top"
+                        fill
+                        sizes="(min-width: 768px) 256px, 90vw"
+                        src={photo.url}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="flex-1 p-6 md:p-8">
                   <Dialog.Title className="mb-1 font-bold text-xl tracking-tight">
