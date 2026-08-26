@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { getProcessSteps } from "@/lib/fetchers";
 
 export const metadata: Metadata = {
-  title: "Our Process",
+  title: "Approach",
   description:
     "Discover how Bost Custom Homes builds your dream home — from first conversation to final walkthrough. A true partnership built on transparency and craftsmanship.",
   alternates: { canonical: "/approach" },
 };
 
-export default async function OurProcessPage() {
+export default async function ApproachPage() {
   const steps = await getProcessSteps();
 
   return (
@@ -35,7 +35,7 @@ export default async function OurProcessPage() {
         <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-36 pb-20 md:pt-44 md:pb-24">
           <div className="max-w-xl">
             <p className="mb-4 font-black text-bost-brick text-sm uppercase tracking-[0.2em]">
-              Our Process
+              Approach
             </p>
             <h1 className="mb-6 font-bold text-3xl text-bost-olive leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
               A Transparent Partnership from First Conversation through Final
@@ -78,7 +78,7 @@ export default async function OurProcessPage() {
         </div>
       </section>
 
-      {/* Sustainability Section — reversed layout */}
+      {/* High Performance Homes Section — reversed layout */}
       <section className="bg-bost-gray-lightest px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-16">
@@ -100,7 +100,7 @@ export default async function OurProcessPage() {
               </p>
               <Button
                 className="bg-bost-brick px-8 text-white hover:bg-bost-brick/80"
-                render={<Link href="/approach/sustainability" />}
+                render={<Link href="/approach/high-performance-homes" />}
                 size="lg"
               >
                 Learn More

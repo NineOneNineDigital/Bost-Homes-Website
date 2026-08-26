@@ -76,6 +76,7 @@ export interface TeamMember {
   id: string;
   image?: Asset;
   name: string;
+  secondaryImage?: Asset;
   title: string;
 }
 

@@ -6,16 +6,16 @@ import { CtaSection } from "@/components/cta-section";
 import { getGreenFeatures, getPageContent } from "@/lib/fetchers";
 
 export const metadata: Metadata = {
-  title: "Green Building & Sustainability",
+  title: "High Performance Homes",
   description:
-    "Bost Custom Homes has pioneered green building in NC for over 20 years. Learn about our HERS-rated energy efficient homes and sustainable construction practices.",
-  alternates: { canonical: "/approach/sustainability" },
+    "Bost Custom Homes has pioneered high performance building in NC for over 20 years. Learn about our HERS-rated energy efficient homes and healthy, resource-efficient construction practices.",
+  alternates: { canonical: "/approach/high-performance-homes" },
 };
 
-export default async function SustainabilityPage() {
+export default async function HighPerformanceHomesPage() {
   const [features, page] = await Promise.all([
     getGreenFeatures(),
-    getPageContent("sustainability"),
+    getPageContent("high-performance-homes"),
   ]);
   const featured = features.filter((f) => f.standard === true);
   const additional = features.filter((f) => f.standard !== true);
@@ -44,13 +44,13 @@ export default async function SustainabilityPage() {
                       className="transition-colors hover:text-white"
                       href="/approach"
                     >
-                      Our Process
+                      Approach
                     </Link>
                   </li>
                   <li>
                     <span className="mx-1">&gt;</span>
                   </li>
-                  <li className="text-white">Sustainability</li>
+                  <li className="text-white">High Performance Homes</li>
                 </ol>
               </nav>
             </div>
@@ -59,7 +59,7 @@ export default async function SustainabilityPage() {
             <div className="mx-auto w-full max-w-7xl">
               <div className="max-w-2xl">
                 <p className="mb-4 font-black text-bost-yellow text-sm uppercase tracking-[0.25em]">
-                  Our Process
+                  Approach
                 </p>
                 <h1 className="mb-6 font-bold text-3xl text-white leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
                   {page.hero.heading}
@@ -80,13 +80,13 @@ export default async function SustainabilityPage() {
               <ol className="flex items-center gap-2 text-muted-foreground text-xs uppercase tracking-widest">
                 <li>
                   <Link className="hover:text-foreground" href="/approach">
-                    Our Process
+                    Approach
                   </Link>
                 </li>
                 <li>
                   <span className="mx-1">&gt;</span>
                 </li>
-                <li className="text-foreground">Sustainability</li>
+                <li className="text-foreground">High Performance Homes</li>
               </ol>
             </nav>
             <h1 className="mb-6 font-bold text-3xl leading-[1.1] tracking-tight md:text-5xl lg:text-6xl">
