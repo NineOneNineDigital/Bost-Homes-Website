@@ -6,9 +6,7 @@ import { useState } from "react";
 import { CmsImage } from "@/components/cms-image";
 
 interface CardImage {
-  height?: number;
   url: string;
-  width?: number;
 }
 
 interface LeadershipCardProps {
@@ -53,7 +51,6 @@ export function LeadershipCard({
   // The dialog shows the candid, falling back to the headshot for members who
   // don't have one yet — otherwise their bio would open with no photo at all.
   const photo = secondaryImage ?? image;
-  const hasDimensions = Boolean(photo.width && photo.height);
 
   return (
     <>
@@ -88,31 +85,30 @@ export function LeadershipCard({
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
             <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
               <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain md:flex-row">
-                {/* Candids run 9:16 through 4:3, so the photo is sized from its
-                    own dimensions and never cropped. Mobile stacks it above the
-                    bio under a dvh cap so a tall shot can't fill the screen;
-                    md+ puts it in a column beside the text. */}
-                <div className="flex w-full shrink-0 items-center justify-center bg-bost-gray-lightest md:w-64 lg:w-80">
-                  {hasDimensions ? (
-                    <CmsImage
-                      alt={name}
-                      className="mx-auto h-auto max-h-[38dvh] w-auto max-w-full object-contain md:max-h-[65dvh]"
-                      height={photo.height ?? 0}
-                      sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
-                      src={photo.url}
-                      width={photo.width ?? 0}
-                    />
-                  ) : (
-                    <div className="relative aspect-[3/4] w-full">
-                      <CmsImage
-                        alt={name}
-                        className="object-cover object-top"
-                        fill
-                        sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
-                        src={photo.url}
-                      />
-                    </div>
-                  )}
+                {/* Candids run 9:16 through 4:3 and can't be cropped to a
+                    common shape — they're group and scene shots, so a portrait
+                    crop decapitates people (Hygraph's align:faces is worse: on
+                    a two-person photo it picks one face and drops the other).
+                    So the frame is fixed and the photo is contained inside it,
+                    over a blurred, dimmed copy of itself. Every dialog gets the
+                    same shape, nothing is cropped, and the leftover space reads
+                    as a designed backdrop rather than an empty gutter. */}
+                <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-bost-olive md:aspect-[4/5] md:w-64 lg:w-80">
+                  <CmsImage
+                    alt=""
+                    aria-hidden="true"
+                    className="scale-110 object-cover blur-2xl brightness-75 saturate-150"
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
+                    src={photo.url}
+                  />
+                  <CmsImage
+                    alt={name}
+                    className="object-contain"
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
+                    src={photo.url}
+                  />
                 </div>
 
                 <div className="flex-1 p-6 md:p-8">
