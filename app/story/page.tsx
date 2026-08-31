@@ -4,6 +4,7 @@ import { AwardsCarousel } from "@/components/awards-carousel";
 import { CtaSection } from "@/components/cta-section";
 import { LeadershipCard } from "@/components/leadership-card";
 import { getAwards, getTeamMembers } from "@/lib/fetchers";
+import type { Asset, TeamMember } from "@/lib/types/hygraph";
 import { cn } from "@/lib/utils";
 
 // Strip Hygraph's literal "\n" plain-text markers; rely on whitespace-pre-line.
@@ -59,7 +60,10 @@ export default async function AboutPage() {
     getAwards(),
     getTeamMembers(),
   ]);
-  const team = teamMembers.filter((member) => member.image?.url);
+  const team = teamMembers.filter(
+    (member): member is TeamMember & { image: Asset } =>
+      Boolean(member.image?.url)
+  );
 
   return (
     <main className="pt-20">
@@ -294,9 +298,10 @@ export default async function AboutPage() {
               {team.map((member) => (
                 <LeadershipCard
                   bio={cleanBio(member.bio?.text)}
-                  image={member.image?.url ?? ""}
+                  image={member.image}
                   key={member.id}
                   name={member.name}
+                  secondaryImage={member.secondaryImage}
                   size="lg"
                   title={member.title}
                 />

@@ -32,6 +32,11 @@ const nextConfig = {
       },
       { source: "/about", destination: "/story", permanent: true },
       {
+        source: "/approach/sustainability",
+        destination: "/approach/high-performance-homes",
+        permanent: true,
+      },
+      {
         source: "/featured-neighborhoods",
         destination: "/neighborhoods",
         permanent: true,

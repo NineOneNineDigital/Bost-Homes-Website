@@ -1,48 +1,14 @@
 "use client";
 
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react";
-import {
-  type TouchEvent as ReactTouchEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CmsImage } from "@/components/cms-image";
+import { useSwipeNav } from "@/hooks/use-swipe-nav";
 import type { Asset } from "@/lib/types/hygraph";
 
 interface Props {
   images: Asset[];
   projectName: string;
-}
-
-const SWIPE_THRESHOLD_PX = 40;
-
-function useSwipeNav(onPrev: () => void, onNext: () => void) {
-  const startX = useRef<number | null>(null);
-
-  const onTouchStart = useCallback((e: ReactTouchEvent) => {
-    startX.current = e.touches[0]?.clientX ?? null;
-  }, []);
-
-  const onTouchEnd = useCallback(
-    (e: ReactTouchEvent) => {
-      const start = startX.current;
-      startX.current = null;
-      const end = e.changedTouches[0]?.clientX;
-      if (start === null || end === undefined) {
-        return;
-      }
-      const dx = end - start;
-      if (Math.abs(dx) < SWIPE_THRESHOLD_PX) {
-        return;
-      }
-      (dx < 0 ? onNext : onPrev)();
-    },
-    [onPrev, onNext]
-  );
-
-  return { onTouchStart, onTouchEnd };
 }
 
 export function ProjectGalleryCarousel({ images, projectName }: Props) {

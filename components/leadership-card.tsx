@@ -5,10 +5,16 @@ import { X } from "lucide-react";
 import { useState } from "react";
 import { CmsImage } from "@/components/cms-image";
 
+interface CardImage {
+  url: string;
+}
+
 interface LeadershipCardProps {
   bio?: string;
-  image: string;
+  image: CardImage;
   name: string;
+  /** Candid/alternate shot from Hygraph; this is what the bio dialog shows. */
+  secondaryImage?: CardImage;
   size?: "lg" | "md" | "sm";
   title: string;
 }
@@ -35,11 +41,16 @@ export function LeadershipCard({
   name,
   title,
   image,
+  secondaryImage,
   bio,
   size = "md",
 }: LeadershipCardProps) {
   const [open, setOpen] = useState(false);
   const s = sizeClasses[size];
+
+  // The dialog shows the candid, falling back to the headshot for members who
+  // don't have one yet — otherwise their bio would open with no photo at all.
+  const photo = secondaryImage ?? image;
 
   return (
     <>
@@ -50,11 +61,11 @@ export function LeadershipCard({
             className="object-cover object-top"
             fill
             sizes={s.imgSize}
-            src={image}
+            src={image.url}
           />
           {bio && (
             <button
-              className="absolute right-2 bottom-2 rounded bg-bost-olive/70 px-3 py-1.5 font-medium text-white text-xs uppercase tracking-wider backdrop-blur-sm transition-all hover:bg-bost-olive/90"
+              className="absolute right-2 bottom-2 cursor-pointer rounded bg-bost-olive/70 px-3 py-1.5 font-medium text-white text-xs uppercase tracking-wider backdrop-blur-sm transition-all hover:bg-bost-olive/90"
               onClick={() => setOpen(true)}
               type="button"
             >
@@ -72,17 +83,34 @@ export function LeadershipCard({
         <Dialog.Root onOpenChange={setOpen} open={open}>
           <Dialog.Portal>
             <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-300 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
-            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
-              <div className="flex flex-col md:flex-row">
-                <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-t-lg md:aspect-[3/4] md:w-56 md:rounded-t-none md:rounded-l-lg lg:w-64">
+            <Dialog.Popup className="fixed top-1/2 left-1/2 z-50 flex max-h-[90dvh] w-[90vw] max-w-2xl -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-lg bg-white p-0 shadow-2xl transition-all duration-300 data-[ending-style]:scale-95 data-[starting-style]:scale-95 data-[ending-style]:opacity-0 data-[starting-style]:opacity-0">
+              <div className="flex min-h-0 flex-col overflow-y-auto overscroll-contain md:flex-row">
+                {/* Candids run 9:16 through 4:3 and can't be cropped to a
+                    common shape — they're group and scene shots, so a portrait
+                    crop decapitates people (Hygraph's align:faces is worse: on
+                    a two-person photo it picks one face and drops the other).
+                    So the frame is fixed and the photo is contained inside it,
+                    over a blurred, dimmed copy of itself. Every dialog gets the
+                    same shape, nothing is cropped, and the leftover space reads
+                    as a designed backdrop rather than an empty gutter. */}
+                <div className="relative aspect-square w-full shrink-0 overflow-hidden bg-bost-olive md:aspect-[4/5] md:w-64 lg:w-80">
+                  <CmsImage
+                    alt=""
+                    aria-hidden="true"
+                    className="scale-110 object-cover blur-2xl brightness-75 saturate-150"
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
+                    src={photo.url}
+                  />
                   <CmsImage
                     alt={name}
-                    className="object-cover object-top"
+                    className="object-contain"
                     fill
-                    sizes="256px"
-                    src={image}
+                    sizes="(min-width: 1024px) 320px, (min-width: 768px) 256px, 90vw"
+                    src={photo.url}
                   />
                 </div>
+
                 <div className="flex-1 p-6 md:p-8">
                   <Dialog.Title className="mb-1 font-bold text-xl tracking-tight">
                     {name}
@@ -95,7 +123,7 @@ export function LeadershipCard({
                   </p>
                 </div>
               </div>
-              <Dialog.Close className="absolute top-3 right-3 rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20">
+              <Dialog.Close className="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-black/10 p-1.5 transition-colors hover:bg-black/20">
                 <X className="size-4" />
                 <span className="sr-only">Close</span>
               </Dialog.Close>
