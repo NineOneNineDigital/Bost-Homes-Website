@@ -42,6 +42,8 @@ export interface BlogPost {
   excerpt: string;
   featuredImage?: Asset;
   id: string;
+  /** Secondary images, only fetched by the single-post query. */
+  images?: Asset[];
   originalDate?: string;
   publishedAt: string;
   slug: string;

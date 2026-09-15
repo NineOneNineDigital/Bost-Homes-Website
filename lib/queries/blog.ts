@@ -59,6 +59,11 @@ export const BLOG_POST_BY_SLUG_QUERY = gql`
         width
         height
       }
+      images {
+        url
+        width
+        height
+      }
       author
       originalDate
       publishedAt
