@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Link } from "next-view-transitions";
 import { CmsImage } from "@/components/cms-image";
 import { CtaSection } from "@/components/cta-section";
+import { interleaveImages } from "@/lib/blog-body";
 import { getBlogPostBySlug, getBlogPostSlugs } from "@/lib/fetchers";
 import {
   formatBlogCategory,
@@ -67,6 +68,11 @@ export default async function BlogPostPage({
   const updatedDate = getMeaningfulUpdatedDate(
     post.updatedAt,
     post.originalDate ?? post.publishedAt
+  );
+
+  const bodySegments = interleaveImages(
+    post.body?.html ?? "",
+    post.images ?? []
   );
 
   const jsonLd = {
@@ -158,15 +164,30 @@ export default async function BlogPostPage({
       {/* Body Content */}
       <section className="px-6 pb-20 md:px-12 lg:px-24">
         <div className="mx-auto max-w-4xl">
-          {post.body?.html ? (
-            <div
-              className="blog-body"
-              dangerouslySetInnerHTML={{ __html: post.body.html }}
-            />
-          ) : (
+          {!post.body?.html && (
             <p className="text-base text-muted-foreground leading-relaxed">
               {post.excerpt}
             </p>
+          )}
+          {bodySegments.map((segment) =>
+            segment.type === "html" ? (
+              <div
+                className="blog-body"
+                dangerouslySetInnerHTML={{ __html: segment.html }}
+                key={segment.key}
+              />
+            ) : (
+              <figure className="my-12 last:mb-0" key={segment.key}>
+                <CmsImage
+                  alt={`${post.title} — image ${segment.index + 1}`}
+                  className="mx-auto block h-auto max-h-[80vh] w-auto max-w-full rounded-lg bg-muted"
+                  height={segment.image.height}
+                  sizes="(min-width: 1024px) 896px, (min-width: 768px) 80vw, 100vw"
+                  src={segment.image.url}
+                  width={segment.image.width}
+                />
+              </figure>
+            )
           )}
         </div>
       </section>
